@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
         <style type="text/css">
             :root {
                 --primary-color: rgb(161,124,107);
@@ -24,7 +25,7 @@
                 --text-colorT: 248,236,220;
 
 
-                --transparency: 0.2;
+                --transparency: 0.8;
             }
             * {
                 padding: 0;
@@ -42,7 +43,8 @@
                 height: 100vh;
                 margin: 0;
                 padding: 0;
-                background-color: var(--background-color);
+                background-image: url("https://wallpapercave.com/wp/wp2815655.jpg");
+                background-size: cover;
             }
             #titlebox {
                 height: 10%;
@@ -63,19 +65,21 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                box-shadow: -65px 0px 24px -24px rgba(0,0,0,0.45);
             }
 
             #addButton button {
                 width: 50px;
                 height: 50px;
-                border: 1px solid #000;
+                border: 1px solid var(--accent-color);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                box-shadow: 0px 0px 4px #000;
+                box-shadow: 0px 0px 4px var(--accent-color);
                 background-color: var(--accent-color);
+                box-shadow: 0px 0px 10px var(--accent-color);
             }
 
             #box {
@@ -91,26 +95,45 @@
                 border: 2px solid var(--secondary-color);
                 width: 400px;
                 flex-shrink: 0;
-                padding: 20px;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
-                border-radius: 15px;
+                justify-content: center;
+                gap: 30px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 3px var(--secondary-color);
                 background-color: rgba(var(--secondary-colorT), var(--transparency));
             }
-            .karte-image {
+            .karte > div {
                 width: 100%;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                background-color: rgba(var(--background-colorT), var(--transparency)) !important;
+                padding: 40px 0;
+                box-shadow: 0px 0px 6px #000;
+            }
+            .karte > span {
+                height: 60px !important;
+            }
+            .karte-image {
+                width: 90%;
                 height: 200px;
                 border: 1px solid var(--accent-color);
-                border-radius: 15px;
+                border-radius: 5px;
+                align-self: center;
+                background-color: blue;
             }
             .karte-image img {
                 width: 100%;
                 height: 100%;
-                border-radius: 15px;
+                border-radius: 5px;
             }
             .karte-name {
-                text-align: center;
+                width: fit-content;
+                padding: 4px 20px;
+                border-radius: 4px;
+                align-self: center;
+                border-bottom: 1px solid var(--text-color);
             }
             .karte-button {
                 width: 100px;
@@ -120,15 +143,20 @@
                 color: #fff;
                 border-radius: 3px;
                 border: 1px solid var(--accent-color);
+                box-shadow: 0px 0px 4px var(--accent-color);
             }
             .karte-stats {
                 display: flex;
+                width: 100%;
                 flex-direction: column;
-                gap: 10px;
+                gap: 20px;
+                padding: 15px;
+                border-radius: 4px;
             }
             .karte-stats-stat {
                 display: flex;
                 justify-content: space-between;
+                letter-spacing: 1px;
             }
             .karte-stats-stat-cat {
                 font-weight: bold;
@@ -138,7 +166,7 @@
                 position: absolute;
                 width: 100vw;
                 height: 100vh;
-                display: flex;
+                display: none;
                 justify-content: center;
                 align-items: center;
                 background-color: rgba(var(--secondary-colorT), 0.9);
@@ -154,10 +182,11 @@
                 border: 1px solid var(--primary-color);
                 background-color: var(--primary-color);
                 color: #fff;
+                box-shadow: 0px 0px 3px var(--primary-color);
             }
 
             #creator {
-                border: 1px solid #000;
+                border: 1px solid var(--back);
                 width: 500px;
                 padding: 60px 0;
                 background-color: var(--background-color);
@@ -166,6 +195,7 @@
                 gap: 20px;
                 align-items: center;
                 position: relative;
+                box-shadow: 0px 0px 10px var(--background-color);
             }
             
             #creator form {
@@ -215,6 +245,22 @@
             }
             #btnInp {
                 width: 100px !important;
+                border-radius: 7px;
+            }
+            .dark {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                opacity: 0.6;
+                background-color: #000;
+            }
+            #username {
+                position: absolute;
+                top: 33px;
+                left: 25px;
             }
         </style>
 
@@ -222,6 +268,8 @@
     </head>
 
     <body>
+        <div class="dark"></div>
+        <p id="username">Username</p>
         <div id="createNewTeam">
 
 
@@ -247,7 +295,7 @@
                     </div>
 
                     <div class="flex">
-                        <label for="">Teamfarbe : </label>
+                        <label>Teamfarbe : </label>
                         <input id="colorIn" type="color">
                     </div>
 
@@ -259,63 +307,82 @@
         </div>
 
         <div id="titlebox">
-            <h1>Team auswählen : </h1>
+            <h1>Team auswählen</h1>
         </div>
         <div id="content">
             <div id="box">
                 <div class="karte">
+<<<<<<< HEAD:src/src/static/preGame/teams.html
+                    <div>
+                        <h2 class="karte-name">Name</h2>
+                        <div class="karte-stats">
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Forschungsbereich : </p>
+                                <p>Lambda`?</p>
+                            </div>
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Creator : </p>
+                                <p>John</p>
+                            </div>
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
+                                <p>10</p>
+                            </div>
+=======
                     <h2 class="karte-name">Name</h2>
                     <div class="karte-stats">
                         <div class="karte-stats-stat">
                             <p class="karte-stats-stat-cat">Forschungsbereich : </p>
                             <p>Lambda`?</p>
+>>>>>>> main:src/src/static/pre_game/teams.html
                         </div>
-                        <div class="karte-stats-stat">
-                            <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
-                            <p>10</p>
-                        </div>
-                        <p class="karte-stats-stat-cat">Geschichte :</p>
+                        <button class="karte-button">Join</button>
                     </div>
-                    <button class="karte-button">Join</button>
+                    <span style="height: 100px;"></span>
+                </div>
+                <div class="karte">
+                    <div>
+                        <h2 class="karte-name">Name</h2>
+                        <div class="karte-stats">
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Forschungsbereich : </p>
+                                <p>Lambda`?</p>
+                            </div>
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Creator : </p>
+                                <p>John</p>
+                            </div>
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
+                                <p>10</p>
+                            </div>
+                        </div>
+                        <button class="karte-button">Join</button>
+                    </div>
+                    <span style="height: 100px;"></span>
+                </div>
+                <div class="karte">
+                    <div>
+                        <h2 class="karte-name">Name</h2>
+                        <div class="karte-stats">
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Forschungsbereich : </p>
+                                <p>Lambda`?</p>
+                            </div>
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Creator : </p>
+                                <p>John</p>
+                            </div>
+                            <div class="karte-stats-stat">
+                                <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
+                                <p>10</p>
+                            </div>
+                        </div>
+                        <button class="karte-button">Join</button>
+                    </div>
+                    <span style="height: 100px;"></span>
                 </div>
 
-                <div class="karte">
-                    <div class="karte-image">
-                        <img src="./image.jpg" alt="">
-                    </div>
-                    <h2 class="karte-name">Name</h2>
-                    <div class="karte-stats">
-                        <div class="karte-stats-stat">
-                            <p class="karte-stats-stat-cat">Forschungsbereich : </p>
-                            <p>Lambda`?</p>
-                        </div>
-                        <div class="karte-stats-stat">
-                            <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
-                            <p>10</p>
-                        </div>
-                        <p class="karte-stats-stat-cat">Geschichte :</p>
-                    </div>
-                    <button class="karte-button">Join</button>
-                </div>
-
-                <div class="karte">
-                    <div class="karte-image">
-                        <img src="./image.jpg" alt="">
-                    </div>
-                    <h2 class="karte-name">Name</h2>
-                    <div class="karte-stats">
-                        <div class="karte-stats-stat">
-                            <p class="karte-stats-stat-cat">Forschungsbereich : </p>
-                            <p>Lambda`?</p>
-                        </div>
-                        <div class="karte-stats-stat">
-                            <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
-                            <p>10</p>
-                        </div>
-                        <p class="karte-stats-stat-cat">Geschichte :</p>
-                    </div>
-                    <button class="karte-button">Join</button>
-                </div>
 
             </div>
 
