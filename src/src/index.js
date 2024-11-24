@@ -1,5 +1,5 @@
 // src/templates/populated-worker/src/index.js
-import html from "./static/working.html"
+import html from "./static/preGame/teams.html"
 
 var src_default = {
   async fetch(request, env) {
