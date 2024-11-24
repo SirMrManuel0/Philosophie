@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Team Auswahl</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <style type="text/css">
+            :root {
+                --primary-color: rgb(161,124,107);
+                --secondary-color: rgb(88,139,139);
+                --accent-color: rgb(107,143,113);
+                --background-color: rgb(49,47,47);
+                --text-color: rgb(248,236,220);
+
+                --primary-colorT: 161,124,107;
+                --secondary-colorT: 88,139,139;
+                --accent-colorT: 107,143,113;
+                --background-colorT: 49,47,47;
+                --text-colorT: 248,236,220;
+
+
+                --transparency: 0.2;
+            }
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            p, h1, h2, input, label {
+                font-family: "Goudy Bookletter 1911", serif;
+                font-weight: 400;
+                font-style: normal;
+                color: #f8ecdc;
+            }
+            body {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                background-image: url("image2.png");
+                background-size: cover;
+            }
+            #titlebox {
+                height: 10%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #content {
+                height: 90%;
+                width: 100%;
+                display: flex;
+                padding: 20px;
+            }
+            #addButton {
+                width: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #addButton button {
+                width: 50px;
+                height: 50px;
+                border: 1px solid #000;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0px 0px 4px #000;
+                background-color: var(--accent-color);
+            }
+
+            #box {
+                display: flex;
+                width: 90%;
+                height: 100%;
+                grid-template-columns: auto;
+                column-gap: 50px;
+                overflow:scroll;
+                overflow-y: hidden;
+            }
+            #box .karte {
+                border: 2px solid var(--secondary-color);
+                width: 400px;
+                flex-shrink: 0;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                border-radius: 15px;
+                background-color: rgba(var(--secondary-colorT), var(--transparency));
+            }
+            .karte-image {
+                width: 100%;
+                height: 200px;
+                border: 1px solid var(--accent-color);
+                border-radius: 15px;
+            }
+            .karte-image img {
+                width: 100%;
+                height: 100%;
+                border-radius: 15px;
+            }
+            .karte-name {
+                text-align: center;
+            }
+            .karte-button {
+                width: 100px;
+                align-self: center;
+                height: 30px;
+                background-color: var(--accent-color);
+                color: #fff;
+                border-radius: 3px;
+                border: 1px solid var(--accent-color);
+            }
+            .karte-stats {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .karte-stats-stat {
+                display: flex;
+                justify-content: space-between;
+            }
+            .karte-stats-stat-cat {
+                font-weight: bold;
+            }
+
+            #createNewTeam {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(var(--secondary-colorT), 0.9);
+            }
+
+            #closeButton {
+                position: absolute;
+                top: 10px;
+                border-radius: 50%;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                border: 1px solid var(--primary-color);
+                background-color: var(--primary-color);
+                color: #fff;
+            }
+
+            #creator {
+                border: 1px solid #000;
+                width: 500px;
+                padding: 60px 0;
+                background-color: var(--background-color);
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                position: relative;
+            }
+            
+            #creator form {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            #creator h1 {
+                text-align: center;
+            }
+            #creator input {
+                width: 60%;
+                text-align: center;
+                padding: 5px 10px;
+                background-color: var(--background-color);
+                color: var(--text-color);
+                outline: none;
+                border: none;
+                border-bottom: 1px solid var(--text-color);
+                font-size: 15px;
+                letter-spacing: 1px;
+            }
+            .text1 {
+                font-size: 15px;
+            }
+            #gebiet {
+                background-color: var(--background-color);
+                color: var(--text-color);
+                outline: none;
+                border: none;
+                padding: 5px 10px;
+                border: 1px solid var(--text-color);
+            }
+            .flex {
+                display: flex;
+                width: 70%;
+                align-items: center;
+                justify-content: center;
+            }
+            #colorIn {
+                width: 50px !important;
+                height: 40px;
+                border: none !important;
+            }
+            #btnInp {
+                width: 100px !important;
+            }
+        </style>
+
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="createNewTeam">
+
+
+            <div id="creator">
+                <button id="closeButton"> X </button>
+
+                <h1>Creator</h1>
+
+                <form id="creatorForm" action="">
+                    <input type="text" placeholder="Teamname" name="Teamname">
+                    <input type="text" placeholder="Geschichte (optional)" name="Geschichte">
+
+                    <div>
+                        <label class="text1">Forschungsgebiet : </label>
+                        <select name="gebiet" id="gebiet" form="creatorForm">
+                            <option value="Lichtgeschwindigkeitsreisen">Lichtgeschwindigkeitsreisen</option>
+                            <option value="Fusionsreaktor">Fusionsreaktor</option>
+                            <option value="Laser">Laser</option>
+                            <option value="Hochleistungslaser">Hochleistungslaser</option>
+                            <option value="UnzerstorbaresMaterial">Unzerstörbares Material</option>
+                            <option value="UnsichtbaresMaterial">Unsichtbares Material</option>
+                        </select>
+                    </div>
+
+                    <div class="flex">
+                        <label for="">Teamfarbe : </label>
+                        <input id="colorIn" type="color">
+                    </div>
+
+
+
+                    <input id="btnInp" type="submit" value="Kreieren">
+                </form>
+            </div>
+        </div>
+
+        <div id="titlebox">
+            <h1>Team auswählen : </h1>
+        </div>
+        <div id="content">
+            <div id="box">
+                <div class="karte">
+                    <div class="karte-image">
+                        <img src="./image.jpg" alt="">
+                    </div>
+                    <h2 class="karte-name">Name</h2>
+                    <div class="karte-stats">
+                        <div class="karte-stats-stat">
+                            <p class="karte-stats-stat-cat">Forschungsbereich : </p>
+                            <p>Lambda`?</p>
+                        </div>
+                        <div class="karte-stats-stat">
+                            <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
+                            <p>10</p>
+                        </div>
+                        <p class="karte-stats-stat-cat">Geschichte :</p>
+                    </div>
+                    <button class="karte-button">Join</button>
+                </div>
+
+                <div class="karte">
+                    <div class="karte-image">
+                        <img src="./image.jpg" alt="">
+                    </div>
+                    <h2 class="karte-name">Name</h2>
+                    <div class="karte-stats">
+                        <div class="karte-stats-stat">
+                            <p class="karte-stats-stat-cat">Forschungsbereich : </p>
+                            <p>Lambda`?</p>
+                        </div>
+                        <div class="karte-stats-stat">
+                            <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
+                            <p>10</p>
+                        </div>
+                        <p class="karte-stats-stat-cat">Geschichte :</p>
+                    </div>
+                    <button class="karte-button">Join</button>
+                </div>
+
+                <div class="karte">
+                    <div class="karte-image">
+                        <img src="./image.jpg" alt="">
+                    </div>
+                    <h2 class="karte-name">Name</h2>
+                    <div class="karte-stats">
+                        <div class="karte-stats-stat">
+                            <p class="karte-stats-stat-cat">Forschungsbereich : </p>
+                            <p>Lambda`?</p>
+                        </div>
+                        <div class="karte-stats-stat">
+                            <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
+                            <p>10</p>
+                        </div>
+                        <p class="karte-stats-stat-cat">Geschichte :</p>
+                    </div>
+                    <button class="karte-button">Join</button>
+                </div>
+
+            </div>
+
+
+
+            <div id="addButton">
+                <button id="create">+</button>
+            </div>
+        </div>
+
+        
+        <script>
+            document.getElementById("create").addEventListener("click", function() {
+                document.getElementById("createNewTeam").style.display = "flex";
+            });
+
+            document.getElementById("closeButton").addEventListener("click", function() {
+                document.getElementById("createNewTeam").style.display = "none";
+            });
+        </script>
+    </body>
+</html>
