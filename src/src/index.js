@@ -7,13 +7,6 @@ var src_default = {
     /*const { DATABASE } = env;
     const stmt = DATABASE.prepare("SELECT * FROM comments LIMIT 3");
     const { results } = await stmt.all();*/
-
-    let url = String(request.url);
-
-    if (url.startsWith("https://philosophie.tcku.dev/static")) {
-      return staticHandler(request);
-    }
-
     // Standard-Route: HTML-Seite rendern
     return new Response(html, {
       headers: { "Content-Type": "text/html" },
