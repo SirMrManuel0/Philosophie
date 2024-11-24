@@ -2,33 +2,61 @@ var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 // src/templates/populated-worker/src/renderHtml.js
-function renderHtml(content) {
+function renderHtml() {
   return `
     <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>D1</title>
-        <link rel="stylesheet" type="text/css" href="https://templates.cloudflareintegrations.com/styles.css">
-      </head>
-    
-      <body>
-        <header>
-          <img
-            src="https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/30e0d3f6-6076-40f8-7abb-8a7676f83c00/public"
-          />
-          <h1>\u{1F389} Successfully connected philosophie to D1</h1>
-        </header>
-        <main>
-          <p>Your D1 Database contains the following data:</p>
-          <pre><code><span style="color: #0E838F">&gt; </span>SELECT * FROM comments LIMIT 3;<br>${content}</code></pre>
-          <small class="blue">
-            <a target="_blank" href="https://developers.cloudflare.com/d1/tutorials/build-a-comments-api/">Build a comments API with Workers and D1</a>
-          </small>
-        </main>
-      </body>
-    </html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite im Aufbau</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #bbbbbb;
+        }
+        .spinner {
+            margin: 2rem auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #444;
+            border-top: 5px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seite im Aufbau</h1>
+        <div class="spinner"></div>
+        <p>Wir arbeiten daran, diese Website bald verfügbar zu machen. Bitte schaue später wieder vorbei!</p>
+    </div>
+</body>
+</html>
+
 `;
 }
 __name(renderHtml, "renderHtml");
