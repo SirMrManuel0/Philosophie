@@ -327,31 +327,37 @@
                 document.getElementById("createNewTeam").style.display = "none";
             });
 
-            const teamsList = [
-                {
-                    "name": "Team1",
-                    "researchfield": "Unsichtbares Material",
-                    "creator": "John",
-                    "memberCount": 5,
-                    "color": [10,20,50]
-                },
-                {
-                    "name": "Team2",
-                    "researchfield": "Unzerstörbares Material",
-                    "creator": "Tim",
-                    "memberCount": 65,
-                    "color": [255,20,50]
-                },
-                {
-                    "name": "Team3",
-                    "researchfield": "Hochleistungslaser",
-                    "creator": "Carlson",
-                    "memberCount": 2,
-                    "color": [50,26,255]
-                }
-            ];
+            function getUsername() {
+                // To later use the fetch api and make a call to the server --------------
+                return "Jefferson";
+            }
 
-            const username_ = "Jefferson";
+            function getTeams() {
+                // To later use the fetch api and make a call to the server --------------
+                return [
+                    {
+                        "name": "Team1",
+                        "researchfield": "Unsichtbares Material",
+                        "creator": "John",
+                        "memberCount": 5,
+                        "color": [10,20,50]
+                    },
+                    {
+                        "name": "Team2",
+                        "researchfield": "Unzerstörbares Material",
+                        "creator": "Tim",
+                        "memberCount": 65,
+                        "color": [255,20,50]
+                    },
+                    {
+                        "name": "Team3",
+                        "researchfield": "Hochleistungslaser",
+                        "creator": "Carlson",
+                        "memberCount": 2,
+                        "color": [50,26,255]
+                    }
+                ];
+            }
 
             function setUsername(username) {
                 // Set the username
@@ -386,7 +392,7 @@
                     // Create the <p> for the researchfield category
                     let statPResearch = document.createElement('p');
                     statPResearch.className = "karte-stats-stat-cat"; // Add the correct class
-                    statPResearch.textContent = "Research Field: "; // Set the label for the stat
+                    statPResearch.textContent = "Forschungsbereich: "; // Set the label for the stat
                     statDivResearch.appendChild(statPResearch); // Add the label to the stat container
 
                     // Create the <p> for the researchfield value
@@ -419,7 +425,7 @@
 
                     let statPMembers = document.createElement('p');
                     statPMembers.className = "karte-stats-stat-cat"; // Add the correct class
-                    statPMembers.textContent = "Members: "; // Set the label for the stat
+                    statPMembers.textContent = "Mitgliederanzahl: "; // Set the label for the stat
                     statDivMembers.appendChild(statPMembers); // Add the label to the stat container
 
                     let statValueMembers = document.createElement('p');
@@ -450,6 +456,8 @@
                 }
             }
 
+            const teamsList = getTeams();
+            const username_ = getUsername();
             // Call the functions
             createDynamicTeamCards(teamsList);
             setUsername(username_);
