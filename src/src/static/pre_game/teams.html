@@ -310,75 +310,7 @@
             <h1>Team auswählen</h1>
         </div>
         <div id="content">
-            <div id="box">
-                <div class="karte">
-                    <div>
-                        <h2 class="karte-name">Name</h2>
-                        <div class="karte-stats">
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Forschungsbereich : </p>
-                                <p>Lambda`?</p>
-                            </div>
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Creator : </p>
-                                <p>John</p>
-                            </div>
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
-                                <p>10</p>
-                            </div>
-                        </div>
-                        <button class="karte-button">Join</button>
-                    </div>
-                    <span style="height: 100px;"></span>
-                </div>
-                <div class="karte">
-                    <div>
-                        <h2 class="karte-name">Name</h2>
-                        <div class="karte-stats">
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Forschungsbereich : </p>
-                                <p>Lambda`?</p>
-                            </div>
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Creator : </p>
-                                <p>John</p>
-                            </div>
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
-                                <p>10</p>
-                            </div>
-                        </div>
-                        <button class="karte-button">Join</button>
-                    </div>
-                    <span style="height: 100px;"></span>
-                </div>
-                <div class="karte">
-                    <div>
-                        <h2 class="karte-name">Name</h2>
-                        <div class="karte-stats">
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Forschungsbereich : </p>
-                                <p>Lambda`?</p>
-                            </div>
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Creator : </p>
-                                <p>John</p>
-                            </div>
-                            <div class="karte-stats-stat">
-                                <p class="karte-stats-stat-cat">Anzahl der Mitglieder : </p>
-                                <p>10</p>
-                            </div>
-                        </div>
-                        <button class="karte-button">Join</button>
-                    </div>
-                    <span style="height: 100px;"></span>
-                </div>
-
-
-            </div>
-
-
+            <div id="box"> </div>
 
             <div id="addButton">
                 <button id="create">+</button>
@@ -394,6 +326,135 @@
             document.getElementById("closeButton").addEventListener("click", function() {
                 document.getElementById("createNewTeam").style.display = "none";
             });
+
+            const teamsList = [
+                {
+                    "name": "Team1",
+                    "researchfield": "Unsichtbares Material",
+                    "creator": "John",
+                    "memberCount": 5,
+                    "color": [10,20,50]
+                },
+                {
+                    "name": "Team2",
+                    "researchfield": "Unzerstörbares Material",
+                    "creator": "Tim",
+                    "memberCount": 65,
+                    "color": [255,20,50]
+                },
+                {
+                    "name": "Team3",
+                    "researchfield": "Hochleistungslaser",
+                    "creator": "Carlson",
+                    "memberCount": 2,
+                    "color": [50,26,255]
+                }
+            ];
+
+            const username_ = "Jefferson";
+
+            function setUsername(username) {
+                // Set the username
+                document.getElementById('username').textContent = username;
+            }
+
+            function createDynamicTeamCards(teams) {
+                for (let i = 0; i < teams.length; i++) {
+                    // Create the div for the card, which will hold everything
+                    let mainDiv = document.createElement('div');
+                    mainDiv.className = "karte"; // Set the class
+                    mainDiv.style.backgroundColor = 
+                        "rgba(" + teams[i]["color"][0] + "," + teams[i]["color"][1] + "," + teams[i]["color"][2] + ", var(--transparency)";
+
+                    // Create the container, which holds all the stats
+                    let containerDiv = document.createElement('div');
+
+                    // Create the Name headline
+                    let nameH2 = document.createElement('h2');
+                    nameH2.className = "karte-name"; // Add the correct class
+                    nameH2.textContent = teams[i]["name"]; // Look up the team's name in the array
+                    containerDiv.appendChild(nameH2); // Add the name to the container
+
+                    // Create the direct parent of all stats (without the name)
+                    let statsDiv = document.createElement('div');
+                    statsDiv.className = "karte-stats"; // Add the correct class
+
+                    // Create the container of the researchfield stat
+                    let statDivResearch = document.createElement('div');
+                    statDivResearch.className = "karte-stats-stat"; // Add the correct class
+
+                    // Create the <p> for the researchfield category
+                    let statPResearch = document.createElement('p');
+                    statPResearch.className = "karte-stats-stat-cat"; // Add the correct class
+                    statPResearch.textContent = "Research Field: "; // Set the label for the stat
+                    statDivResearch.appendChild(statPResearch); // Add the label to the stat container
+
+                    // Create the <p> for the researchfield value
+                    let statValueResearch = document.createElement('p');
+                    statValueResearch.textContent = teams[i]["researchfield"]; // Look up the research field
+                    statDivResearch.appendChild(statValueResearch); // Add the value to the stat container
+
+                    // Add the researchfield stat to the statsDiv
+                    statsDiv.appendChild(statDivResearch);
+
+                    // Repeat for creator stat
+                    let statDivCreator = document.createElement('div');
+                    statDivCreator.className = "karte-stats-stat"; // Add the correct class
+
+                    let statPCreator = document.createElement('p');
+                    statPCreator.className = "karte-stats-stat-cat"; // Add the correct class
+                    statPCreator.textContent = "Creator: "; // Set the label for the stat
+                    statDivCreator.appendChild(statPCreator); // Add the label to the stat container
+
+                    let statValueCreator = document.createElement('p');
+                    statValueCreator.textContent = teams[i]["creator"]; // Look up the creator
+                    statDivCreator.appendChild(statValueCreator); // Add the value to the stat container
+
+                    // Add the creator stat to the statsDiv
+                    statsDiv.appendChild(statDivCreator); 
+
+                    // Repeat for memberCount stat
+                    let statDivMembers = document.createElement('div');
+                    statDivMembers.className = "karte-stats-stat"; // Add the correct class
+
+                    let statPMembers = document.createElement('p');
+                    statPMembers.className = "karte-stats-stat-cat"; // Add the correct class
+                    statPMembers.textContent = "Members: "; // Set the label for the stat
+                    statDivMembers.appendChild(statPMembers); // Add the label to the stat container
+
+                    let statValueMembers = document.createElement('p');
+                    statValueMembers.textContent = teams[i]["memberCount"]; // Look up the member count
+                    statDivMembers.appendChild(statValueMembers); // Add the value to the stat container
+
+                    statsDiv.appendChild(statDivMembers); // Add the memberCount stat to the statsDiv
+
+                    // Add the statsDiv to the containerDiv
+                    containerDiv.appendChild(statsDiv);
+
+                    // Create the join button
+                    let joinButton = document.createElement('button');
+                    joinButton.className = "karte-button"; // Add the correct class
+                    joinButton.textContent = "Join"; // Set the button text
+                    containerDiv.appendChild(joinButton); // Add the button to the container
+
+                    // Add the containerDiv to the mainDiv
+                    mainDiv.appendChild(containerDiv);
+
+                    // Add a spacer for styling
+                    let spacer = document.createElement('span');
+                    spacer.style.height = "100px"; // Set the height
+                    mainDiv.appendChild(spacer); // Add the spacer to the mainDiv
+
+                    // Append the mainDiv to the box div
+                    document.getElementById('box').appendChild(mainDiv);
+                }
+            }
+
+            // Call the functions
+            createDynamicTeamCards(teamsList);
+            setUsername(username_);
+
+
         </script>
     </body>
 </html>
