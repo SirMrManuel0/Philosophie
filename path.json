@@ -1,0 +1,19 @@
+{
+    "logs": "logs/server.log",
+    "static": {
+        "pre_game": {
+            "creatUser": "src/static/pre_game/creatUser.html",
+            "teams": "src/static/pre_game/teams.html"
+        },
+        "img": {
+            "background.jpg": "src/static/img/background.jpg"
+        },
+        "css": {
+            "origin.css": "src/static/css/origin.css"
+        },
+        "fonts": {
+            "GoudyBookletter.ttf": "src/static/fonts/GoudyBookletter.ttf"
+        }
+    },
+    "db": "databank.json"
+}

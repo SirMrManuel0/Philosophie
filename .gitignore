@@ -2,6 +2,12 @@
 wrangler.toml
 src/key.pem
 src/cert.pem
+.venv/
+.idea/
+logs/
+*.pem
+*.pyc
+src/__pycache__/
 
 # Logs
 

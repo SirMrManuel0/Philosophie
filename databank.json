@@ -1,0 +1,55 @@
+{
+    "user": {
+        "Ip": {
+            "team": 0,
+            "name": "Jefferson"
+        },
+        "127.0.0.1": {
+            "team": 0,
+            "name": "Gabriel"
+        }
+    },
+    "teams": {
+        "0": {
+            "name": "Name",
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "research_field": 0,
+            "creator": "Jefferson",
+            "government_type": 0,
+            "country": 0,
+            "user_count": 12
+        }
+    },
+    "game": {
+        "id": 0,
+        "teams": [],
+        "state": []
+    },
+    "research_field": [
+        "Unsichtbares Material",
+        "Unzerst\u00c3\u00b6rbares Material",
+        "Hochleistungslaser",
+        "Laser",
+        "Fusionsreaktor",
+        "Lichtgeschwindigkeitsreisen"
+    ],
+    "government_type": [
+        "Diktatur",
+        "Demokratie",
+        "F\u00c3\u00bcrstentum"
+    ],
+    "countries": {
+        "Deutschland": 0,
+        "Russland": 0,
+        "China": 0,
+        "Japan": 0,
+        "Frankreich": 0,
+        "Schweiz": 0,
+        "Indien": 0,
+        "Botswana": 0
+    }
+}

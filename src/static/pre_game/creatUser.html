@@ -7,7 +7,7 @@
 
         <title>Create User</title>
 
-        <link rel="stylesheet" href="../css/origin.css">
+        <link rel="stylesheet" href="/static/css/origin.css">
 
         <style type="text/css">
 
@@ -28,7 +28,7 @@
                 height: 100vh;
                 justify-content: center;
                 align-items: center;
-                background-image: url("../img/background.jpg");
+                background-image: url("/static/img/background.jpg");
                 background-size: cover;
             }
 
@@ -74,8 +74,8 @@
 
     <body class="flex">
         <div class="userNameCreate">    
-            <form action="" class="flex">
-                <input type="text" placeholder="Benutzername" class="">
+            <form action="/teams" class="flex" method="post">
+                <input type="text" placeholder="Benutzername" class="" name="username">
                 <input type="submit" id="btn1">
             </form>
         </div>
