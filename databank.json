@@ -21,7 +21,7 @@
             "creator": "Jefferson",
             "government_type": 0,
             "country": 0,
-            "user_count": 12
+            "user_count": 13
         }
     },
     "game": {
@@ -43,13 +43,13 @@
         "F\u00c3\u00bcrstentum"
     ],
     "countries": {
-        "Deutschland": 0,
-        "Russland": 0,
-        "China": 0,
-        "Japan": 0,
-        "Frankreich": 0,
-        "Schweiz": 0,
-        "Indien": 0,
-        "Botswana": 0
+        "Deutschland": 7.5,
+        "Russland": 5.75,
+        "China": 7.75,
+        "Japan": 7.75,
+        "Frankreich": 7.25,
+        "Schweiz": 6.5,
+        "Indien": 5.25,
+        "Botswana": 3.5
     }
 }
