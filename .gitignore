@@ -1,5 +1,7 @@
 *.toml
 wrangler.toml
+src/key.pem
+src/cert.pem
 
 # Logs
 
