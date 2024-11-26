@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <title>Create User</title>
+
+        <link rel="stylesheet" href="../css/origin.css">
+
+        <style type="text/css">
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            p {
+                font-family: "Goudy", sans-serif;
+            }
+
+            .flex {
+                display: flex;   
+            }
+
+            body {
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                background-image: url("../img/background.jpg");
+                background-size: cover;
+            }
+
+            .userNameCreate {
+                border: 1px solid var(--back);
+                width: 500px;
+                padding: 60px 0;
+                background-color: var(--background-color);
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                position: relative;
+                box-shadow: 0px 0px 10px var(--background-color);
+            }
+            input {
+                width: 100%;
+                text-align: center;
+                padding: 5px 10px;
+                background-color: var(--background-color);
+                color: var(--text-color);
+                outline: none;
+                border: none;
+                border-bottom: 1px solid var(--text-color);
+                font-size: 15px;
+                letter-spacing: 1px;
+                border-radius: 4px;
+            }
+            form {
+                width: 40%;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            #btn1 {
+                width: fit-content;
+                padding: 5px 10px;
+            } 
+            
+        </style>
+    </head>
+
+    <body class="flex">
+        <div class="userNameCreate">    
+            <form action="" class="flex">
+                <input type="text" placeholder="Benutzername" class="">
+                <input type="submit" id="btn1">
+            </form>
+        </div>
+    </body>
+</html>
