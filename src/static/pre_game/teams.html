@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="../css/origin.css">
+        <link rel="stylesheet" href="/static/css/origin.css">
 
         <style type="text/css">
             * {
@@ -26,7 +26,7 @@
                 height: 100vh;
                 margin: 0;
                 padding: 0;
-                background-image: url("../img/background.jpg");
+                background-image: url("/static/img/background.jpg");
                 background-size: cover;
             }
             #titlebox {
@@ -310,9 +310,47 @@
                 document.getElementById("createNewTeam").style.display = "none";
             });
 
-            function getUsername() {
-                // To later use the fetch api and make a call to the server --------------
-                return "Jefferson";
+            const url = "http://localhost:80/api";
+
+            async function sendPostRequest(data) {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json", // JSON-Format angeben
+                        },
+                        body: JSON.stringify(data), // Daten in JSON umwandeln
+                    });
+
+                    if (response.ok) {
+                        const responseText = await response.text(); // Antwort des Servers
+                        const responseDict = JSON.parse(responseText); // JSON-String in Objekt umwandeln
+                        return responseDict;
+                    } else {
+                        console.error("Fehler beim Request:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Netzwerkfehler:", error);
+                }
+            }
+
+            async function getUsername() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "username" });
+                    return responseDict["username"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Benutzernamens:", error);
+                    return null;
+                }
+            }
+
+            async function updateUsername() {
+                const username = await getUsername();
+                if (username) {
+                    setUsername(username); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Benutzername konnte nicht abgerufen werden.");
+                }
             }
 
             function getTeams() {
@@ -443,7 +481,7 @@
             const username_ = getUsername();
             // Call the functions
             createDynamicTeamCards(teamsList);
-            setUsername(username_);
+            updateUsername();
 
 
         </script>
