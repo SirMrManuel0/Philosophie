@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="../css/origin.css">
+
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            h1, h2, p {
+                font-family: "Goudy";
+                color: var(--text-color);
+            }
+            body {
+                width: 100vw;
+                height: 100vh;
+                background-image: url("../img/background.jpg");
+                background-size: cover;
+                overflow: hidden;
+            }
+            body::-webkit-scrollbar {
+                display: none;
+            }
+            .titleDiv {
+                width: 100%;
+                height: 15%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .title {
+                color: var(--text-color);
+            }
+            .chooseDiv {
+                width: 100%;
+                height: 85%;
+                display: flex;
+                padding: 30px;
+                padding-top: 0px;
+                overflow-x: scroll;
+                gap: 10px;  
+            }
+            .land {
+                width: 300px;
+                height: 100%;
+                border: 1px solid #fff;
+                flex-shrink: 0;
+                background-color: rgba(var(--secondary-colorT), var(--transparency));
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                overflow-y: scroll;
+                box-shadow: 0px 0px 20px #000;
+                border-radius: 4px;
+            }
+            .land::-webkit-scrollbar {
+                display: none;
+            }
+            h2 {
+                color: var(--text-color);
+                margin-top: 20px;
+            }
+            img {
+                width: 100%;
+                height: 200px;
+                filter: brightness(0.4);
+            }
+            input[type=submit] {
+                padding: 8px 16px;
+                background-color: var(--background-color);
+                border: 1px solid #000;
+                color: #fff;
+                border-radius: 2px;
+                cursor: pointer;
+                box-shadow: 0px 0px 4px #000;
+            }
+            form :nth-child(1) {
+                display: block;
+            }
+            form :nth-child(2) {
+                display: none;
+                background-color: var(--secondary-color);
+            }
+            
+            .chosen form :nth-child(1) {
+                display: none;
+            }
+            .chosen form :nth-child(2) {
+                display: block;
+            }
+            .chosen img {
+                filter: brightness(1);
+            }
+            .chosen h2 {
+                text-decoration: underline;
+            }
+            .ubersicht {
+                width: 100%;
+            }
+
+            .team {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid #000;
+                padding: 10px 20px;
+            }
+            .-b {
+                font-weight: bold;
+                border-bottom: 2px solid #000;
+            }
+            #username {
+                position: absolute;
+                top: 30px;
+                left: 30px;
+            }
+        </style>
+    </head>
+    <body>  
+        <p id="username">Username</p>
+
+        <div class="titleDiv">
+            <h1 class="title">Wähle ein Land aus</h1>
+        </div>
+
+        <div class="chooseDiv">
+            <div class="land">
+                <h2>Deutschland</h2>
+                <img src="/img/countires/ger.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                </form>
+
+                <div class="ubersicht">
+                    <div class="team -b">
+                        <p>Teamname</p>
+                        <p>Stimmen</p>
+                    </div>
+                    <div class="team">
+                        <p>Team1</p>
+                        <p>10</p>
+                    </div>
+                    <div class="team">
+                        <p>Team2</p>
+                        <p>4</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="land">
+                <h2>China</h2>
+                <img src="/img/countires/ch.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                </form>
+
+                <div class="ubersicht">
+                    <div class="team -b">   
+                        <p>Teamname</p>
+                        <p>Stimmen</p>
+                    </div>
+                    <div class="team">
+                        <p>Team1</p>
+                        <p>10</p>
+                    </div>
+                    <div class="team">
+                        <p>Team2</p>
+                        <p>4</p>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="land chosen">
+                <h2>Frankreich</h2>
+                <img src="/img/countires/fra.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                </form>
+
+                <div class="ubersicht">
+                    <div class="team -b">
+                        <p>Teamname</p>
+                        <p>Stimmen</p>
+                    </div>
+                    <div class="team">
+                        <p>Team1</p>
+                        <p>10</p>
+                    </div>
+                    <div class="team">
+                        <p>Team2</p>
+                        <p>4</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="land">
+                <h2>Schweiz</h2>
+                <img src="/img/countires/schw.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                </form>
+
+                <div class="ubersicht">
+                    <div class="team -b">
+                        <p>Teamname</p>
+                        <p>Stimmen</p>
+                    </div>
+                    <div class="team">
+                        <p>Team1</p>
+                        <p>10</p>
+                    </div>
+                    <div class="team">
+                        <p>Team2</p>
+                        <p>4</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="land">
+                <h2>USA</h2>
+                <img src="/img/countires/usa.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                </form>
+
+                <div class="ubersicht">
+                    <div class="team -b">
+                        <p>Teamname</p>
+                        <p>Stimmen</p>
+                    </div>
+                    <div class="team">
+                        <p>Team1</p>
+                        <p>10</p>
+                    </div>
+                    <div class="team">
+                        <p>Team2</p>
+                        <p>4</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="land">
+                <h2>Botswana</h2>
+                <img src="/img/countires/bot.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                </form>
+
+                <div class="ubersicht">
+                    <div class="team -b">
+                        <p>Teamname</p>
+                        <p>Stimmen</p>
+                    </div>
+                    <div class="team">
+                        <p>Team1</p>
+                        <p>10</p>
+                    </div>
+                    <div class="team">
+                        <p>Team2</p>
+                        <p>4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
