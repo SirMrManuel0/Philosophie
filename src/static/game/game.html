@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+
+        <link rel="stylesheet" href="../css/origin.css">
+
+        <style>
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                width: 100vw;
+                height: 100vh;
+                background-image: url("../img/background.jpg");
+                background-size: cover;
+            }
+            h1, h2, p {
+                font-family: "Goudy";
+            }
+            .all {
+                display: flex;
+                height: 100vh;
+            }
+            .links {
+                width: 30%;
+                height: 100%;
+                border: 1px solid #fff;
+                box-shadow: 0px 0px 4px var(--text-color);
+
+                overflow: hidden;
+            }
+            .links > div {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                color: var(--text-color);
+                overflow: hidden;
+            }
+            .links_container {
+                padding: 20px;
+                gap: 20px;
+                background-color: rgba(var(--background-colorT), var(--transparency));
+            }
+            .rechts {
+                width: 70%;
+                height: 100%;
+                border: 1px solid var(--text-color);
+            }
+            .land {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                position: relative;
+            }
+            #image_country {
+                width: 80%;
+            }
+            #image_country_background {
+                width: calc(80% + 40px);
+                margin-top: -15px;
+                position: absolute;
+                z-index: -1;
+                filter: blur(13px);
+            }
+            #username {
+                margin-top: -10px;
+            }
+            .line {
+                width: 200%;
+                height: 1px;
+                margin-left: -100px;
+                border: 1px solid var(--text-color);
+            }
+            #tech_description {
+                text-align: center;
+            }
+            .fortschritt {
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-bottom: 2px solid var(--text-color);
+                position: relative;
+                overflow: hidden;
+            }
+            .fortschritt h1 {
+                background-color: rgba(var(--background-colorT), 0.4);
+                padding: 0 20px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 60px;
+            }
+            .balken {
+                position: absolute;
+                height: 60px;
+                width: 60%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                background-color: rgba(255, 99, 71, 1);
+                box-shadow: 0px 0px 100px rgba(255, 99, 71, 1);;
+            }
+            .investoren {
+                width: 100%;
+                height: 300px;
+                padding: 20px;
+                padding-top: 0;
+                background-color: rgba(var(--background-colorT), calc(var(--transparency) - 0.4));
+                overflow-y: scroll !important;
+            }
+            .investoren h2 {
+                align-self: start;
+                position: fixed;
+                width: calc(30% - 2px);
+                margin-left: 1px;
+                left: 0;
+                background-color: rgba(var(--background-colorT), 1);
+                padding: 10px 10px;
+            }
+            .table {
+                width: 100%;
+                margin-top: 60px;
+            }
+            .table div {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0px;
+                border-bottom: 1px solid #fff;
+            }
+            .rechts-cover {
+                position: absolute;
+                width: 70%;
+                height: 100vh;
+                left: 30%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                background-color:rgba(var(--background-colorT), calc(var(--transparency) + 0.1));
+            }
+            .rechts-cover h1 {
+                color: var(--text-color);
+                font-size: 50px;
+                letter-spacing: 5px;
+                text-align: center;
+                text-shadow: 0px 0px 10px rgb(91, 11, 11);
+            }
+            .spinner {
+                margin: 2rem auto;
+                width: 50px;
+                height: 50px;
+                border: 5px solid #444;
+                border-top: 5px solid #ffffff;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .hide {
+                display: none;
+            }
+            .leaderboard {
+                width: 70%;
+                height: 60px;
+                border-top: 1px solid var(--text-color);
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
+                background-color: rgba(var(--background-colorT), calc(var(--transparency) + 0.1));
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: var(--text-color);
+                padding: 20px;
+            }
+            #first {
+                font-size: 25px;
+                letter-spacing: 1px;
+                color: #C9B037;
+            }
+            #second {
+                font-size: 20px;
+                color: #D7D7D7;
+            }
+            #third {
+                font-size: 17px;
+                color: #AD8A56;
+            }
+            .rechts {
+                display: flex;
+                height: calc(100% - 60px);
+                overflow: hidden;
+            }
+            .rechts-r {
+                width: 35%;
+                height: 100%;
+                display: flex;
+                box-shadow: 0px 0px 10px var(--text-color);
+            }
+            .table-down {
+                margin-top: 0;
+                color: var(--text-color);
+                background-color: rgba(var(--background-colorT), calc(var(--transparency) + 0.1));
+            }
+            .table-down > div {
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border-bottom: 1px solid #fff;
+            }
+            .table-down > div > div {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .table-down div:last-child {
+                border-bottom: none;
+            }
+            .table-down p {
+                font-size: 15px;
+                margin-top: 10px;
+            }
+            .table-down button {
+                padding: 6px;
+                border-radius: 5px;
+                outline: none;
+                border: none;
+                background-color: var(--accent-color);
+                color: var(--text-color);
+            }
+            .rechts-l {
+                width: 65%;
+                border-right: 1px solid #fff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+            .meilenstein {
+                position: relative;
+                width: 100%;
+                height: 240px;
+                border: 10px solid var(--text-color);
+                border-radius: 10px;
+                background-color: rgba(var(--background-colorT), var(--transparency));
+                padding: 20px;
+                color: var(--text-color);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #m-balken {
+                height: 100%;
+                width: 0;
+            }
+
+            .pp {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        </style>
+
+        <title>Game</title>
+    </head>
+    <body>
+        
+
+        <div class="all">
+            <div class="links">
+                <div class="links_container">
+                    <h1 id="team">Teams 1</h1>
+                    <p id="username">Username</p>
+                    <div class="land">
+                        <img id="image_country" src="../img/countires/fra.png" alt="">
+                        <img id="image_country_background" src="../img/countires/fra.png" alt="">
+                    </div>
+                    <p class="">Technologie : Lichtgeschwindigkeitreisen</p>
+                    <p id="tech_description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus placeat nihil hic dolorem, aliquid repudiandae porro quos harum, quae quia in voluptates. Adipisci modi odit laborum dolor libero beatae quis.</p>
+                </div>
+                <div class="line"></div>
+                <div class="fortschritt">
+                    <div id="f-balken" class="balken"></div>
+                    <h1>Fortschritt</h1>
+                </div>
+                <div class="investoren">
+                    <h2>Invesotrenliste</h2>
+
+                    <div class="table">
+                        <div>
+                            <p>Investor</p>
+                            <p>Geld</p>
+                        </div>
+                        <div>
+                            <p>Investor 1</p>
+                            <p>Geld 1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rechts">
+                <div class="leaderboard">
+                    <p id="second">Team X</p>
+                    <p id="first">Team Y</p>
+                    <p id="third">Team Z</p>
+                </div>
+
+
+                <div class="rechts-l">
+
+                    <div id="meilensteinbox" class="meilenstein">
+                        <div class="pp">
+                            <h2>Name</h2>
+                            <p>Meilenstein</p>
+                        </div>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat natus quasi aspernatur officia, sed error laborum quidem mollitia distinctio omnis placeat reprehenderit culpa necessitatibus nulla, impedit ipsam. Pariatur dolorem tempore, voluptas esse facilis blanditiis nam cupiditate quod iusto illo repudiandae et architecto cum perferendis veritatis debitis suscipit ut nostrum exercitationem!</p>
+                        <div id="m-balken" class="balken"></div>
+                    </div>
+
+                </div>
+                <div class="rechts-r">
+                    <div class="table-down">
+                        <div id="investor1">
+                            <div>
+                                <p>Investor</p>
+                                <button>Annehmen</button>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                        </div>
+                        <div id="investor2">
+                            <div>
+                                <p>Investor</p>
+                                <button>Annehmen</button>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                        </div>
+                        <div id="investor3">
+                            <div>
+                                <p>Investor</p>
+                                <button>Annehmen</button>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                        </div>
+                        <div id="investor4">
+                            <div>
+                                <p>Investor</p>
+                                <button>Annehmen</button>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                        </div>
+                        <div id="investor5">
+                            <div>
+                                <p>Investor</p>
+                                <button>Annehmen</button>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rechts-cover hide">
+                <h1>Bitte warten Sie auf alle Spieler!</h1>
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
