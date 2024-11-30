@@ -20,7 +20,7 @@
             "research_field": 0,
             "creator": "Jefferson",
             "country": "Frankreich",
-            "user_count": 23,
+            "user_count": 25,
             "chosen_country": {
                 "127.0.0.1": ""
             }
@@ -58,10 +58,8 @@
         "Deutschland": 7.5,
         "Russland": 5.75,
         "China": 7.75,
-        "Japan": 7.75,
         "Frankreich": 7.25,
         "Schweiz": 6.5,
-        "Indien": 5.25,
         "Botswana": 3.5
     }
 }

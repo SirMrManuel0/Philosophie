@@ -16,7 +16,7 @@ ADDR: str = parser.parse_args().ip
 
 def file_to_bit(file_path):
     if file_path.endswith(".html"):
-        with open(file_path, 'r') as fs:
+        with open(file_path, 'r', encoding="utf-8") as fs:
             file: str = fs.read()
         file = file.replace("ADDRESS", ADDR)
         return file.encode()
