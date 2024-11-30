@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link rel="stylesheet" href="../css/origin.css">
+        <link rel="stylesheet" href="/static/css/origin.css">
 
         <style>
             * {
@@ -21,7 +21,7 @@
             body {
                 width: 100vw;
                 height: 100vh;
-                background-image: url("../img/background.jpg");
+                background-image: url("/static/img/background.jpg");
                 background-size: cover;
                 overflow: hidden;
             }
@@ -73,7 +73,7 @@
                 height: 200px;
                 filter: brightness(0.4);
             }
-            input[type=submit] {
+            button {
                 padding: 8px 16px;
                 background-color: var(--background-color);
                 border: 1px solid #000;
@@ -133,11 +133,9 @@
         <div class="chooseDiv">
             <div class="land">
                 <h2>Deutschland</h2>
-                <img src="/img/countires/ger.png" alt="">
-                <form class="" action="">
-                    <input type="submit" value="Auswählen">
-                    <input type="submit" value="Ausgewählt">
-                </form>
+                <img src="/static/img/countries/ger.png" alt="">
+                <button onclick="chosen('ger')">Auswählen</button>
+                <div class="chosen">Ausgeqählt</div>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -157,11 +155,8 @@
 
             <div class="land">
                 <h2>China</h2>
-                <img src="/img/countires/ch.png" alt="">
-                <form class="" action="">
-                    <input type="submit" value="Auswählen">
-                    <input type="submit" value="Ausgewählt">
-                </form>
+                <img src="/static/img/countries/ch.png" alt="">
+                <button onclick="chosen('ch')">Auswählen</button>
 
                 <div class="ubersicht">
                     <div class="team -b">   
@@ -181,11 +176,8 @@
 
             <div class="land chosen">
                 <h2>Frankreich</h2>
-                <img src="/img/countires/fra.png" alt="">
-                <form class="" action="">
-                    <input type="submit" value="Auswählen">
-                    <input type="submit" value="Ausgewählt">
-                </form>
+                <img src="/static/img/countries/fra.png" alt="">
+                <button onclick="chosen('fra')">Auswählen</button>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -205,11 +197,8 @@
 
             <div class="land">
                 <h2>Schweiz</h2>
-                <img src="/img/countires/schw.png" alt="">
-                <form class="" action="">
-                    <input type="submit" value="Auswählen">
-                    <input type="submit" value="Ausgewählt">
-                </form>
+                <img src="/static/img/countries/schw.png" alt="">
+                <button onclick="chosen('schw')">Auswählen</button>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -230,11 +219,8 @@
 
             <div class="land">
                 <h2>USA</h2>
-                <img src="/img/countires/usa.png" alt="">
-                <form class="" action="">
-                    <input type="submit" value="Auswählen">
-                    <input type="submit" value="Ausgewählt">
-                </form>
+                <img src="/static/img/countries/usa.png" alt="">
+                <button onclick="chosen('usa')">Auswählen</button>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -255,11 +241,8 @@
             
             <div class="land">
                 <h2>Botswana</h2>
-                <img src="/img/countires/bot.png" alt="">
-                <form class="" action="">
-                    <input type="submit" value="Auswählen">
-                    <input type="submit" value="Ausgewählt">
-                </form>
+                <img src="/static/img/countries/bot.png" alt="">
+                <button onclick="chosen('bot')">Auswählen</button>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -277,5 +260,10 @@
                 </div>
             </div>
         </div>
+        <script>
+            function chosen(country) {
+
+            }
+        </script>
     </body>
 </html>

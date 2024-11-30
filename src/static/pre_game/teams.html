@@ -261,12 +261,12 @@
 
                 <h1>Creator</h1>
 
-                <form id="creatorForm" action="">
+                <form id="creatorForm" action="/team_create" method="post">
                     <input type="text" placeholder="Teamname" name="Teamname">
                     <input type="text" placeholder="Geschichte (optional)" name="Geschichte">
 
                     <div>
-                        <label class="text1">Forschungsgebiet : </label>
+                        <label class="text1">Forschungsgebiet: </label>
                         <select name="gebiet" id="gebiet" form="creatorForm">
                             <option value="Lichtgeschwindigkeitsreisen">Lichtgeschwindigkeitsreisen</option>
                             <option value="Fusionsreaktor">Fusionsreaktor</option>
@@ -279,7 +279,7 @@
 
                     <div class="flex">
                         <label>Teamfarbe : </label>
-                        <input id="colorIn" type="color">
+                        <input id="colorIn" type="color" name="Teamfarbe">
                     </div>
 
 
@@ -310,7 +310,7 @@
                 document.getElementById("createNewTeam").style.display = "none";
             });
 
-            const url = "http://localhost:80/api";
+            const url = "http://127.0.0.1:80/api";
 
             async function sendPostRequest(data) {
                 try {
@@ -353,31 +353,23 @@
                 }
             }
 
-            function getTeams() {
-                // To later use the fetch api and make a call to the server --------------
-                return [
-                    {
-                        "name": "Team1",
-                        "researchfield": "Unsichtbares Material",
-                        "creator": "John",
-                        "memberCount": 5,
-                        "color": [10,20,50]
-                    },
-                    {
-                        "name": "Team2",
-                        "researchfield": "Unzerstörbares Material",
-                        "creator": "Tim",
-                        "memberCount": 65,
-                        "color": [255,20,50]
-                    },
-                    {
-                        "name": "Team3",
-                        "researchfield": "Hochleistungslaser",
-                        "creator": "Carlson",
-                        "memberCount": 2,
-                        "color": [50,26,255]
-                    }
-                ];
+            async function getTeams() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "teams" });
+                    return responseDict["teams"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen der Teams:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeams() {
+                const teams = await getTeams();
+                if (teams) {
+                    createDynamicTeamCards(teams);
+                } else {
+                    console.error("Teams konnten nicht abgerufen werden.");
+                }
             }
 
             function setUsername(username) {
@@ -418,7 +410,7 @@
 
                     // Create the <p> for the researchfield value
                     let statValueResearch = document.createElement('p');
-                    statValueResearch.textContent = teams[i]["researchfield"]; // Look up the research field
+                    statValueResearch.textContent = teams[i]["research_field"]; // Look up the research field
                     statDivResearch.appendChild(statValueResearch); // Add the value to the stat container
 
                     // Add the researchfield stat to the statsDiv
@@ -450,7 +442,7 @@
                     statDivMembers.appendChild(statPMembers); // Add the label to the stat container
 
                     let statValueMembers = document.createElement('p');
-                    statValueMembers.textContent = teams[i]["memberCount"]; // Look up the member count
+                    statValueMembers.textContent = teams[i]["user_count"]; // Look up the member count
                     statDivMembers.appendChild(statValueMembers); // Add the value to the stat container
 
                     statsDiv.appendChild(statDivMembers); // Add the memberCount stat to the statsDiv
@@ -462,6 +454,9 @@
                     let joinButton = document.createElement('button');
                     joinButton.className = "karte-button"; // Add the correct class
                     joinButton.textContent = "Join"; // Set the button text
+                    joinButton.onclick = () => {
+                        window.location.href='http://127.0.0.1/landingPage';
+                    };
                     containerDiv.appendChild(joinButton); // Add the button to the container
 
                     // Add the containerDiv to the mainDiv
@@ -476,14 +471,37 @@
                     document.getElementById('box').appendChild(mainDiv);
                 }
             }
-
-            const teamsList = getTeams();
-            const username_ = getUsername();
             // Call the functions
-            createDynamicTeamCards(teamsList);
+            updateTeams();
             updateUsername();
 
 
         </script>
     </body>
 </html>
+
+<!--
+[
+                    {
+                        "name": "Team1",
+                        "researchfield": "Unsichtbares Material",
+                        "creator": "John",
+                        "memberCount": 5,
+                        "color": [10,20,50]
+                    },
+                    {
+                        "name": "Team2",
+                        "researchfield": "Unzerstörbares Material",
+                        "creator": "Tim",
+                        "memberCount": 65,
+                        "color": [255,20,50]
+                    },
+                    {
+                        "name": "Team3",
+                        "researchfield": "Hochleistungslaser",
+                        "creator": "Carlson",
+                        "memberCount": 2,
+                        "color": [50,26,255]
+                    }
+                ]
+-->
