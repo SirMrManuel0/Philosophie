@@ -5,7 +5,7 @@
             "name": "Jefferson"
         },
         "127.0.0.1": {
-            "team": 2,
+            "team": 0,
             "name": "Gabriel"
         }
     },
@@ -20,7 +20,7 @@
             "research_field": 0,
             "creator": "Jefferson",
             "country": "Frankreich",
-            "user_count": 20,
+            "user_count": 23,
             "chosen_country": {
                 "127.0.0.1": ""
             }

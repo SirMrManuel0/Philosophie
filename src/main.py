@@ -13,7 +13,7 @@ def file_to_bit(file_path):
     if file_path.endswith(".html"):
         with open(file_path, 'r') as fs:
             file: str = fs.read()
-        file.replace("ADDRESS", ADDR)
+        file = file.replace("ADDRESS", ADDR)
         return file.encode()
     with open(file_path, 'rb') as f:  # Open file in binary mode
         byte_data = f.read()  # Read the entire file content in bytes
