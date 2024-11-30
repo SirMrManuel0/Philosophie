@@ -5,7 +5,7 @@
             "name": "Jefferson"
         },
         "127.0.0.1": {
-            "team": 0,
+            "team": 2,
             "name": "Gabriel"
         }
     },
@@ -19,15 +19,32 @@
             ],
             "research_field": 0,
             "creator": "Jefferson",
-            "government_type": 0,
-            "country": 0,
-            "user_count": 13
+            "country": "Frankreich",
+            "user_count": 20,
+            "chosen_country": {
+                "127.0.0.1": ""
+            }
+        },
+        "2": {
+            "name": "deleteOld",
+            "color": [
+                4,
+                93,
+                75
+            ],
+            "research_field": 5,
+            "creator": "Gabriel",
+            "country": "",
+            "user_count": 1,
+            "chosen_country": {}
         }
     },
     "game": {
         "id": 0,
         "teams": [],
-        "state": []
+        "state": {
+            "started": false
+        }
     },
     "research_field": [
         "Unsichtbares Material",
@@ -36,11 +53,6 @@
         "Laser",
         "Fusionsreaktor",
         "Lichtgeschwindigkeitsreisen"
-    ],
-    "government_type": [
-        "Diktatur",
-        "Demokratie",
-        "F\u00c3\u00bcrstentum"
     ],
     "countries": {
         "Deutschland": 7.5,

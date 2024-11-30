@@ -3,16 +3,34 @@
     "static": {
         "pre_game": {
             "creatUser": "src/static/pre_game/creatUser.html",
-            "teams": "src/static/pre_game/teams.html"
+            "teams": "src/static/pre_game/teams.html",
+            "landingPage": "src/static/pre_game/landingPage.html"
         },
         "img": {
-            "background.jpg": "src/static/img/background.jpg"
+            "background.jpg": "src/static/img/background.jpg",
+            "countries": {
+                "bot.png": "src/static/img/countries/bot.png",
+                "ch.png": "src/static/img/countries/ch.png",
+                "fra.png": "src/static/img/countries/fra.png",
+                "ger.png": "src/static/img/countries/ger.png",
+                "schw.png": "src/static/img/countries/schw.png",
+                "usa.png": "src/static/img/countries/usa.png"
+            }
         },
         "css": {
             "origin.css": "src/static/css/origin.css"
         },
         "fonts": {
             "GoudyBookletter.ttf": "src/static/fonts/GoudyBookletter.ttf"
+        },
+        "game": {
+            "game": "src/static/game/game.html"
+        },
+        "post_game": {
+            "endscreen": "src/static/post_game/endscreen.html"
+        },
+        "admin": {
+            "lander": "src/static/admin/lander.html"
         }
     },
     "db": "databank.json"

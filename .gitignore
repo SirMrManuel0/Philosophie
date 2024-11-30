@@ -8,7 +8,8 @@ logs/
 *.pem
 *.pyc
 src/__pycache__/
-
+pwAdmin
+_test.py
 # Logs
 
 logs
