@@ -6,8 +6,13 @@ from PathManager import PathsManager
 from DbManager import DB
 import json
 import hashlib
+import argparse
 
-ADDR: str = "127.0.0.1"
+parser = argparse.ArgumentParser()
+
+parser.add_argument("ip", help="Server IP")
+
+ADDR: str = parser.parse_args().ip
 
 def file_to_bit(file_path):
     if file_path.endswith(".html"):
