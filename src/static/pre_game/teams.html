@@ -310,7 +310,7 @@
                 document.getElementById("createNewTeam").style.display = "none";
             });
 
-            const url = "http://127.0.0.1:80/api";
+            const url = "http://ADDRESS/api";
 
             async function sendPostRequest(data) {
                 try {
@@ -455,7 +455,7 @@
                     joinButton.className = "karte-button"; // Add the correct class
                     joinButton.textContent = "Join"; // Set the button text
                     joinButton.onclick = () => {
-                        window.location.href='http://127.0.0.1/landingPage';
+                        window.location.href='http://ADDRESS/landingPage';
                     };
                     containerDiv.appendChild(joinButton); // Add the button to the container
 

@@ -6,10 +6,20 @@ from PathManager import PathsManager
 from DbManager import DB
 import json
 import hashlib
+import argparse
 
-ADDR: str = "127.0.0.1"
+parser = argparse.ArgumentParser()
+
+parser.add_argument("ip", help="Server IP")
+
+ADDR: str = parser.parse_args().ip
 
 def file_to_bit(file_path):
+    if file_path.endswith(".html"):
+        with open(file_path, 'r', encoding="utf-8") as fs:
+            file: str = fs.read()
+        file = file.replace("ADDRESS", ADDR)
+        return file.encode()
     with open(file_path, 'rb') as f:  # Open file in binary mode
         byte_data = f.read()  # Read the entire file content in bytes
         # Convert each byte to a bit string and join them together

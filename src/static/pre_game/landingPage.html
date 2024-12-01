@@ -73,7 +73,7 @@
                 height: 200px;
                 filter: brightness(0.4);
             }
-            button {
+            form input[type='submit'] {
                 padding: 8px 16px;
                 background-color: var(--background-color);
                 border: 1px solid #000;
@@ -87,7 +87,7 @@
             }
             form :nth-child(2) {
                 display: none;
-                background-color: var(--secondary-color);
+                background-color: var(--secondary-color) !important;
             }
             
             .chosen form :nth-child(1) {
@@ -134,8 +134,11 @@
             <div class="land">
                 <h2>Deutschland</h2>
                 <img src="/static/img/countries/ger.png" alt="">
-                <button onclick="chosen('ger')">Auswählen</button>
-                <div class="chosen">Ausgeqählt</div>
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                    <input type="hidden" value="Deutschland">
+                </form>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -156,7 +159,11 @@
             <div class="land">
                 <h2>China</h2>
                 <img src="/static/img/countries/ch.png" alt="">
-                <button onclick="chosen('ch')">Auswählen</button>
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                    <input type="hidden" value="China">
+                </form>
 
                 <div class="ubersicht">
                     <div class="team -b">   
@@ -177,7 +184,12 @@
             <div class="land chosen">
                 <h2>Frankreich</h2>
                 <img src="/static/img/countries/fra.png" alt="">
-                <button onclick="chosen('fra')">Auswählen</button>
+                <form class="" action="">
+
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                    <input type="hidden" value="Frankreich">
+                </form>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -198,7 +210,11 @@
             <div class="land">
                 <h2>Schweiz</h2>
                 <img src="/static/img/countries/schw.png" alt="">
-                <button onclick="chosen('schw')">Auswählen</button>
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                    <input type="hidden" value="Schweiz">
+                </form>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -218,9 +234,13 @@
 
 
             <div class="land">
-                <h2>USA</h2>
-                <img src="/static/img/countries/usa.png" alt="">
-                <button onclick="chosen('usa')">Auswählen</button>
+                <h2>Russland</h2>
+                <img src="/static/img/countries/rus.png" alt="">
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                    <input type="hidden" value="Russland">
+                </form>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -242,7 +262,11 @@
             <div class="land">
                 <h2>Botswana</h2>
                 <img src="/static/img/countries/bot.png" alt="">
-                <button onclick="chosen('bot')">Auswählen</button>
+                <form class="" action="">
+                    <input type="submit" value="Auswählen">
+                    <input type="submit" value="Ausgewählt">
+                    <input type="hidden" value="Botswana">
+                </form>
 
                 <div class="ubersicht">
                     <div class="team -b">
@@ -261,9 +285,54 @@
             </div>
         </div>
         <script>
-            function chosen(country) {
+            const url = "http://ADDRESS/api";
 
+            async function sendPostRequest(data) {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json", // JSON-Format angeben
+                        },
+                        body: JSON.stringify(data), // Daten in JSON umwandeln
+                    });
+
+                    if (response.ok) {
+                        const responseText = await response.text(); // Antwort des Servers
+                        const responseDict = JSON.parse(responseText); // JSON-String in Objekt umwandeln
+                        return responseDict;
+                    } else {
+                        console.error("Fehler beim Request:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Netzwerkfehler:", error);
+                }
             }
+
+            async function getUsername() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "username" });
+                    return responseDict["username"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Benutzernamens:", error);
+                    return null;
+                }
+            }
+
+            async function updateUsername() {
+                const username = await getUsername();
+                if (username) {
+                    setUsername(username); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Benutzername konnte nicht abgerufen werden.");
+                }
+            }
+            function setUsername(username) {
+                // Set the username
+                document.getElementById('username').textContent = username;
+            }
+
+            updateUsername();
         </script>
     </body>
 </html>
