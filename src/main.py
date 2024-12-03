@@ -1,4 +1,5 @@
 import http.server
+import os.path
 import urllib.parse
 from socketserver import ThreadingMixIn
 import logging
@@ -252,6 +253,13 @@ def run_server():
 
 
 if __name__ == "__main__":
+    log_file: str = PathsManager().get_path("logs")
+    if not os.path.isfile(log_file):
+        path: str = "/".join(log_file.split("/")[:-1])
+        if not os.path.isdir(path):
+            os.mkdir(path)
+        with open(log_file, "w") as f:
+            f.write(".\n")
     try:
         run_server()
     except KeyboardInterrupt as err:
