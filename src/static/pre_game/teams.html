@@ -366,6 +366,7 @@
             async function updateTeams() {
                 const teams = await getTeams();
                 if (teams) {
+                    deleteTeams();
                     createDynamicTeamCards(teams);
                 } else {
                     console.error("Teams konnten nicht abgerufen werden.");
@@ -376,13 +377,24 @@
                 // Set the username
                 document.getElementById('username').textContent = username;
             }
+            
+            function deleteTeams() {
+                // Get the parent container of the team cards
+                const box = document.getElementById('box');
+
+                // Remove all child elements (team cards)
+                while (box.firstChild) {
+                    box.removeChild(box.firstChild);
+                }
+            }
+
 
             function createDynamicTeamCards(teams) {
                 for (let i = 0; i < teams.length; i++) {
                     // Create the div for the card, which will hold everything
                     let mainDiv = document.createElement('div');
                     mainDiv.className = "karte"; // Set the class
-                    mainDiv.style.backgroundColor = 
+                    mainDiv.style.backgroundColor =
                         "rgba(" + teams[i]["color"][0] + "," + teams[i]["color"][1] + "," + teams[i]["color"][2] + ", var(--transparency)";
 
                     // Create the container, which holds all the stats
@@ -430,7 +442,7 @@
                     statDivCreator.appendChild(statValueCreator); // Add the value to the stat container
 
                     // Add the creator stat to the statsDiv
-                    statsDiv.appendChild(statDivCreator); 
+                    statsDiv.appendChild(statDivCreator);
 
                     // Repeat for memberCount stat
                     let statDivMembers = document.createElement('div');
@@ -450,30 +462,44 @@
                     // Add the statsDiv to the containerDiv
                     containerDiv.appendChild(statsDiv);
 
-                    // Create the join button
-                    let joinButton = document.createElement('button');
+                    // Create a form for the join button
+                    let joinForm = document.createElement('form');
+                    joinForm.action = "/assign_team"; // Set the form action
+                    joinForm.method = "POST"; // Set the form method
+
+                    // Create a hidden input for the team name
+                    let hiddenInput = document.createElement('input');
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "teamname";
+                    hiddenInput.value = teams[i]["name"]; // Set the hidden value to the team name
+                    joinForm.appendChild(hiddenInput);
+
+                    // Create the join button as a form submit input
+                    let joinButton = document.createElement('input');
+                    joinButton.type = "submit";
                     joinButton.className = "karte-button"; // Add the correct class
-                    joinButton.textContent = "Join"; // Set the button text
-                    joinButton.onclick = () => {
-                        window.location.href='http://ADDRESS/landingPage';
-                    };
-                    containerDiv.appendChild(joinButton); // Add the button to the container
+                    joinButton.value = "Join"; // Set the button text
+                    joinForm.appendChild(joinButton); // Add the button to the form
+
+                    // Add the form to the containerDiv
+                    containerDiv.appendChild(joinForm);
 
                     // Add the containerDiv to the mainDiv
                     mainDiv.appendChild(containerDiv);
-
-                    // Add a spacer for styling
-                    let spacer = document.createElement('span');
-                    spacer.style.height = "100px"; // Set the height
-                    mainDiv.appendChild(spacer); // Add the spacer to the mainDiv
 
                     // Append the mainDiv to the box div
                     document.getElementById('box').appendChild(mainDiv);
                 }
             }
+
+           
+
             // Call the functions
             updateTeams();
             updateUsername();
+
+            // call every 2 seconds
+            setInterval(updateTeams, 2000);
 
 
         </script>

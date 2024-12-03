@@ -121,23 +121,30 @@
                 top: 30px;
                 left: 30px;
             }
+            #teamname {
+                position: absolute;
+                top: 50px;
+                left: 30px;
+                font-size: small;
+            }
         </style>
     </head>
     <body>  
         <p id="username">Username</p>
+        <p id="teamname">Teamname</p>
 
         <div class="titleDiv">
             <h1 class="title">Wähle ein Land aus</h1>
         </div>
 
         <div class="chooseDiv">
-            <div class="land">
+            <div class="land" id="Deutschland">
                 <h2>Deutschland</h2>
                 <img src="/static/img/countries/ger.png" alt="">
-                <form class="" action="">
+                <form class="" action="/select_country" method="post">
                     <input type="submit" value="Auswählen">
                     <input type="submit" value="Ausgewählt">
-                    <input type="hidden" value="Deutschland">
+                    <input type="hidden" value="Deutschland" name="country">
                 </form>
 
                 <div class="ubersicht">
@@ -156,13 +163,13 @@
                 </div>
             </div>
 
-            <div class="land">
+            <div class="land" id="China">
                 <h2>China</h2>
                 <img src="/static/img/countries/ch.png" alt="">
-                <form class="" action="">
+                <form class="" action="/select_country" method="post">
                     <input type="submit" value="Auswählen">
                     <input type="submit" value="Ausgewählt">
-                    <input type="hidden" value="China">
+                    <input type="hidden" value="China" name="country">
                 </form>
 
                 <div class="ubersicht">
@@ -181,14 +188,14 @@
                 </div>  
             </div>
 
-            <div class="land chosen">
+            <div class="land" id="Frankreich">
                 <h2>Frankreich</h2>
                 <img src="/static/img/countries/fra.png" alt="">
-                <form class="" action="">
+                <form class="" action="/select_country" method="post">
 
                     <input type="submit" value="Auswählen">
                     <input type="submit" value="Ausgewählt">
-                    <input type="hidden" value="Frankreich">
+                    <input type="hidden" value="Frankreich" name="country">
                 </form>
 
                 <div class="ubersicht">
@@ -207,13 +214,13 @@
                 </div>
             </div>
 
-            <div class="land">
+            <div class="land" id="Schweiz">
                 <h2>Schweiz</h2>
                 <img src="/static/img/countries/schw.png" alt="">
-                <form class="" action="">
+                <form class="" action="/select_country" method="post">
                     <input type="submit" value="Auswählen">
                     <input type="submit" value="Ausgewählt">
-                    <input type="hidden" value="Schweiz">
+                    <input type="hidden" value="Schweiz" name="country">
                 </form>
 
                 <div class="ubersicht">
@@ -233,13 +240,13 @@
             </div>
 
 
-            <div class="land">
+            <div class="land" id="Russland">
                 <h2>Russland</h2>
                 <img src="/static/img/countries/rus.png" alt="">
-                <form class="" action="">
+                <form class="" action="/select_country" method="post">
                     <input type="submit" value="Auswählen">
                     <input type="submit" value="Ausgewählt">
-                    <input type="hidden" value="Russland">
+                    <input type="hidden" value="Russland" name="country">
                 </form>
 
                 <div class="ubersicht">
@@ -259,13 +266,13 @@
             </div>
 
             
-            <div class="land">
+            <div class="land" id="Botswana">
                 <h2>Botswana</h2>
                 <img src="/static/img/countries/bot.png" alt="">
-                <form class="" action="">
+                <form class="" action="/select_country" method="post">
                     <input type="submit" value="Auswählen">
                     <input type="submit" value="Ausgewählt">
-                    <input type="hidden" value="Botswana">
+                    <input type="hidden" value="Botswana" name="country">
                 </form>
 
                 <div class="ubersicht">
@@ -292,22 +299,31 @@
                     const response = await fetch(url, {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json", // JSON-Format angeben
+                            "Content-Type": "application/json",
                         },
-                        body: JSON.stringify(data), // Daten in JSON umwandeln
+                        body: JSON.stringify(data),
                     });
 
+                    if (response.redirected) {
+                        console.log("Weiterleitung erkannt:", response.url);
+                        // Optionale Weiterleitung loggen oder entsprechend reagieren
+                        return null;
+                    }
+
                     if (response.ok) {
-                        const responseText = await response.text(); // Antwort des Servers
-                        const responseDict = JSON.parse(responseText); // JSON-String in Objekt umwandeln
+                        const responseText = await response.text();
+                        const responseDict = JSON.parse(responseText);
                         return responseDict;
                     } else {
                         console.error("Fehler beim Request:", response.statusText);
+                        return null;
                     }
                 } catch (error) {
                     console.error("Netzwerkfehler:", error);
+                    return null;
                 }
-            }
+}
+
 
             async function getUsername() {
                 try {
@@ -327,12 +343,144 @@
                     console.error("Benutzername konnte nicht abgerufen werden.");
                 }
             }
+
+            async function getTeamname() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "teamname" });
+                    return responseDict["teamname"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeamname() {
+                const teamname = await getTeamname();
+                if (teamname) {
+                    setTeamname(teamname); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Teamname konnte nicht abgerufen werden.");
+                }
+            }
+
             function setUsername(username) {
                 // Set the username
                 document.getElementById('username').textContent = username;
             }
 
+            function setTeamname(teamname) {
+                // Set the username
+                document.getElementById('teamname').textContent = teamname;
+            }
+
+            async function getCountry() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "user_country" });
+                    return responseDict["user_country"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des user_country:", error);
+                    return null;
+                }
+            }
+            async function updateCountry() {
+                const country = await getCountry();
+                if (country) {
+                    setCountry(country); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Benutzername konnte nicht abgerufen werden.");
+                }
+            }
+            function setCountry(country) {
+                document.getElementById(country).classList.add("chosen");
+            }
+
+            async function getTeamvotes() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "team_votes" });
+                    return responseDict["team_votes"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des team_votes:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeamnamevotes() {
+                const teamVotes = await getTeamvotes();
+                if (teamVotes) {
+                    deleteTeamvotes();
+                    createTeamvotes(teamVotes);
+                } else {
+                    console.error("TeamVotes konnten nicht abgerufen werden.");
+                }
+            }
+
+            function deleteTeamvotes() {
+                // Entfernt alle bestehenden Teamstimmen aus allen Ländern
+                const lands = document.querySelectorAll(".land .ubersicht");
+                lands.forEach((land) => {
+                    const teams = land.querySelectorAll(".team");
+                    teams.forEach((team, index) => {
+                        // Überspringt die Kopfzeile (erste Zeile) mit `Teamname` und `Stimmen`
+                        if (index > 0) {
+                            team.remove();
+                        }
+                    });
+                });
+            }
+
+            
+            function createTeamvotes(teamVotes) {
+                const userTeam = document.getElementById("teamname").textContent; // Benutzer-Teamname
+                console.log(teamVotes)
+                for (const country in teamVotes) {
+                    const land = document.getElementById(country);
+                    if (!land) continue;
+  
+                    const ubersicht = land.querySelector(".ubersicht");
+
+                    const teams = Object.entries(teamVotes[country]); // [{Team: Stimmen}, ...]
+
+                    // Sortiere die Teams, damit das Benutzerteam zuerst kommt
+                    teams.sort(([teamA], [teamB]) => {
+                        if (teamA === userTeam) return -1; // Benutzerteam kommt zuerst
+                        if (teamB === userTeam) return 1;
+                        return 0; // Keine Veränderung bei anderen Teams
+                    });
+
+                    teams.forEach(([teamName, votes]) => {
+                        const teamDiv = document.createElement("div");
+                        teamDiv.className = "team";
+                        if (teamName === userTeam) {
+                            teamDiv.classList.add("-b"); // Benutzerteam erhält Klasse `-b`
+                        }
+
+                        const teamNameEl = document.createElement("p");
+                        teamNameEl.textContent = teamName;
+
+                        const votesEl = document.createElement("p");
+                        votesEl.textContent = votes;
+
+                        teamDiv.appendChild(teamNameEl);
+                        teamDiv.appendChild(votesEl);
+
+                        ubersicht.appendChild(teamDiv);
+                    });
+                }
+            }
+
+            function checkGame() {
+                sendPostRequest({ message: "check_country_team" })
+            }
+
+
+            updateCountry();
             updateUsername();
+            updateTeamname();
+            updateTeamnamevotes();
+
+            setInterval(updateTeamnamevotes, 2000);
+            setInterval(checkGame, 2000);
+
         </script>
     </body>
 </html>
