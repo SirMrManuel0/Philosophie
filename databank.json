@@ -27,7 +27,7 @@
         "id": 0,
         "teams": [],
         "state": {
-            "started": true
+            "started": false
         }
     },
     "research_field": [

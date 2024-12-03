@@ -299,22 +299,31 @@
                     const response = await fetch(url, {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json", // JSON-Format angeben
+                            "Content-Type": "application/json",
                         },
-                        body: JSON.stringify(data), // Daten in JSON umwandeln
+                        body: JSON.stringify(data),
                     });
 
+                    if (response.redirected) {
+                        console.log("Weiterleitung erkannt:", response.url);
+                        // Optionale Weiterleitung loggen oder entsprechend reagieren
+                        return null;
+                    }
+
                     if (response.ok) {
-                        const responseText = await response.text(); // Antwort des Servers
-                        const responseDict = JSON.parse(responseText); // JSON-String in Objekt umwandeln
+                        const responseText = await response.text();
+                        const responseDict = JSON.parse(responseText);
                         return responseDict;
                     } else {
                         console.error("Fehler beim Request:", response.statusText);
+                        return null;
                     }
                 } catch (error) {
                     console.error("Netzwerkfehler:", error);
+                    return null;
                 }
-            }
+}
+
 
             async function getUsername() {
                 try {
@@ -459,6 +468,10 @@
                 }
             }
 
+            function checkGame() {
+                sendPostRequest({ message: "check_country_team" })
+            }
+
 
             updateCountry();
             updateUsername();
@@ -466,6 +479,7 @@
             updateTeamnamevotes();
 
             setInterval(updateTeamnamevotes, 2000);
+            setInterval(checkGame, 2000);
 
         </script>
     </body>

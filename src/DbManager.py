@@ -179,7 +179,6 @@ class DB:
                             dic[team["name"]] = 1
         return countries
 
-
     def set_country(self, ip: str, country: str) -> None:
         db: dict = self._load_db()
         db["teams"][str(self.get_team(ip))]["chosen_country"][ip] = country

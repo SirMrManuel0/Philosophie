@@ -213,6 +213,11 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "team_votes":
                 self._logger.info(f"Received POST Request from {self.client_address}. User team_votes is requested.")
                 data: dict = {"team_votes": Base.get_team_votes()}
+            elif post_data["message"] == "check_country_team":
+                self._logger.info(f"Received POST Request from {self.client_address}. check_country_team.")
+                if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
+                    self._transfer_to("game")
+                    return
             else:
                 self._logger.warning(f"Received POST Request from {self.client_address}. Unknown reason!")
                 self.send_response(400)
