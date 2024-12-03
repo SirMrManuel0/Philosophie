@@ -366,6 +366,7 @@
             async function updateTeams() {
                 const teams = await getTeams();
                 if (teams) {
+                    deleteTeams();
                     createDynamicTeamCards(teams);
                 } else {
                     console.error("Teams konnten nicht abgerufen werden.");
@@ -376,6 +377,17 @@
                 // Set the username
                 document.getElementById('username').textContent = username;
             }
+            
+            function deleteTeams() {
+                // Get the parent container of the team cards
+                const box = document.getElementById('box');
+
+                // Remove all child elements (team cards)
+                while (box.firstChild) {
+                    box.removeChild(box.firstChild);
+                }
+            }
+
 
             function createDynamicTeamCards(teams) {
                 for (let i = 0; i < teams.length; i++) {
@@ -474,6 +486,9 @@
             // Call the functions
             updateTeams();
             updateUsername();
+
+            // call every 2 seconds
+            setInterval(updateTeams, 2000);
 
 
         </script>
