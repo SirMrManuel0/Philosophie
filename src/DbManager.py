@@ -63,12 +63,13 @@ class DB:
     def assign_team(self, user: str, team: int) -> None:
         db: dict = self._load_db()
         oldTeam: str = str(db["user"][user]["team"])
-        if oldTeam == str(team):
-            return
-        db["teams"][oldTeam]["user_count"] -= 1
-        del db["teams"][oldTeam]["chosen_country"][user]
-        if db["teams"][oldTeam]["user_count"] <= 0:
-            del db["teams"][oldTeam]
+        if int(oldTeam) >= 0:
+            if oldTeam == str(team):
+                return
+            db["teams"][oldTeam]["user_count"] -= 1
+            del db["teams"][oldTeam]["chosen_country"][user]
+            if db["teams"][oldTeam]["user_count"] <= 0:
+                del db["teams"][oldTeam]
         db["user"][user]["team"] = team
         db["teams"][str(team)]["user_count"] += 1
         db["teams"][str(team)]["chosen_country"][user] = ""
@@ -81,6 +82,19 @@ class DB:
         for team in teams:
             team["research_field"] = db["research_field"][team["research_field"]]
         return teams
+
+    def is_team(self, name: str) -> bool:
+        db: dict = self._load_db()
+        for k, team in db["teams"].items():
+            if team["name"] == name: return True
+        return False
+
+    def get_team_by_name(self, name: str) -> int:
+        db: dict = self._load_db()
+        for k, team in db["teams"].items():
+            if team["name"] == name: return int(k)
+        return -1
+
 
     def create_team(self, name: str, color: str,
                     research_field: str, creator: str) -> int:
@@ -137,11 +151,11 @@ class DB:
 
     def get_team_name(self, team: int) -> str:
         db = self._load_db()
-        return db["teams"][team]["name"]
+        return db["teams"][str(team)]["name"]
 
     def get_team_country(self, team: int) -> str:
         db = self._load_db()
-        return db["teams"][team]["country"]
+        return db["teams"][str(team)]["country"]
 
     def have_all_chosen_country(self, team: int) -> bool:
         db: dict = self._load_db()
@@ -150,6 +164,21 @@ class DB:
             if v == "":
                 return False
         return True
+
+    def get_team_votes(self) -> dict:
+        db: dict = self._load_db()
+        countries: dict = {k: {} for k, _ in db["countries"].items()}
+        teams: list = self.get_teams()
+        for country, dic in countries.items():
+            for team in teams:
+                for user, cou in team["chosen_country"].items():
+                    if country == cou:
+                        if team["name"] in dic.keys():
+                            dic[team["name"]] += 1
+                        else:
+                            dic[team["name"]] = 1
+        return countries
+
 
     def set_country(self, ip: str, country: str) -> None:
         db: dict = self._load_db()

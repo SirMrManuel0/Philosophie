@@ -16,7 +16,7 @@
             "research_field": 5,
             "creator": "Gabriel",
             "country": "Frankreich",
-            "user_count": 5,
+            "user_count": 32,
             "chosen_country": {
                 "127.0.0.1": "Frankreich",
                 "192.168.178.4": "Botswana"
@@ -27,7 +27,7 @@
         "id": 0,
         "teams": [],
         "state": {
-            "started": false
+            "started": true
         }
     },
     "research_field": [

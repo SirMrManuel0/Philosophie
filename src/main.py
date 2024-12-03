@@ -70,7 +70,7 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self.send_header('Location', f'http://{ADDR}/{address}')
         self.end_headers()
-        self._logger.info(f"Transfered {self.client_address} to f'http://{ADDR}/{address}")
+        self._logger.info(f"Transferred {self.client_address} to http://{ADDR}/{address}")
 
     def _send_file(self, *path) -> None:
         self.send_response(200)
@@ -127,8 +127,9 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             return
         elif self.path == "/landingPage" and not Base.has_game_started() and Base.is_in_team(self.client_address[0]):
             self._logger.info(f"Received GET request from {self.client_address} for landingPage. The game has yet to "
-                              f"start.")
+                              f"start. User is allowed.")
             self._send_file("static", "pre_game", "landingPage")
+            return
         elif self.path == "/landingPage" and not Base.has_game_started():
             self._logger.info(f"Received GET request from {self.client_address} for teams. The user is in no team.")
             if Base.is_user(self.client_address[0]):
@@ -174,7 +175,18 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 DB(PathsManager().get_path("db")).create_user(username, self.client_address[0])
                 self._send_file("static", "pre_game", "teams")
                 return
-
+        elif path[0] == "assign_team":
+            self._logger.info(f"Received POST Request from {self.client_address}. User requests team assigning.")
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            parsed_data = urllib.parse.parse_qs(post_data.decode('utf-8'))
+            form_data = {key: values[0] for key, values in parsed_data.items()}
+            Base: DB = DB(PathsManager().get_path("db"))
+            if Base.is_team(form_data["teamname"]):
+                Base.assign_team(self.client_address[0], Base.get_team_by_name(form_data["teamname"]))
+                self._logger.info(f"{self.client_address[0]} is assign to team {form_data["teamname"]}")
+                self._transfer_to("landingPage")
+                return
         elif path[0] == "api":
             self._logger.info(f"Received POST Request from {self.client_address} for api.")
             content_length = int(self.headers.get('Content-Length', 0))
@@ -195,6 +207,12 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if country == "":
                     country: str = "Frankreich"
                 data: dict = {"user_country": country}
+            elif post_data["message"] == "teamname":
+                self._logger.info(f"Received POST Request from {self.client_address}. User Team Name is requested.")
+                data: dict = {"teamname": Base.get_team_name(Base.get_team(self.client_address[0]))}
+            elif post_data["message"] == "team_votes":
+                self._logger.info(f"Received POST Request from {self.client_address}. User team_votes is requested.")
+                data: dict = {"team_votes": Base.get_team_votes()}
             else:
                 self._logger.warning(f"Received POST Request from {self.client_address}. Unknown reason!")
                 self.send_response(400)

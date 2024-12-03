@@ -121,10 +121,17 @@
                 top: 30px;
                 left: 30px;
             }
+            #teamname {
+                position: absolute;
+                top: 50px;
+                left: 30px;
+                font-size: small;
+            }
         </style>
     </head>
     <body>  
         <p id="username">Username</p>
+        <p id="teamname">Teamname</p>
 
         <div class="titleDiv">
             <h1 class="title">Wähle ein Land aus</h1>
@@ -327,9 +334,34 @@
                     console.error("Benutzername konnte nicht abgerufen werden.");
                 }
             }
+
+            async function getTeamname() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "teamname" });
+                    return responseDict["teamname"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeamname() {
+                const teamname = await getTeamname();
+                if (teamname) {
+                    setTeamname(teamname); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Teamname konnte nicht abgerufen werden.");
+                }
+            }
+
             function setUsername(username) {
                 // Set the username
                 document.getElementById('username').textContent = username;
+            }
+
+            function setTeamname(teamname) {
+                // Set the username
+                document.getElementById('teamname').textContent = teamname;
             }
 
             async function getCountry() {
@@ -350,10 +382,91 @@
                 }
             }
             function setCountry(country) {
-                document.getElementById(country).classList.add("chosen")
+                document.getElementById(country).classList.add("chosen");
             }
+
+            async function getTeamvotes() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "team_votes" });
+                    return responseDict["team_votes"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des team_votes:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeamnamevotes() {
+                const teamVotes = await getTeamvotes();
+                if (teamVotes) {
+                    deleteTeamvotes();
+                    createTeamvotes(teamVotes);
+                } else {
+                    console.error("TeamVotes konnten nicht abgerufen werden.");
+                }
+            }
+
+            function deleteTeamvotes() {
+                // Entfernt alle bestehenden Teamstimmen aus allen Ländern
+                const lands = document.querySelectorAll(".land .ubersicht");
+                lands.forEach((land) => {
+                    const teams = land.querySelectorAll(".team");
+                    teams.forEach((team, index) => {
+                        // Überspringt die Kopfzeile (erste Zeile) mit `Teamname` und `Stimmen`
+                        if (index > 0) {
+                            team.remove();
+                        }
+                    });
+                });
+            }
+
+            
+            function createTeamvotes(teamVotes) {
+                const userTeam = document.getElementById("teamname").textContent; // Benutzer-Teamname
+                console.log(teamVotes)
+                for (const country in teamVotes) {
+                    const land = document.getElementById(country);
+                    if (!land) continue;
+  
+                    const ubersicht = land.querySelector(".ubersicht");
+
+                    const teams = Object.entries(teamVotes[country]); // [{Team: Stimmen}, ...]
+
+                    // Sortiere die Teams, damit das Benutzerteam zuerst kommt
+                    teams.sort(([teamA], [teamB]) => {
+                        if (teamA === userTeam) return -1; // Benutzerteam kommt zuerst
+                        if (teamB === userTeam) return 1;
+                        return 0; // Keine Veränderung bei anderen Teams
+                    });
+
+                    teams.forEach(([teamName, votes]) => {
+                        const teamDiv = document.createElement("div");
+                        teamDiv.className = "team";
+                        if (teamName === userTeam) {
+                            teamDiv.classList.add("-b"); // Benutzerteam erhält Klasse `-b`
+                        }
+
+                        const teamNameEl = document.createElement("p");
+                        teamNameEl.textContent = teamName;
+
+                        const votesEl = document.createElement("p");
+                        votesEl.textContent = votes;
+
+                        teamDiv.appendChild(teamNameEl);
+                        teamDiv.appendChild(votesEl);
+
+                        ubersicht.appendChild(teamDiv);
+                    });
+                }
+            }
+
+
             updateCountry();
             updateUsername();
+            updateTeamname();
+            updateTeamnamevotes();
+
+            setInterval(updateTeamnamevotes, 2000);
+
         </script>
     </body>
 </html>
