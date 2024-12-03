@@ -1,9 +1,5 @@
 {
     "user": {
-        "Ip": {
-            "team": 0,
-            "name": "Jefferson"
-        },
         "127.0.0.1": {
             "team": 0,
             "name": "Gabriel"
@@ -11,22 +7,7 @@
     },
     "teams": {
         "0": {
-            "name": "Name",
-            "color": [
-                255,
-                255,
-                255
-            ],
-            "research_field": 0,
-            "creator": "Jefferson",
-            "country": "Frankreich",
-            "user_count": 25,
-            "chosen_country": {
-                "127.0.0.1": ""
-            }
-        },
-        "2": {
-            "name": "deleteOld",
+            "name": "Root",
             "color": [
                 4,
                 93,
@@ -34,9 +15,12 @@
             ],
             "research_field": 5,
             "creator": "Gabriel",
-            "country": "",
-            "user_count": 1,
-            "chosen_country": {}
+            "country": "Frankreich",
+            "user_count": 5,
+            "chosen_country": {
+                "127.0.0.1": "Frankreich",
+                "192.168.178.4": "Botswana"
+            }
         }
     },
     "game": {
@@ -55,11 +39,11 @@
         "Lichtgeschwindigkeitsreisen"
     ],
     "countries": {
-        "Deutschland": 7.5,
-        "Russland": 5.75,
-        "China": 7.75,
-        "Frankreich": 7.25,
-        "Schweiz": 6.5,
-        "Botswana": 3.5
+        "Frankreich": 1,
+        "China": 0.775,
+        "Russland": 0.575,
+        "Deutschland": 0.75,
+        "Botswana": 0.35,
+        "Schweiz": 0.65
     }
 }

@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: 'Goudy'; 
-    src: url('../fonts/GoudyBookletter.ttf') format('truetype'); 
+    src: url('/static/fonts/GoudyBookletter.ttf') format('truetype');
 }       
 
 :root {

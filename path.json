@@ -24,7 +24,8 @@
             "GoudyBookletter.ttf": "src/static/fonts/GoudyBookletter.ttf"
         },
         "game": {
-            "game": "src/static/game/game.html"
+            "game": "src/static/game/game.html",
+            "gameStarted": "src/static/game/gameStarted.html"
         },
         "post_game": {
             "endscreen": "src/static/post_game/endscreen.html"
