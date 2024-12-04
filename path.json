@@ -34,5 +34,13 @@
             "lander": "src/static/admin/lander.html"
         }
     },
-    "db": "databank.json"
+    "db": "databank.json",
+    "country_flag_url": {
+        "Frankreich": "/static/img/countries/fra.png",
+        "China": "/static/img/countries/ch.png",
+        "Russland": "/static/img/countries/rus.png",
+        "Deutschland": "/static/img/countries/ger.png",
+        "Botswana": "/static/img/countries/bot.png",
+        "Schweiz": "/static/img/countries/schw.png"
+    }
 }

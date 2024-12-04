@@ -103,6 +103,22 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self._logger.info(f"Received GET Request from {self.client_address}.")
         Base: DB = DB(PathsManager().get_path("db"))
+        if self.path == "/endscreen":
+            skill: str = Base.get_killed(self.client_address[0])
+            with open(PathsManager().get_path("static","post_game","endscreen"), 'r', encoding="utf-8") as fs:
+                file: str = fs.read()
+                file = file.replace("NUMBER", skill)
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+            self.wfile.write(file.encode())
+            self._logger.info(f"Send file endscreen to {self.client_address}")
+            self._logger.info(f"{self.client_address} killed {skill}")
+
+        if self.path == "/game" and Base.is_user(self.client_address[0]) and Base.is_in_team(self.client_address[0]):
+            Base.user_at_game(self.client_address[0])
+            self._send_file("static", "game", "game")
+            return
         if self.path == "/":
             self._send_file("static", "pre_game", "creatUser")
             return
@@ -218,6 +234,50 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
                     self._transfer_to("game")
                     return
+            elif post_data["message"] == "country_flag_url":
+                self._logger.info(f"Received POST Request from {self.client_address}. country_flag_url.")
+                data: dict = {"country_flag_url": Base.get_user_flag(self.client_address[0])}
+            elif post_data["message"] == "team_color":
+                self._logger.info(f"Received POST Request from {self.client_address}. team_color.")
+                data: dict = {"team_color": Base.get_user_color(self.client_address[0])}
+            elif post_data["message"] == "technology":
+                self._logger.info(f"Received POST Request from {self.client_address}. technology.")
+                data: dict = {"technology": Base.get_user_technology(self.client_address[0])}
+            elif post_data["message"] == "technology_description":
+                self._logger.info(f"Received POST Request from {self.client_address}. technology_description.")
+                data: dict = {"technology_description": Base.get_user_technology_description(self.client_address[0])}
+            elif post_data["message"] == "investor_history":
+                self._logger.info(f"Received POST Request from {self.client_address}. investor_history.")
+                data: dict = {"investor_history": Base.get_user_investor_history(self.client_address[0])}
+            elif post_data["message"] == "milestone":
+                self._logger.info(f"Received POST Request from {self.client_address}. milestone.")
+                data: dict = {"milestone": Base.get_user_milestone(self.client_address[0])}
+            elif post_data["message"] == "investoren":
+                self._logger.info(f"Received POST Request from {self.client_address}. investoren.")
+                data: dict = {"investoren": Base.get_user_investoren(self.client_address[0])}
+            elif post_data["message"].startswith("investor_bought_"):
+                self._logger.info(f"Received POST Request from {self.client_address}. {post_data["message"]}.")
+                index: int = int(post_data["message"][-1:])
+                Base.bought_investor(index, self.client_address[0])
+                data: dict = {"investor": "bought"}
+            elif post_data["message"] == "fortschritt":
+                self._logger.info(f"Received POST Request from {self.client_address}. fortschritt.")
+                data: dict = {"fortschritt": Base.get_progress(Base.get_team(self.client_address[0]))}
+            elif post_data["message"] == "milestone_balken":
+                self._logger.info(f"Received POST Request from {self.client_address}. milestone_balken.")
+                data: dict = {"milestone_balken": Base.get_milestone_progress(Base.get_team(self.client_address[0]))}
+            elif post_data["message"] == "check_done":
+                self._logger.info(f"Received POST Request from {self.client_address}. check_done.")
+                if Base.is_team_done(Base.get_team(self.client_address[0])):
+                    self._transfer_to("endscreen")
+                    return
+                data: dict ={"no": "no"}
+            elif post_data["message"] == "check_all_here":
+                self._logger.info(f"Received POST Request from {self.client_address}. check_all_here.")
+                data: dict = {"check_all_here": [Base.are_all_game()]}
+            elif post_data["message"] == "leaderboard":
+                self._logger.info(f"Received POST Request from {self.client_address}. leaderboard.")
+                data: dict = {"leaderboard": Base.get_leaderboard()}
             else:
                 self._logger.warning(f"Received POST Request from {self.client_address}. Unknown reason!")
                 self.send_response(400)
