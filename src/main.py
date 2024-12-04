@@ -200,7 +200,8 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             Base: DB = DB(PathsManager().get_path("db"))
             if Base.is_team(form_data["teamname"]):
                 Base.assign_team(self.client_address[0], Base.get_team_by_name(form_data["teamname"]))
-                self._logger.info(f"{self.client_address[0]} is assign to team {form_data["teamname"]}")
+                team_name: str = form_data["teamname"]
+                self._logger.info(f"{self.client_address[0]} is assign to team {team_name}")
                 self._transfer_to("landingPage")
                 return
         elif path[0] == "api":
@@ -256,7 +257,8 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self._logger.info(f"Received POST Request from {self.client_address}. investoren.")
                 data: dict = {"investoren": Base.get_user_investoren(self.client_address[0])}
             elif post_data["message"].startswith("investor_bought_"):
-                self._logger.info(f"Received POST Request from {self.client_address}. {post_data["message"]}.")
+                message: str = post_data["message"]
+                self._logger.info(f"Received POST Request from {self.client_address}. {message}.")
                 index: int = int(post_data["message"][-1:])
                 Base.bought_investor(index, self.client_address[0])
                 data: dict = {"investor": "bought"}
@@ -297,7 +299,8 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             Base: DB = DB(PathsManager().get_path("db"))
             teamId: int = Base.create_team(form_data["Teamname"], form_data["Teamfarbe"],
                                            form_data["gebiet"], self.client_address[0])
-            self._logger.info(f"Created team {form_data["Teamname"]}{form_data["Teamfarbe"]}, {form_data["gebiet"]}"
+            values: tuple = form_data["Teamname"], form_data["Teamfarbe"], form_data["gebiet"]
+            self._logger.info(f"Created team {values[0]} {values[1]}, {values[2]}"
                               f" due to {self.client_address[0]}")
             Base.assign_team(self.client_address[0], teamId)
             self._transfer_to("teams")
