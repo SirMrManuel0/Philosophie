@@ -102,14 +102,13 @@
             .balken {
                 position: absolute;
                 height: 60px;
-                width: 60%;
+                width: 100%;
                 left: 0;
                 top: 0;
                 z-index: -1;
                 background-color: rgba(255, 99, 71, 1);
-                box-shadow: 0px 0px 100px rgba(255, 99, 71, 1);;
             }
-            .investoren {
+            .investoren_history {
                 width: 100%;
                 height: 300px;
                 padding: 20px;
@@ -117,7 +116,7 @@
                 background-color: rgba(var(--background-colorT), calc(var(--transparency) - 0.4));
                 overflow-y: scroll !important;
             }
-            .investoren h2 {
+            .investoren_history h2 {
                 align-self: start;
                 position: fixed;
                 width: calc(30% - 2px);
@@ -212,6 +211,7 @@
                 margin-top: 0;
                 color: var(--text-color);
                 background-color: rgba(var(--background-colorT), calc(var(--transparency) + 0.1));
+                overflow-y: scroll;
             }
             .table-down > div {
                 padding: 15px;
@@ -287,10 +287,10 @@
                     <h1 id="team">Teams 1</h1>
                     <p id="username">Username</p>
                     <div class="land">
-                        <img id="image_country" src="/static/img/countires/fra.png" alt="">
-                        <img id="image_country_background" src="/static/img/countires/fra.png" alt="">
+                        <img id="image_country" src="/static/img/countries/fra.png" alt="">
+                        <img id="image_country_background" src="/static/img/countries/fra.png" alt="">
                     </div>
-                    <p class="">Technologie : Lichtgeschwindigkeitreisen</p>
+                    <p id="technology" class="">Technologie</p>
                     <p id="tech_description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus placeat nihil hic dolorem, aliquid repudiandae porro quos harum, quae quia in voluptates. Adipisci modi odit laborum dolor libero beatae quis.</p>
                 </div>
                 <div class="line"></div>
@@ -298,7 +298,7 @@
                     <div id="f-balken" class="balken"></div>
                     <h1>Fortschritt</h1>
                 </div>
-                <div class="investoren">
+                <div class="investoren_history">
                     <h2>Invesotrenliste</h2>
 
                     <div class="table">
@@ -325,10 +325,10 @@
 
                     <div id="meilensteinbox" class="meilenstein">
                         <div class="pp">
-                            <h2>Name</h2>
+                            <h2 id="milestone_name">Name</h2>
                             <p>Meilenstein</p>
                         </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat natus quasi aspernatur officia, sed error laborum quidem mollitia distinctio omnis placeat reprehenderit culpa necessitatibus nulla, impedit ipsam. Pariatur dolorem tempore, voluptas esse facilis blanditiis nam cupiditate quod iusto illo repudiandae et architecto cum perferendis veritatis debitis suscipit ut nostrum exercitationem!</p>
+                        <p id="milestone_description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat natus quasi aspernatur officia, sed error laborum quidem mollitia distinctio omnis placeat reprehenderit culpa necessitatibus nulla, impedit ipsam. Pariatur dolorem tempore, voluptas esse facilis blanditiis nam cupiditate quod iusto illo repudiandae et architecto cum perferendis veritatis debitis suscipit ut nostrum exercitationem!</p>
                         <div id="m-balken" class="balken"></div>
                     </div>
 
@@ -337,48 +337,483 @@
                     <div class="table-down">
                         <div id="investor1">
                             <div>
-                                <p>Investor</p>
-                                <button>Annehmen</button>
+                                <p id="investor1_name">Investor</p>
+                                <button id="investor1_price">Geld</button>
                             </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                            <p id="investor1_description">description</p>
                         </div>
                         <div id="investor2">
                             <div>
-                                <p>Investor</p>
-                                <button>Annehmen</button>
+                                <p id="investor2_name">Investor</p>
+                                <button id="investor2_price">Geld</button>
                             </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                            <p id="investor2_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
                         </div>
                         <div id="investor3">
                             <div>
-                                <p>Investor</p>
-                                <button>Annehmen</button>
+                                <p id="investor3_name">Investor</p>
+                                <button id="investor3_price">Geld</button>
                             </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                            <p id="investor3_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
                         </div>
                         <div id="investor4">
                             <div>
-                                <p>Investor</p>
-                                <button>Annehmen</button>
+                                <p id="investor4_name">Investor</p>
+                                <button id="investor4_price">Geld</button>
                             </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                            <p id="investor4_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
                         </div>
                         <div id="investor5">
                             <div>
-                                <p>Investor</p>
-                                <button>Annehmen</button>
+                                <p id="investor5_name">Investor</p>
+                                <button id="investor5_price">Geld</button>
                             </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
+                            <p id="investor5_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi laudantium facilis, odit nihil excepturi quis nemo dolorum voluptatibus numquam.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="rechts-cover hide">
+            <div class="rechts-cover" id="warten">
                 <h1>Bitte warten Sie auf alle Spieler!</h1>
                 <div class="spinner"></div>
             </div>
         </div>
 
+        <script>
+            const url = "http://ADDRESS/api";
 
+            async function sendPostRequest(data) {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.redirected) {
+                        console.log("Weiterleitung erkannt:", response.url);
+                        window.location.href = response.url;
+                        return null;
+                    }
+
+                    if (response.ok) {
+                        const responseText = await response.text();
+                        const responseDict = JSON.parse(responseText);
+                        return responseDict;
+                    } else {
+                        console.error("Fehler beim Request:", response.statusText);
+                        return null;
+                    }
+                } catch (error) {
+                    console.error("Netzwerkfehler:", error);
+                    return null;
+                }
+            }
+
+            async function getUsername() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "username" });
+                    return responseDict["username"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Benutzernamens:", error);
+                    return null;
+                }
+            }
+
+            async function updateUsername() {
+                const username = await getUsername();
+                if (username) {
+                    setUsername(username); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Benutzername konnte nicht abgerufen werden.");
+                }
+            }
+
+            async function getTeamname() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "teamname" });
+                    return responseDict["teamname"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeamname() {
+                const teamname = await getTeamname();
+                if (teamname) {
+                    setTeamname(teamname); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("Teamname konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setUsername(username) {
+                // Set the username
+                document.getElementById('username').textContent = username;
+            }
+
+            function setTeamname(teamname) {
+                // Set the username
+                document.getElementById('team').textContent = teamname;
+            }
+
+            async function getCountryFlag() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "country_flag_url" });
+                    return responseDict["country_flag_url"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateCountryFlag() {
+                const country_flag_url = await getCountryFlag();
+                if (country_flag_url) {
+                    setCountryFlag(country_flag_url); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("country_flag_url konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setCountryFlag(country_flag_url) {
+                // Set the username
+                document.getElementById('image_country').src = country_flag_url;
+                document.getElementById('image_country_background').src = country_flag_url;
+            }
+
+            async function getTeamColor() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "team_color" });
+                    return responseDict["team_color"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des team_color:", error);
+                    return null;
+                }
+            }
+
+            async function updateTeamColor() {
+                const team_color = await getTeamColor();
+                if (team_color) {
+                    setTeamColor(team_color); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("team_color konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setTeamColor(team_color) {
+                // Set the username
+                const elements = document.querySelectorAll('.balken');
+                elements.forEach(element => {
+                    element.style.backgroundColor = 'rgba(' + team_color[0] + "," + team_color[1] + "," + team_color[2] + ",0.7)"; // Hintergrundfarbe setzen
+                });
+            }
+
+            async function getTechnology() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "technology" });
+                    return responseDict["technology"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateTechnology() {
+                const technology = await getTechnology();
+                if (technology) {
+                    setTechnology(technology); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("technology konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setTechnology(technology) {
+                // Set the username
+                document.getElementById('technology').textContent = technology;
+            }
+
+            async function getInvestorenHistory() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "investor_history" });
+                    return responseDict["investor_history"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des investor_history:", error);
+                    return null;
+                }
+            }
+
+            async function updateInvestorenHistory() {
+                const investor_history = await getInvestorenHistory();
+                if (investor_history) {
+                    setInvestorenHistory(investor_history); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("investor_history konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setInvestorenHistory(investor_history) {
+                const table = document.querySelector('.table');
+                
+                // Leere die bestehende Tabelle, bevor neue Daten eingefügt werden
+                table.innerHTML = `
+                    <div>
+                        <p>Investor</p>
+                        <p>Geld</p>
+                    </div>
+                `;
+                
+                // Hilfsfunktion zur Formatierung der Zahl
+                function formatMoney(amount) {
+                    return amount.toLocaleString('de-DE');
+                }
+                
+                // Iteriere durch das Dictionary der Investoren
+                for (let id in investor_history) {
+                    investor = investor_history[id]
+                    const money = investor[1];
+                    const investorDiv = document.createElement('div');
+                    investorDiv.innerHTML = `
+                        <p>${investor[0]}</p>
+                        <p>${formatMoney(money)} Mio. €</p>
+                    `;
+                    table.appendChild(investorDiv);
+                }
+            }
+
+
+            async function getTechnologyDescription() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "technology_description" });
+                    return responseDict["technology_description"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateTechnologyDescription() {
+                const technology_description = await getTechnologyDescription();
+                if (technology_description) {
+                    setTechnologyDescription(technology_description); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("technology_description konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setTechnologyDescription(technology_description) {
+                // Set the username
+                document.getElementById('tech_description').textContent = technology_description;
+            }
+
+            async function getMilestone() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "milestone" });
+                    return responseDict["milestone"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Teamnames:", error);
+                    return null;
+                }
+            }
+
+            async function updateMilestone() {
+                const milestone = await getMilestone();
+                if (milestone) {
+                    setMilestone(milestone); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("milestone konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setMilestone(milestone) {
+                // Set the username
+                document.getElementById('milestone_name').textContent = milestone["name"];
+                document.getElementById('milestone_description').textContent = milestone["description"];
+            }
+
+            async function getInvestoren() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "investoren" });
+                    return responseDict["investoren"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des investoren:", error);
+                    return null;
+                }
+            }
+
+            async function updateInvestoren() {
+                const investoren = await getInvestoren();
+                if (investoren) {
+                    setInvestoren(investoren); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("investoren konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setInvestoren(investoren) {
+                function formatMoney(money) {
+                    return money.toLocaleString('de-DE') + " Mio. €"; // Formatieren mit deutschem Tausender-Trennzeichen
+                }
+                // Zugriff auf die Investoren
+                const investorKeys = Object.keys(investoren);
+
+                // Gehe durch alle Investoren und setze den Inhalt der bestehenden Elemente
+                investorKeys.forEach((key, index) => {
+                    const investor = investoren[key];
+
+                    // Hole das entsprechende div für jeden Investor
+                    document.getElementById(`investor${index + 1}_name`).textContent = investor.name;
+                    document.getElementById(`investor${index + 1}_price`).textContent = formatMoney(investor.price);
+                    document.getElementById(`investor${index + 1}_description`).textContent = investor.description;
+                    document.getElementById(`investor${index + 1}_price`).onclick = () => {investor_selected(index)};
+                });
+            }
+
+            async function getLeaderboard() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "leaderboard" });
+                    return responseDict["leaderboard"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des leaderboard:", error);
+                    return null;
+                }
+            }
+
+            async function updateLeaderboard() {
+                const leaderboard = await getLeaderboard();
+                if (leaderboard) {
+                    setLeaderboard(leaderboard); // Setze den Benutzernamen im HTML
+                } else {
+                    console.error("leaderboard konnte nicht abgerufen werden.");
+                }
+            }
+
+            function setLeaderboard(leadorborad) {
+                document.getElementById("first").textContent = leadorborad[0]
+                document.getElementById("second").textContent = leadorborad[1]
+                document.getElementById("third").textContent = leadorborad[2]
+            }
+
+
+            already_waiting = false
+            async function investor_selected(index) {
+                if (already_waiting) return;
+                already_waiting = true;
+                let time = 10;
+                document.getElementById(`investor${index + 1}_price`).textContent = time;
+
+                let countdownValue = time;
+                const intervalId = setInterval(() => {
+                    document.getElementById(`investor${index + 1}_price`).textContent = countdownValue.toFixed(1);
+                    countdownValue -= 0.1;
+
+                    if (countdownValue <= 0) {
+                        clearInterval(intervalId); // Stop the countdown when it reaches 0
+                        continueAfterCountdown(); // Call the next steps after countdown finishes
+                    }
+                }, 100); // Update every 100ms
+
+                function continueAfterCountdown() {
+                    sendPostRequest({ message: "investor_bought_" + index })
+                        .then(() => {
+                            checkDone();
+                            updateInvestoren();
+                            updateMilestone();
+                            updateFortschritt();
+                            updateMilestoneBalken();
+                            already_waiting = false;
+                        });
+                }
+            }
+
+            async function getFortschritt() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "fortschritt" });
+                    return responseDict["fortschritt"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des fortschritt:", error);
+                    return null;
+                }
+            }
+
+            async function updateFortschritt() {
+                const fortschritt = await getFortschritt();
+                if (fortschritt) {
+                    setFortschritt(+fortschritt)
+                } else {
+                    console.error("milestone konnte nicht abgerufen werden.");
+                }
+            }
+
+            async function getMilestoneBalken() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "milestone_balken" });
+                    return responseDict["milestone_balken"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des milestone_balken:", error);
+                    return null;
+                }
+            }
+
+            async function updateMilestoneBalken() {
+                const milestone = await getMilestoneBalken();
+                if (milestone) {
+                    setMilestoneBalken(+milestone)
+                } else {
+                    console.error("milestone_balken konnte nicht abgerufen werden.");
+                }
+            }
+
+            async function checkDone() {
+                const responseDict = await sendPostRequest({ message: "check_done" });
+            }
+
+            function setFortschritt(percentage) {
+                document.getElementById('f-balken').style.width = percentage + "%";
+            }
+
+            function setMilestoneBalken(percentage) {
+                document.getElementById('m-balken').style.width = percentage + "%";
+            }
+
+            async function getCheckAllHere() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "check_all_here" });
+                    return responseDict["check_all_here"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des investoren:", error);
+                    return null;
+                }
+            }
+            
+            let intervalId = setInterval(async () => {
+                const all_here = await getCheckAllHere();
+                if (all_here) {
+                    if (all_here[0]) {
+                        document.getElementById("warten").classList.add("hide");
+                        clearInterval(intervalId); // Stoppe das Intervall, wenn die Bedingung erfüllt ist
+                    }
+                    
+                }
+            }, 1000);
+
+            updateInvestoren();
+            updateUsername();
+            updateTeamname();
+            updateCountryFlag();
+            updateTechnology();
+            updateTechnologyDescription();
+            updateTeamColor();
+            updateInvestorenHistory();
+            updateMilestone();
+            setFortschritt(0);
+            setMilestoneBalken(0);
+
+            setInterval(updateLeaderboard, 2000);
+
+        </script>
     </body>
 </html>
