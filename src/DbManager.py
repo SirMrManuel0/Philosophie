@@ -2,7 +2,7 @@ import json
 import math
 import random
 
-from src.PathManager import PathsManager
+from PathManager import PathsManager
 
 
 def hex_to_rgb(hex_color):
