@@ -16,27 +16,125 @@
             "research_field": 5,
             "creator": "Gabriel",
             "country": "Frankreich",
-            "user_count": 32,
+            "user_count": 36,
             "chosen_country": {
                 "127.0.0.1": "Frankreich",
                 "192.168.178.4": "Botswana"
+            },
+            "investoren": {
             }
         }
     },
     "game": {
         "id": 0,
         "teams": [],
+        "technology_price_constant": 100000,
+        "investoren": {
+            "Quantum Ventures" : {
+                "beschreibung": "Ein Investor, der in Unternehmen investiert, die sowohl in Quantenmechanik als auch in Meeresbiologie tätig sind. Ihr Logo zeigt einen Kraken, der Elektronen in den Tiefen des Ozeans jagt.",
+                "range": 4000,
+                "destruction_degree": 0.9
+            },
+            "Aurora Capital": {
+                "beschreibung": "Diese Firma glaubt an die Kombination von Technologie und Gemüse. Sie investieren in Startups, die Robotik mit der Landwirtschaft verbinden – insbesondere in Unternehmen, die sich auf die künstliche Züchtung von \"intelligenten\" Auberginen spezialisiert haben.",
+                "range": 0,
+                "destruction_degree": 0.4
+            },
+            "Iron Forge Dynamics": {
+                "beschreibung": "Ein Unternehmensnetzwerk, das in High-Tech-Militärausrüstung und mystische Artefakte investiert. Ihr Fokus liegt auf der Entwicklung von Superwaffen, die auf antiken, okkulten Praktiken basieren.",
+                "range": 8000,
+                "destruction_degree": 1
+            },
+            "Vertex Innovations": {
+                "beschreibung": "Ein Unternehmen, das in \"unmögliche\" Startups investiert – wie Unternehmen, die behaupten, Einhörner zu züchten oder fliegende Teppiche zu entwickeln. ",
+                "range": 7000,
+                "destruction_degree": 1
+            },
+            "Eclipse Holdings": {
+                "beschreibung": "Diese Firma glaubt, dass der Schlüssel zur Zukunft in der Kombination von Raumfahrt und tiefseetauglichen Quallen liegt. Sie finanzieren Projekte, die versuchen, Quallen in den Weltraum zu schicken.\n\n",
+                "range": 2000,
+                "destruction_degree": 0.5
+            },
+            "Nimbus Growth Partners": {
+                "beschreibung": "Nimbus Cloud Factory hat es sich zur Aufgabe gemacht, physische Wolken zu züchten und zu verkaufen. Ihr Ziel ist es, eine Wolkenökonomie zu schaffen, in der Menschen \"die perfekte Wolke\" mieten können.\n\n",
+                "range": 4000,
+                "destruction_degree": 0.8
+            },
+            "Stellar Equity": {
+                "beschreibung": "Diese Investorenfirma hat eine unorthodoxe Leidenschaft für Gurken. Sie investieren in Unternehmen, die sich mit der Automatisierung von Pickelprozessen oder der Herstellung von \"kosmischen\" Gurken beschäftigen – also Gurken, die im Weltraum angebaut werden.",
+                "range": 1000,
+                "destruction_degree": 0.3
+            },
+            "Evergreen Investments": {
+                "beschreibung": "Das Unternehmen hat den geheimen Plan, riesige, künstliche Monolithen zu bauen und sie in die entlegensten Gebirgsregionen zu stellen. Sie glauben, dass diese Monolithen Schlüssel zur Lösung globaler Probleme wie Energieknappheit sein könnten.\n\n",
+                "range": 4000,
+                "destruction_degree": 0.7
+            },
+            "Cipher Ventures": {
+                "beschreibung": "Cipher Parrot Ventures ist auf die Entschlüsselung von Rätseln spezialisiert – insbesondere auf die Entwicklung von Technologien, die es ermöglichen, mit Tieren, insbesondere Papageien, zu kommunizieren. Ihr Ziel ist es, tierische Kommunikation zu entschlüsseln.",
+                "range": 1000,
+                "destruction_degree": 0.3
+            },
+            "Pinnacle Horizons": {
+                "beschreibung": "Ein Unternehmen, das in die Pizzaindustrie investiert, jedoch auf unkonventionelle Weise. Sie unterstützen Startups, die Pizza in völlig neuen Formen anbieten – von fliegenden Pizzen bis zu Pizzen, die durch Augmented Reality gegessen werden können.",
+                "range": 1500,
+                "destruction_degree": 0.4
+            },
+            "Orion Shield Group": {
+                "beschreibung": "Diese Firma investiert in Unternehmen, die behaupten, den Mond zu kolonisieren. Aber ihr wahrer Fokus liegt auf der Schaffung einer \"Mond-Beam\" – einer Lichtstrahlen-Technologie, die es Menschen ermöglicht, mit dem Mond zu kommunizieren.",
+                "range": 8000,
+                "destruction_degree": 1
+            },
+            "Solaris Nexus": {
+                "beschreibung": "Diese Firma hat es sich zur Aufgabe gemacht, Solartechnologien zu entwickeln, die wie Käse-Reiben aussehen. Sie glauben, dass die besten Technologien aus der unkonventionellen Kombination von Solarenergie und alltäglichen Küchenutensilien entstehen.",
+                "range": 1000,
+                "destruction_degree": 0.8
+            },
+            "Helios Venture Partners": {
+                "beschreibung": "Helios investiert in die Schaffung der größten und fortschrittlichsten Luftpolsterfolien. Ihr Ziel ist es, ein riesiges, sich selbst reparierendes System zu entwickeln, das als \"weltweiter Schutzschild\" fungiert.",
+                "range": 2000,
+                "destruction_degree": 0.5
+            },
+            "Lighthouse Capital": {
+                "beschreibung": "Eine Firma, die sich auf die Erforschung und Förderung der \"süßen\" Seite der Technologie konzentriert. Sie investieren in Unternehmen, die Technologien entwickeln, um Jellybeans zu produzieren, die als Energiequelle dienen.",
+                "range": 1000,
+                "destruction_degree": 0.2
+            },
+            "Radiant Edge Ventures": {
+                "beschreibung": "Ein militärischer Entwickler von Licht- und Strahlentechnologie zur Abwehr von Angriffen. Sie sind bekannt für ihre „Laser-Mantisschilde“, die feindliche Waffen mit Lichtgeschwindigkeit neutralisieren.",
+                "range": 4000,
+                "destruction_degree": 0.9
+            },
+            "Cobalt Syndicate": {
+                "beschreibung": "Spezialisiert auf taktische Roboter und fortschrittliche Rüstungstechnik. Ihr „Cobalt-Soldat“ ist ein autonomer Krieger, der für Spionage und Kriegsführung eingesetzt wird.",
+                "range": 4000,
+                "destruction_degree": 0.8
+            },
+            "Blue Horizon Fund": {
+                "beschreibung": "Ein geheimes militärisches Projekt zur Entwicklung von Technologie für den militärischen Einsatz im Weltraum. Sie arbeiten an orbitalen Verteidigungssystemen und Satelliten-Spionagesystemen.",
+                "range": 4500,
+                "destruction_degree": 0.9
+            }
+        },
         "state": {
             "started": false
         }
     },
     "research_field": [
-        "Unsichtbares Material",
-        "Unzerst\u00c3\u00b6rbares Material",
-        "Hochleistungslaser",
-        "Laser",
-        "Fusionsreaktor",
-        "Lichtgeschwindigkeitsreisen"
+        "Dunkle Materie",
+        "Quantenverschränkung",
+        "Holografisches Prinzip",
+        "Quantengravitation",
+        "Supraflüssigkeit ",
+        "Superfestigkeit"
+    ],
+    "research_field_description": [
+        "Unsichtbare Materieform, die nur durch Gravitation wirkt und die Bewegungen von Galaxien beeinflusst.",
+        "Zustand, bei dem Teilchen über Distanz sofort miteinander verbunden bleiben.",
+        "Alle Rauminformationen können auf einer Fläche beschrieben werden, ähnlich einem Hologramm.",
+        "Theorie, die Quantenmechanik und Gravitation zu einer einzigen Beschreibung vereint.",
+        "Materiezustand mit Null-Viskosität, der sich ohne Energieverlust bewegt.",
+        "Materiezustand, der gleichzeitig flüssig und festartige Eigenschaften zeigt."
     ],
     "countries": {
         "Frankreich": 1,
