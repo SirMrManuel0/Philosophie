@@ -310,6 +310,8 @@ class DB:
         for user, value in users.items():
             if not value["is_at_game"]:
                 return False
+        db["game"]["state"]["started"] = True
+        self._write_db(db)
         return True
 
     def get_leaderboard(self) -> list:

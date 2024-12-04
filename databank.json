@@ -1,65 +1,10 @@
 {
-    "user": {
-        "127.0.0.1": {
-            "team": 0,
-            "name": "Gabriel",
-            "is_at_game": true
-        }
-    },
-    "teams": {
-        "0": {
-            "name": "Root",
-            "color": [
-                4,
-                93,
-                75
-            ],
-            "research_field": 5,
-            "creator": "Gabriel",
-            "country": "Frankreich",
-            "user_count": 36,
-            "chosen_country": {
-                "127.0.0.1": "Frankreich",
-                "192.168.178.4": "Botswana"
-            },
-            "investoren": [
-                [
-                    "Cobalt Syndicate",
-                    4000
-                ],
-                [
-                    "Helios Venture Partners",
-                    2000
-                ],
-                [
-                    "Quantum Ventures",
-                    4000
-                ],
-                [
-                    "Quantum Ventures",
-                    4000
-                ]
-            ],
-            "current_investors": [
-                13,
-                6,
-                13,
-                8,
-                4
-            ],
-            "current_milestone": 10,
-            "paid_milestone": 0,
-            "destruction_degree": 0.825,
-            "done": true,
-            "killed": 7095000000
-        }
-    },
+    "user": {},
+    "teams": {},
     "game": {
         "id": 0,
         "teams": [],
-        "progress": {
-            "0": 100.0
-        },
+        "progress": {},
         "technology_price_constant": 100000,
         "investoren": {
             "0": {
