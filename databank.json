@@ -136,6 +136,261 @@
         "Materiezustand mit Null-Viskosität, der sich ohne Energieverlust bewegt.",
         "Materiezustand, der gleichzeitig flüssig und festartige Eigenschaften zeigt."
     ],
+    "milestones": {
+    "Dunkle Materie": [
+        {
+            "name": "Erste Hypothese",
+            "description": "Die Theorie der Dunklen Materie wird erstmals von Wissenschaftlern formuliert, um fehlende Masse im Universum zu erklären."
+        },
+        {
+            "name": "Erste experimentelle Hinweise",
+            "description": "Erste Hinweise auf Dunkle Materie durch Beobachtungen der Rotationskurven von Galaxien."
+        },
+        {
+            "name": "WZK-Experiment",
+            "description": "Wissenschaftler entwerfen ein Experiment zur direkten Detektion von Dunkler Materie."
+        },
+        {
+            "name": "Widerspruch zu bisherigen Modellen",
+            "description": "Beobachtungen legen nahe, dass die Dunkle Materie keine normalen Teilchen ist."
+        },
+        {
+            "name": "Bose-Einstein-Kondensate als Modell",
+            "description": "Forschung an Bose-Einstein-Kondensaten bietet neue Ansätze zur Untersuchung von Dunkler Materie."
+        },
+        {
+            "name": "Gravitationswellenbeobachtungen",
+            "description": "Beobachtungen von Gravitationswellen liefern neue Hinweise auf die Natur der Dunklen Materie."
+        },
+        {
+            "name": "Indirekte Nachweise",
+            "description": "Indirekte Nachweise durch die Analyse von Gammastrahlen und kosmischen Strahlung."
+        },
+        {
+            "name": "Theorie der supersymmetrischen Teilchen",
+            "description": "Entwicklung der Theorie, dass Dunkle Materie aus supersymmetrischen Teilchen bestehen könnte."
+        },
+        {
+            "name": "Erste Kollisionsexperimente",
+            "description": "Experimentelle Kollisionen in Teilchenbeschleunigern liefern potenzielle Hinweise auf Dunkle Materie."
+        },
+        {
+            "name": "Kombination von Theorien",
+            "description": "Kombination der Theorien der Dunklen Materie mit anderen kosmologischen Modellen zur Entwicklung eines vereinheitlichten Modells."
+        }
+    ],
+    "Quantenverschränkung": [
+        {
+            "name": "Erste Entdeckung",
+            "description": "Albert Einstein, Boris Podolsky und Nathan Rosen formulieren das EPR-Paradoxon, das Quantenverschränkung postuliert."
+        },
+        {
+            "name": "Bell'sche Ungleichung",
+            "description": "John Bell formuliert eine Ungleichung, die die experimentelle Testbarkeit von Quantenverschränkung ermöglicht."
+        },
+        {
+            "name": "Erster Test von Bell’s Ungleichung",
+            "description": "Erster experimenteller Test der Bell'schen Ungleichung, der Quantenverschränkung bestätigt."
+        },
+        {
+            "name": "Teleportation von Quanten",
+            "description": "Erfolgreiche Demonstration der Quanten-Teleportation in Laborversuchen."
+        },
+        {
+            "name": "Verkettung von Qubits",
+            "description": "Verkettung von mehreren Qubits zur Realisierung von Quantenverschränkung in komplexeren Systemen."
+        },
+        {
+            "name": "Quantenkommunikation",
+            "description": "Erste Implementierung der Quantenkommunikation über lange Distanzen unter Verwendung von verschränkten Photonen."
+        },
+        {
+            "name": "Teleportation von Atomen",
+            "description": "Erfolgreiche Quanten-Teleportation von größeren Teilchen, wie Atomen, statt nur Photonen."
+        },
+        {
+            "name": "Verwendung in Quantencomputern",
+            "description": "Quantenverschränkung wird in funktionierenden Quantencomputern zur Berechnung komplexer Probleme genutzt."
+        },
+        {
+            "name": "Weltweite Quantenkommunikationsnetze",
+            "description": "Einführung erster globaler Quantenkommunikationsnetzwerke unter Verwendung von Quantenverschränkung zur sicheren Kommunikation."
+        },
+        {
+            "name": "Fehlerkorrektur in Quantencomputern",
+            "description": "Entwicklung von Methoden zur Fehlerkorrektur unter Verwendung von Quantenverschränkung für robustere Quantencomputer."
+        }
+    ],
+    "Holografisches Prinzip": [
+        {
+            "name": "Erste Theoretische Entwürfe",
+            "description": "Das Holografische Prinzip wird von Gerard 't Hooft und Leonard Susskind formuliert."
+        },
+        {
+            "name": "Verbindung zur Stringtheorie",
+            "description": "Das Holografische Prinzip wird mit der Stringtheorie verbunden, um eine Verbindung zwischen Quantenmechanik und Gravitation zu schaffen."
+        },
+        {
+            "name": "AdS/CFT-Korrespondenz",
+            "description": "Entwicklung der AdS/CFT-Korrespondenz, die das Holografische Prinzip mathematisch unterstützt."
+        },
+        {
+            "name": "Erste mathematische Beweise",
+            "description": "Erste Beweise und formale Verbindungen zwischen dem Holografischen Prinzip und bekannten physikalischen Modellen."
+        },
+        {
+            "name": "Kosmologische Anwendungen",
+            "description": "Das Holografische Prinzip wird verwendet, um das Verhalten von schwarzen Löchern und dem Universum zu erklären."
+        },
+        {
+            "name": "Holografische Entropie",
+            "description": "Der Zusammenhang zwischen Entropie und der Fläche eines Ereignishorizonts wird durch das Holografische Prinzip beschrieben."
+        },
+        {
+            "name": "Quantengravitation und Raumzeit",
+            "description": "Das Holografische Prinzip liefert Einblicke in die Natur der Quantengravitation und die Struktur der Raumzeit."
+        },
+        {
+            "name": "Verbindung zur Thermodynamik",
+            "description": "Das Holografische Prinzip wird zur Erklärung von Phänomenen der Thermodynamik in schwarzer Loch-Physik verwendet."
+        },
+        {
+            "name": "Erste Experimente zur Verifikation",
+            "description": "Erste Experimente zur Verifikation des Holografischen Prinzips durch Messungen von schwarzen Löchern und Quantenfluktuationen."
+        },
+        {
+            "name": "Vollständige Theorie der Quantengravitation",
+            "description": "Das Holografische Prinzip führt zur vollständigen Theorie der Quantengravitation, die die Quantenmechanik und Gravitation vereint."
+        }
+    ],
+    "Quantengravitation": [
+        {
+            "name": "Erste Theoretische Annäherungen",
+            "description": "Erste Versuche, die allgemeine Relativitätstheorie mit der Quantenmechanik zu verbinden."
+        },
+        {
+            "name": "Quantisierte Raumzeit",
+            "description": "Vorschläge zur Quantisierung der Raumzeit, um die Quantenmechanik auf gravitative Systeme anzuwenden."
+        },
+        {
+            "name": "Loop-Quantengravitation",
+            "description": "Entwicklung der Theorie der Loop-Quantengravitation als eine Alternative zur Stringtheorie."
+        },
+        {
+            "name": "Stringtheorie und Gravitation",
+            "description": "Verwendung der Stringtheorie, um die Quantenmechanik mit der Gravitation zu verbinden."
+        },
+        {
+            "name": "Holografisches Prinzip",
+            "description": "Das Holografische Prinzip bietet neue Wege zur Beschreibung von Quantengravitation in niedrigen Dimensionen."
+        },
+        {
+            "name": "Gravitationswellen und Quantenfluktuationen",
+            "description": "Erste Nachweise von Gravitationswellen, die durch Quantenfluktuationen beeinflusst werden."
+        },
+        {
+            "name": "Schwarze Löcher und Entropie",
+            "description": "Berechnungen zur Entropie von schwarzen Löchern führen zu neuen Einsichten in die Quantengravitation."
+        },
+        {
+            "name": "Erste experimentelle Tests",
+            "description": "Erste Versuche, Quantengravitation experimentell zu testen, z. B. durch Messungen der Gravitationswellen."
+        },
+        {
+            "name": "Quantenfeldtheorie der Gravitation",
+            "description": "Entwicklung einer Quantenfeldtheorie zur Beschreibung der Gravitation in mikroskopischen Skalen."
+        },
+        {
+            "name": "Vereinheitlichung aller fundamentalen Kräfte",
+            "description": "Vollständige Theorie, die alle vier fundamentalen Kräfte (Gravitation, Elektromagnetismus, starke und schwache Kernkraft) vereinigt."
+        }
+    ],
+    "Supraflüssigkeit": [
+        {
+            "name": "Erste Entdeckung",
+            "description": "Die Entdeckung der Supraflüssigkeit in Helium-4 durch Pyotr Kapitza, John F. Allen und Don Misener."
+        },
+        {
+            "name": "Supraleitung und Supraflüssigkeit",
+            "description": "Forschung an der Verknüpfung von Supraleitung und Supraflüssigkeit in unterschiedlichen Materialien."
+        },
+        {
+            "name": "Bose-Einstein-Kondensat",
+            "description": "Die erste Erzeugung von Bose-Einstein-Kondensaten in ultra-kalten Gasen bringt neue Einsichten in Supraflüssigkeit."
+        },
+        {
+            "name": "Vortexbewegungen",
+            "description": "Studien zur Bewegung von Vortexstrukturen in supraflüssigen Systemen."
+        },
+        {
+            "name": "Supraflüssigkeit bei höheren Temperaturen",
+            "description": "Erste Versuche, Supraflüssigkeit bei höheren Temperaturen als zuvor zu erzeugen."
+        },
+        {
+            "name": "Verwendung in der Quantenmechanik",
+            "description": "Untersuchungen der Supraflüssigkeit als Modell für Quanteneffekte in makroskopischen Systemen."
+        },
+        {
+            "name": "Erzeugung von Supraflüssigkeit in anderen Materialien",
+            "description": "Suche nach anderen Materialien, die Supraflüssigkeit unter bestimmten Bedingungen erzeugen können."
+        },
+        {
+            "name": "Nutzung in der Technologie",
+            "description": "Verwendung von Supraflüssigkeit zur Verbesserung von Kühlsystemen und anderen Technologien."
+        },
+        {
+            "name": "Erste Anwendungen in der Raumfahrttechnik",
+            "description": "Verwendung von Supraflüssigkeit in der Raumfahrttechnologie für effizientere Systeme."
+        },
+        {
+            "name": "Erweiterung der Supraflüssigkeitstheorie",
+            "description": "Die Supraflüssigkeitstheorie wird erweitert, um auch exotische Materialien und Phasen zu umfassen."
+        }
+    ],
+    "Superfestigkeit": [
+            {
+                "name": "Erste Entdeckung",
+                "description": "Die Entdeckung von Superfestigkeit in bestimmten Materialien unter extremen Bedingungen."
+            },
+            {
+                "name": "Modellierung von Superfestigkeit",
+                "description": "Erste theoretische Modelle, die das Verhalten von Superfestigkeit beschreiben."
+            },
+            {
+                "name": "Experimentelle Beobachtungen",
+                "description": "Experimentelle Beobachtungen von Superfestigkeit in speziellen Festkörpern."
+            },
+            {
+                "name": "Superfestigkeit in Nanomaterialien",
+                "description": "Die Entwicklung von Nanomaterialien mit Superfestigkeitseigenschaften."
+            },
+            {
+                "name": "Anwendung in der Materialwissenschaft",
+                "description": "Superfestigkeit wird in der Materialwissenschaft genutzt, um stärkere und widerstandsfähigere Werkstoffe zu entwickeln."
+            },
+            {
+                "name": "Superfestigkeit bei extremen Temperaturen",
+                "description": "Untersuchung der Superfestigkeit bei extrem niedrigen oder hohen Temperaturen."
+            },
+            {
+                "name": "Verbindung zu Quantenmechanik",
+                "description": "Die Entdeckung, dass Superfestigkeit eng mit Quantenmechanik und den Wechselwirkungen auf atomarer Ebene verbunden ist."
+            },
+            {
+                "name": "Superfeste Materialien in der Technik",
+                "description": "Erste Anwendungen von superfeste Materialien in High-Tech-Geräten und Ingenieursprojekten."
+            },
+            {
+                "name": "Kommerzielle Nutzung von Superfestigkeit",
+                "description": "Kommerzielle Produkte, die superfeste Materialien verwenden, werden auf den Markt gebracht."
+            },
+            {
+                "name": "Optimierung von Superfestigkeitstechnologien",
+                "description": "Optimierung der Superfestigkeitstechnologien für verschiedene industrielle Anwendungen."
+            }
+        ]
+    },
+
     "countries": {
         "Frankreich": 1,
         "China": 0.775,
