@@ -1,10 +1,68 @@
 {
-    "user": {},
-    "teams": {},
+    "user": {
+        "127.0.0.1": {
+            "team": 0,
+            "name": "Gabriel",
+            "is_at_game": true
+        }
+    },
+    "teams": {
+        "0": {
+            "name": "superTeam",
+            "color": [
+                94,
+                30,
+                123
+            ],
+            "research_field": 1,
+            "creator": "Gabriel",
+            "country": "Frankreich",
+            "user_count": 1,
+            "chosen_country": {
+                "127.0.0.1": "Frankreich"
+            },
+            "investoren": [
+                [
+                    "Vertex Innovations",
+                    7000
+                ],
+                [
+                    "Lighthouse Capital",
+                    1000
+                ],
+                [
+                    "Nimbus Growth Partners",
+                    4000
+                ],
+                [
+                    "Iron Forge Dynamics",
+                    8000
+                ],
+                [
+                    "Quantum Ventures",
+                    4000
+                ]
+            ],
+            "current_investors": [
+                0,
+                1,
+                14,
+                9,
+                4
+            ],
+            "current_milestone": 10,
+            "paid_milestone": 0,
+            "destruction_degree": 0.8400000000000001,
+            "done": true,
+            "killed": 7560000000
+        }
+    },
     "game": {
         "id": 0,
         "teams": [],
-        "progress": {},
+        "progress": {
+            "0": 100.0
+        },
         "technology_price_constant": 100000,
         "investoren": {
             "0": {
@@ -111,7 +169,7 @@
             }
         },
         "state": {
-            "started": false
+            "started": true
         }
     },
     "research_field": [

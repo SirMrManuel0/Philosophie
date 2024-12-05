@@ -8,6 +8,7 @@
         },
         "img": {
             "background.jpg": "src/static/img/background.jpg",
+            "icon.png": "src/static/img/icon.png",
             "countries": {
                 "bot.png": "src/static/img/countries/bot.png",
                 "ch.png": "src/static/img/countries/ch.png",

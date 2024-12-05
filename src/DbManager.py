@@ -15,7 +15,7 @@ def hex_to_rgb(hex_color):
     g = int(hex_color[2:4], 16)
     b = int(hex_color[4:6], 16)
 
-    return (r, g, b)
+    return r, g, b
 
 
 class DB:
@@ -38,7 +38,6 @@ class DB:
         db["user"][ip]["team"] = -1
         db["user"][ip]["name"] = username
         db["user"][ip]["is_at_game"] = False
-        db["teams"]["0"]["user_count"] += 1
         self._write_db(db)
 
     def get_user(self, ip: str) -> dict:
@@ -116,7 +115,7 @@ class DB:
             "country": "",
             "user_count": 0,
             "chosen_country": {},
-            "investoren": {},
+            "investoren": [],
             "current_investors": [0, 1, 2, 3, 4],
             "current_milestone": 0,
             "paid_milestone": 0,
@@ -246,7 +245,12 @@ class DB:
         db["teams"][team]["paid_milestone"] += (price * country_index)
         milestone_needed: int = db["game"]["technology_price_constant"] // 10
         db["teams"][team]["destruction_degree"] += destruction_degree
-        db["teams"][team]["current_investors"][index] = random.randint(0, 16)
+        while True:
+            new_inves: int = random.randint(0, 16)
+            if new_inves not in db["teams"][team]["current_investors"]:
+                db["teams"][team]["current_investors"][index] = new_inves
+                break
+
         self._write_db(db)
         if db["teams"][team]["paid_milestone"] >= milestone_needed:
             self.next_milestone(team)
@@ -257,7 +261,7 @@ class DB:
         db["teams"][team]["current_milestone"] += 1
         db["teams"][team]["paid_milestone"] = 0
         if db["teams"][team]["current_milestone"] > 9:
-            db["teams"][team]["destruction_degree"] = db["teams"][team]["destruction_degree"]/ len(db["teams"][team]["investoren"])
+            db["teams"][team]["destruction_degree"] = db["teams"][team]["destruction_degree"] / len(db["teams"][team]["investoren"])
             db["teams"][team]["done"] = True
         self._write_db(db)
 
@@ -363,3 +367,12 @@ class DB:
         self._write_db(db)
         return f"{killed:,}".replace(",", " ")
 
+    def reset(self):
+        db: dict = self._load_db()
+        db["user"] = {}
+        db["teams"] = {}
+        db["game"]["id"] = 0
+        db["game"]["teams"] = []
+        db["game"]["progress"] = {}
+        db["game"]["state"]["started"] = False
+        self._write_db(db)
