@@ -1,13 +1,16 @@
 import http.server
 import os.path
-import urllib.parse
-from socketserver import ThreadingMixIn
-import logging
-from PathManager import PathsManager
-from DbManager import DB
 import json
 import hashlib
 import argparse
+import logging
+
+from urllib.parse import parse_qs
+from socketserver import ThreadingMixIn
+
+from PathManager import PathsManager
+from DbManager import DB
+
 
 parser = argparse.ArgumentParser()
 
@@ -15,13 +18,8 @@ parser.add_argument("ip", help="Server IP")
 
 ADDR: str = parser.parse_args().ip
 
-
-
-
-
 class ThreadedHTTPServer(ThreadingMixIn, http.server.HTTPServer):
     """Handle requests in a separate thread."""
-
 
 class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, request, client_address, server):
@@ -39,7 +37,8 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if not self._logger.handlers:
             # This stops multiple useless log entries
             fh = logging.FileHandler(
-                PathsManager().get_path("logs")
+                PathsManager().get_path("logs"),
+                encoding='utf-8'
             )
             fh.setLevel(logging.INFO)
 
@@ -79,13 +78,13 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/css")
         elif path[-1][:-3] == "jpg":
             self.send_header("Content-type", "image/jpg")
-            self.send_header("Content-Length", len(file))
+            self.send_header("Content-Length", str(len(file)))
         elif path[-1][:-3] == "png":
             self.send_header("Content-type", "image/png")
-            self.send_header("Content-Length", len(file))
+            self.send_header("Content-Length", str(len(file)))
         elif "fonts" in path:
             self.send_header("Content-type", "font/ttf")
-            self.send_header("Content-Length", len(file))
+            self.send_header("Content-Length", str(len(file)))
         else:
             self.send_header("Content-type", "text/html")
         self.end_headers()
@@ -114,7 +113,9 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(file.encode())
             self._logger.info(f"Send file endscreen to {self.client_address}")
             self._logger.info(f"{self.client_address} killed {skill}")
-
+        if self.path == "/phil/favicon.png":
+            self._send_file("static", "img", "icon.png")
+            return
         if self.path == "/game" and Base.is_user(self.client_address[0]) and Base.is_in_team(self.client_address[0]):
             Base.user_at_game(self.client_address[0])
             self._send_file("static", "game", "game")
@@ -141,7 +142,10 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         elif self.path == "/teams":
             self._transfer_to("gameStarted")
             return
-        elif self.path == "/landingPage" and not Base.has_game_started() and Base.is_in_team(self.client_address[0]):
+        elif (self.path == "/landingPage"
+              and not Base.has_game_started()
+              and Base.is_in_team(self.client_address[0])
+              and Base.is_user(self.client_address[0])):
             self._logger.info(f"Received GET request from {self.client_address} for landingPage. The game has yet to "
                               f"start. User is allowed.")
             self._send_file("static", "pre_game", "landingPage")
@@ -177,9 +181,12 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if path[0] == "teams":
             self._logger.info(f"Received POST Request from {self.client_address} for teams.")
             content_length = int(self.headers.get('Content-Length', 0))
-            post_data = self.rfile.read(content_length)
-            post_data = str(post_data)
-            username: str = post_data[post_data.find("=") + 1:-1]
+            post_data = self.rfile.read(content_length).decode('utf-8')
+            data = parse_qs(post_data)
+            username: str = data.get('username', [''])[0]
+            if username == "":
+                self._transfer_to("")
+                return
             username_hash = hashlib.sha256(username.encode())
             username_hash = username_hash.hexdigest()
             if username_hash == "5823d1bc9416c2996bc9572da20cc9efa617fc036181e2d42c7e8b198519e7fa":
@@ -195,7 +202,7 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self._logger.info(f"Received POST Request from {self.client_address}. User requests team assigning.")
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
-            parsed_data = urllib.parse.parse_qs(post_data.decode('utf-8'))
+            parsed_data = parse_qs(post_data.decode('utf-8'))
             form_data = {key: values[0] for key, values in parsed_data.items()}
             Base: DB = DB(PathsManager().get_path("db"))
             if Base.is_team(form_data["teamname"]):
@@ -221,8 +228,6 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "user_country":
                 self._logger.info(f"Received POST Request from {self.client_address}. User country is requested.")
                 country: str = Base.get_chosen_country(self.client_address[0])
-                if country == "":
-                    country: str = "Frankreich"
                 data: dict = {"user_country": country}
             elif post_data["message"] == "teamname":
                 self._logger.info(f"Received POST Request from {self.client_address}. User Team Name is requested.")
@@ -235,6 +240,7 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
                     self._transfer_to("game")
                     return
+                return
             elif post_data["message"] == "country_flag_url":
                 self._logger.info(f"Received POST Request from {self.client_address}. country_flag_url.")
                 data: dict = {"country_flag_url": Base.get_user_flag(self.client_address[0])}
@@ -294,9 +300,18 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
 
-            parsed_data = urllib.parse.parse_qs(post_data.decode('utf-8'))
+            parsed_data = parse_qs(post_data.decode('utf-8'))
             form_data = {key: values[0] for key, values in parsed_data.items()}
             Base: DB = DB(PathsManager().get_path("db"))
+
+            try:
+                a = form_data["Teamname"]
+                a = form_data["Teamfarbe"]
+                a = form_data["gebiet"]
+            except KeyError:
+                self._transfer_to("teams")
+                return
+
             teamId: int = Base.create_team(form_data["Teamname"], form_data["Teamfarbe"],
                                            form_data["gebiet"], self.client_address[0])
             values: tuple = form_data["Teamname"], form_data["Teamfarbe"], form_data["gebiet"]
@@ -310,7 +325,7 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
 
-            parsed_data = urllib.parse.parse_qs(post_data.decode('utf-8'))
+            parsed_data = parse_qs(post_data.decode('utf-8'))
             form_data = {key: values[0] for key, values in parsed_data.items()}
             Base: DB = DB(PathsManager().get_path("db"))
             Base.set_country(self.client_address[0], form_data["country"])
@@ -339,12 +354,13 @@ def run_server():
 
 
 if __name__ == "__main__":
+    DB(PathsManager().get_path("db")).reset()
     log_file: str = PathsManager().get_path("logs")
     if not os.path.isfile(log_file):
         path: str = "/".join(log_file.split("/")[:-1])
         if not os.path.isdir(path):
             os.mkdir(path)
-        with open(log_file, "w") as f:
+        with open(log_file, "w", encoding="utf-8") as f:
             f.write(".\n")
     try:
         run_server()

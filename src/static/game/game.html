@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-
+        <link rel="icon" href="/phil/favicon.png" type="image/png">
         <link rel="stylesheet" href="/static/css/origin.css">
 
         <style>
@@ -724,6 +724,7 @@
                             updateMilestone();
                             updateFortschritt();
                             updateMilestoneBalken();
+                            
                             already_waiting = false;
                         });
                 }
@@ -760,11 +761,7 @@
 
             async function updateMilestoneBalken() {
                 const milestone = await getMilestoneBalken();
-                if (milestone) {
-                    setMilestoneBalken(+milestone)
-                } else {
-                    console.error("milestone_balken konnte nicht abgerufen werden.");
-                }
+                setMilestoneBalken(milestone)
             }
 
             async function checkDone() {
@@ -812,7 +809,11 @@
             setFortschritt(0);
             setMilestoneBalken(0);
 
-            setInterval(updateLeaderboard, 2000);
+            setInterval(updateLeaderboard, 200);
+            setInterval(updateMilestone, 500);
+            setInterval(updateFortschritt, 500);
+            setInterval(updateMilestoneBalken, 500);
+            setInterval(updateInvestorenHistory, 500);
 
         </script>
     </body>

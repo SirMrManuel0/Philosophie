@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="icon" href="/phil/favicon.png" type="image/png">
         <link rel="stylesheet" href="/static/css/origin.css">
 
         <style>
@@ -391,7 +391,9 @@
                 }
             }
             function setCountry(country) {
-                document.getElementById(country).classList.add("chosen");
+                if (country != ""){
+                    document.getElementById(country).classList.add("chosen");
+                }
             }
 
             async function getTeamvotes() {
