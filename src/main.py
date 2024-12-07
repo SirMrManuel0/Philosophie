@@ -282,10 +282,10 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 data: dict ={"no": "no"}
             elif post_data["message"] == "check_all_here":
                 self._logger.info(f"Received POST Request from {self.client_address}. check_all_here.")
-                data: dict = {"check_all_here": [Base.are_all_game()]}
+                data: dict = {"check_all_here": [Base.has_game_started()]}
             elif post_data["message"] == "leaderboard":
                 self._logger.info(f"Received POST Request from {self.client_address}. leaderboard.")
-                data: dict = {"leaderboard": Base.get_leaderboard()}
+                data: dict = {"leaderboard": Base.get_top_three(self.client_address[0])}
             else:
                 self._logger.warning(f"Received POST Request from {self.client_address}. Unknown reason!")
                 self.send_response(400)
@@ -336,6 +336,22 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self._transfer_to("game")
                 return
             self._transfer_to("landingPage")
+        elif path[0] == "define":
+            self._logger.info(f"Received POST Request from {self.client_address} for define.")
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            post_data = json.loads(str(post_data)[2:-1])
+            Base: DB = DB(PathsManager().get_path("db"))
+            if post_data["message"] == "start_game":
+                Base.start_game()
+                return
+            elif post_data["message"] == "get_db":
+                data: dict = Base.get_db()
+                self._send_json(data)
+                return
+            elif post_data["message"] == "set_db":
+                Base.set_db(post_data["db"])
+                return
 
 
 def run_server():

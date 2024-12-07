@@ -308,54 +308,46 @@ class DB:
         db["user"][ip]["is_at_game"] = True
         self._write_db(db)
 
-    def are_all_game(self) -> bool:
+    def get_leaderboards(self) -> dict:
         db: dict = self._load_db()
-        users: dict = db["user"]
-        for user, value in users.items():
-            if not value["is_at_game"]:
-                return False
-        db["game"]["state"]["started"] = True
-        self._write_db(db)
-        return True
+        leaderboards: dict = dict()
+        for name in db["research_field"]:
+            leaderboards[name] = []
 
-    def get_leaderboard(self) -> list:
-        db: dict = self._load_db()
-        board: dict = db["game"]["progress"]
+        for r_id, k in enumerate(leaderboards.keys()):
+            teams: dict = db["game"]["progress"][r_id]
+            teams: list = sorted(teams.items(), key=lambda x: x[1])
+            for team in teams:
+                team_id: str = team[0]
+                db_team: dict = db["teams"][team_id]
+                team_dict: dict = dict()
+                team_dict["name"] = db_team["name"]
+                team_dict["color"] = db_team["color"]
+                team_dict["country"] = db_team["country"]
+                team_dict["progress"] = team[1]
+                team_dict["user"] = []
+                for user in db["users"].values():
+                    if user["team"] != int(team_id):
+                        continue
+                    team_dict["user"].append(user["name"])
+                leaderboards[k].append(team_dict)
+
+        return leaderboards
+
+    def get_top_three(self, ip: str) -> list:
+        leaderboards: dict = self.get_leaderboards()
+        team: str = str(self.get_team(ip))
         top_three: list = list()
-        for k, v in board.items():
-            if len(top_three) == 0:
-                top_three.append([k, v])
-                continue
-            if v < top_three[0][1]:
-                if len(top_three) == 1:
-                    top_three.append([k, v])
-                    continue
-                if v < top_three[1][1]:
-                    if len(top_three) == 2:
-                        top_three.append([k, v])
-                        continue
-                    if v < top_three[2][1]:
-                        continue
-                    top_three.insert(2, [k, v])
-                    top_three.pop()
-                    continue
-                top_three.insert(1, [k, v])
-                top_three.pop()
-                continue
-            top_three.insert(0, [k, v])
-            top_three.pop()
-
-        for i in range(len(top_three)):
-            top_three[i][0] = db["teams"][top_three[i][0]]["name"]
-
-        for i in range(len(top_three)):
-            top_three[i] = f"{top_three[i][0]} | {top_three[i][1]}%"
-
-        if len(top_three) < 2:
-            top_three.append("")
-        if len(top_three) < 3:
-            top_three.append("")
-
+        db: dict = self._load_db()
+        r_ind: str = str(db["teams"][team]["research_field"])
+        leaderboard: list = leaderboards[r_ind]
+        if len(leaderboard) >= 3:
+            leaderboard: list = leaderboard[:3]
+        for team in leaderboard:
+            name: str = team["name"]
+            progress: str = str(team["progress"])
+            progress.replace(".",",")
+            top_three.append(f"{name} | {progress}%")
         return top_three
 
     def get_killed(self, ip: str) -> str:
@@ -367,12 +359,23 @@ class DB:
         self._write_db(db)
         return f"{killed:,}".replace(",", " ")
 
+    def start_game(self):
+        db: dict = self._load_db()
+        db["game"]["state"]["started"] = True
+        self._write_db(db)
+
+    def get_db(self) -> dict:
+        return self._load_db()
+
+    def set_db(self, new: dict) -> None:
+        self._write_db(new)
+
     def reset(self):
         db: dict = self._load_db()
         db["user"] = {}
         db["teams"] = {}
         db["game"]["id"] = 0
         db["game"]["teams"] = []
-        db["game"]["progress"] = {}
+        db["game"]["progress"] = {"0": {}, "1": {}}
         db["game"]["state"]["started"] = False
         self._write_db(db)
