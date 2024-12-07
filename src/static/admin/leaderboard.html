@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="../js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+        <script src="../js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.js"></script>
+
+        <link rel="stylesheet" href="../css/origin.css">
+
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            p {
+                color: var(--text-color);
+                font-family: "Goudy";
+            }
+            body {
+                width: 100vw;
+                height: 100vh;
+                background-image: url("../img/background.jpg");
+                background-size: cover;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .title {
+                text-align: center;
+                color: var(--text-color);
+            }
+            .leaderboard {
+                width: 50%;
+                padding: 4  0px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                background-color: rgba(var(--background-colorT), 0.8);
+                padding: 60px;
+                overflow-y: hidden;
+                height: 100%;
+                align-items: center;
+            }
+            .leaderboard-team {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px;
+                position: relative;
+                border-bottom: 1px solid #fff;
+                background-color: var(--background-color);
+                border-radius: 10px;
+                flex-shrink: 0;
+                width: 80%;
+            }
+            .leaderboard-score, .leaderboard-team-data > p:first-child  {
+                font-size: 21px;
+            }
+            .leaderboard-team-image {
+                display: block;
+                content: " ";
+                position: absolute;
+                left: -10px;
+                top: -10px;
+                width: calc(100% + 20px);
+                z-index: -10;
+                height: calc(100% + 20px);
+                background-size: cover;
+                filter: blur(3px);
+            }
+            .leaderboard-team > div {
+                width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .leaderboard-team-data {
+                width: 80% !important;
+                flex-direction: column;
+                border-right: 1px solid var(--text-color);
+                gap: 10px;
+                padding-right: 10px;
+            }
+            .leaderboard-team-mitglieder {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .leaderboard-team-progress {
+                width: 100% !important;
+                height: 60%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(10, 200, 200, 0.1);
+            }
+            .team-first {
+                box-shadow: 0px 0px 30px #C9B037;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            .team-first img, .team-second img, .team-third img {
+                display: block;
+                content: " ";
+                position: absolute;
+                left: -20px;
+                top: -20px;
+                width: calc(100% + 40px);
+                z-index: -10;
+                height: calc(100% + 40px);
+                background-size: cover;
+                filter: blur(3px);
+            }
+            .team-second {
+                box-shadow: 0px 0px 30px #D7D7D7;
+                margin-bottom: 20px;
+                width: 90%;
+            }
+            .team-third {
+                box-shadow: 0px 0px 30px #AD8A56;
+                margin-bottom: 20px;    
+                width: 85%;
+            }
+        </style>
+
+        <title>Document</title>
+    </head>
+    <body>
+
+        <div class="leaderboard">
+            <h1 class="title">Leaderboard</h1>
+            <div class="leaderboard-team team-first">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+
+                <img class="leaderboard-team-image" src="../img/countries/fra.png" alt="">
+            </div>
+
+            <div class="leaderboard-team team-second">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+
+                <img class="leaderboard-team-image" src="../img/countries/rus.png" alt="">
+            </div>
+
+
+            <div class="leaderboard-team team-third">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+
+                <img class="leaderboard-team-image" src="../img/countries/fra.png" alt="">
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+
+                <img class="leaderboard-team-image" src="../img/countries/ger.png" alt="">
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+        </div>
+
+    </body>
+</html>

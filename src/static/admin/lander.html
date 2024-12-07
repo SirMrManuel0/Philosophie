@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="../js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+        <script src="../js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.js"></script>
+
+        <link rel="stylesheet" href="../css/origin.css">
+
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            p {
+                color: var(--text-color);
+                font-family: "Goudy";
+            }
+            body {
+                width: 100vw;
+                height: 100vh;
+                background-image: url("../img/background.jpg");
+                background-size: cover;
+            }
+            .leaderboard {
+                width: 50%;
+                padding: 4  0px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                background-color: rgba(var(--background-colorT), 0.8);
+                padding: 60px;
+                overflow-y: scroll;
+                height: 100%;
+            }
+            .leaderboard-team {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px;
+                position: relative;
+                border-bottom: 1px solid #fff;
+                background-color: var(--background-color);
+                border-radius: 10px;
+                flex-shrink: 0;
+            }
+            .leaderboard-team > div {
+                width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .leaderboard-team-data {
+                width: 80% !important;
+                flex-direction: column;
+                border-right: 1px solid var(--text-color);
+                gap: 10px;
+                padding-right: 10px;
+            }
+            .leaderboard-team-mitglieder {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .leaderboard-team-progress {
+                width: 100% !important;
+                height: 60%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(10, 200, 200, 0.1);
+            }
+            
+            #jsoneditor {
+                position: absolute;
+                width: 50%;
+                left: 50%;
+                top: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .btn1 {
+                position: absolute;
+                left: 20px;
+                bottom: 20px;
+                z-index: 100;
+            }
+            .btn2 {
+                position: absolute;
+                right: 20px;
+                bottom: 20px;
+                z-index: 100;
+            }
+            .btn1, .btn2 {
+                padding: 20px;
+                background-color: #fff;
+                border: 1px solid var(--background-color);
+                border-radius: 10px;
+                cursor: pointer;
+                box-shadow: 0px 0px 5px #000;
+            }
+        </style>
+
+        <title>Document</title>
+    </head>
+    <body>
+
+        <div class="leaderboard">
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+
+            <div class="leaderboard-team">
+                <div class="leaderboard-team-data">
+                    <p>Team Name</p>
+                    <div class="leaderboard-team-mitglieder">
+                        <p class="leaderboard-team-mitglieder-name">Pepe</p>
+                        <p class="leaderboard-team-mitglieder-name">Fabian</p>
+                        <p class="leaderboard-team-mitglieder-name">Luis</p>
+                        <p class="leaderboard-team-mitglieder-name">India</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="leaderboard-score">20%</p>
+                </div>
+
+                <div class="leaderboard-team-progress"></div>
+            </div>
+        </div>
+
+        <div id="jsoneditor">
+            <button class="btn2">Save</button>
+        </div>
+
+        <script>
+            var container = document.getElementById('jsoneditor');
+            var options = {
+                mode: 'tree', // other modes: 'tree', 'form', 'code', 'text'
+            };
+            var editor = new JSONEditor(container, options);
+            var json =  {
+    "user": {
+        "127.0.0.1": {
+            "team": 0,
+            "name": "Gabriel",
+            "is_at_game": true
+        }
+    },
+    "teams": {
+        "0": {
+            "name": "superTeam",
+            "color": [
+                94,
+                30,
+                123
+            ],
+            "research_field": 1,
+            "creator": "Gabriel",
+            "country": "Frankreich",
+            "user_count": 1,
+            "chosen_country": {
+                "127.0.0.1": "Frankreich"
+            },
+            "investoren": [
+                [
+                    "Vertex Innovations",
+                    7000
+                ],
+                [
+                    "Lighthouse Capital",
+                    1000
+                ],
+                [
+                    "Nimbus Growth Partners",
+                    4000
+                ],
+                [
+                    "Iron Forge Dynamics",
+                    8000
+                ],
+                [
+                    "Quantum Ventures",
+                    4000
+                ]
+            ],
+            "current_investors": [
+                0,
+                1,
+                14,
+                9,
+                4
+            ],
+            "current_milestone": 10,
+            "paid_milestone": 0,
+            "destruction_degree": 0.8400000000000001,
+            "done": true,
+            "killed": 7560000000
+        }
+    },
+    "game": {
+        "id": 0,
+        "teams": [],
+        "progress": {
+            "0": 100.0
+        },
+        "technology_price_constant": 100000,
+        "investoren": {
+            "0": {
+                "name": "Quantum Ventures",
+                "description": "Ein Investor, der in Unternehmen investiert, die sowohl in Quantenmechanik als auch in Meeresbiologie t\u00e4tig sind. Ihr Logo zeigt einen Kraken, der Elektronen in den Tiefen des Ozeans jagt.",
+                "price": 4000,
+                "destruction_degree": 0.9
+            },
+            "1": {
+                "name": "Aurora Capital",
+                "description": "Diese Firma glaubt an die Kombination von Technologie und Gem\u00fcse. Sie investieren in Startups, die Robotik mit der Landwirtschaft verbinden \u2013 insbesondere in Unternehmen, die sich auf die k\u00fcnstliche Z\u00fcchtung von 'intelligenten' Auberginen spezialisiert haben.",
+                "price": 1500,
+                "destruction_degree": 0.4
+            },
+            "2": {
+                "name": "Iron Forge Dynamics",
+                "description": "Ein Unternehmensnetzwerk, das in High-Tech-Milit\u00e4rausr\u00fcstung und mystische Artefakte investiert. Ihr Fokus liegt auf der Entwicklung von Superwaffen, die auf antiken, okkulten Praktiken basieren.",
+                "price": 8000,
+                "destruction_degree": 1
+            },
+            "3": {
+                "name": "Vertex Innovations",
+                "description": "Ein Unternehmen, das in 'unm\u00f6gliche' Startups investiert \u2013 wie Unternehmen, die behaupten, Einh\u00f6rner zu z\u00fcchten oder fliegende Teppiche zu entwickeln.",
+                "price": 7000,
+                "destruction_degree": 1
+            },
+            "4": {
+                "name": "Eclipse Holdings",
+                "description": "Diese Firma glaubt, dass der Schl\u00fcssel zur Zukunft in der Kombination von Raumfahrt und tiefseetauglichen Quallen liegt. Sie finanzieren Projekte, die versuchen, Quallen in den Weltraum zu schicken.",
+                "price": 2000,
+                "destruction_degree": 0.5
+            },
+            "5": {
+                "name": "Nimbus Growth Partners",
+                "description": "Nimbus Cloud Factory hat es sich zur Aufgabe gemacht, physische Wolken zu z\u00fcchten und zu verkaufen. Ihr Ziel ist es, eine Wolken\u00f6konomie zu schaffen, in der Menschen 'die perfekte Wolke' mieten k\u00f6nnen.",
+                "price": 4000,
+                "destruction_degree": 0.8
+            },
+            "6": {
+                "name": "Stellar Equity",
+                "description": "Diese Investorenfirma hat eine unorthodoxe Leidenschaft f\u00fcr Gurken. Sie investieren in Unternehmen, die sich mit der Automatisierung von Pickelprozessen oder der Herstellung von 'kosmischen' Gurken besch\u00e4ftigen \u2013 also Gurken, die im Weltraum angebaut werden.",
+                "price": 1000,
+                "destruction_degree": 0.3
+            },
+            "7": {
+                "name": "Evergreen Investments",
+                "description": "Das Unternehmen hat den geheimen Plan, riesige, k\u00fcnstliche Monolithen zu bauen und sie in die entlegensten Gebirgsregionen zu stellen. Sie glauben, dass diese Monolithen Schl\u00fcssel zur L\u00f6sung globaler Probleme wie Energieknappheit sein k\u00f6nnten.",
+                "price": 4000,
+                "destruction_degree": 0.7
+            },
+            "8": {
+                "name": "Cipher Ventures",
+                "description": "Cipher Parrot Ventures ist auf die Entschl\u00fcsselung von R\u00e4tseln spezialisiert \u2013 insbesondere auf die Entwicklung von Technologien, die es erm\u00f6glichen, mit Tieren, insbesondere Papageien, zu kommunizieren. Ihr Ziel ist es, tierische Kommunikation zu entschl\u00fcsseln.",
+                "price": 1000,
+                "destruction_degree": 0.3
+            },
+            "9": {
+                "name": "Pinnacle Horizons",
+                "description": "Ein Unternehmen, das in die Pizzaindustrie investiert, jedoch auf unkonventionelle Weise. Sie unterst\u00fctzen Startups, die Pizza in v\u00f6llig neuen Formen anbieten \u2013 von fliegenden Pizzen bis zu Pizzen, die durch Augmented Reality gegessen werden k\u00f6nnen.",
+                "price": 1500,
+                "destruction_degree": 0.4
+            },
+            "10": {
+                "name": "Orion Shield Group",
+                "description": "Diese Firma investiert in Unternehmen, die behaupten, den Mond zu kolonisieren. Aber ihr wahrer Fokus liegt auf der Schaffung einer 'Mond-Beam' \u2013 einer Lichtstrahlen-Technologie, die es Menschen erm\u00f6glicht, mit dem Mond zu kommunizieren.",
+                "price": 8000,
+                "destruction_degree": 1
+            },
+            "11": {
+                "name": "Solaris Nexus",
+                "description": "Diese Firma hat es sich zur Aufgabe gemacht, Solartechnologien zu entwickeln, die wie K\u00e4se-Reiben aussehen. Sie glauben, dass die besten Technologien aus der unkonventionellen Kombination von Solarenergie und allt\u00e4glichen K\u00fcchenutensilien entstehen.",
+                "price": 1000,
+                "destruction_degree": 0.8
+            },
+            "12": {
+                "name": "Helios Venture Partners",
+                "description": "Helios investiert in die Schaffung der gr\u00f6\u00dften und fortschrittlichsten Luftpolsterfolien. Ihr Ziel ist es, ein riesiges, sich selbst reparierendes System zu entwickeln, das als 'weltweiter Schutzschild' fungiert.",
+                "price": 2000,
+                "destruction_degree": 0.5
+            },
+            "13": {
+                "name": "Lighthouse Capital",
+                "description": "Eine Firma, die sich auf die Erforschung und F\u00f6rderung der 's\u00fc\u00dfen' Seite der Technologie konzentriert. Sie investieren in Unternehmen, die Technologien entwickeln, um Jellybeans zu produzieren, die als Energiequelle dienen.",
+                "price": 1000,
+                "destruction_degree": 0.2
+            },
+            "14": {
+                "name": "Radiant Edge Ventures",
+                "description": "Ein milit\u00e4rischer Entwickler von Licht- und Strahlentechnologie zur Abwehr von Angriffen. Sie sind bekannt f\u00fcr ihre 'Laser-Mantisschilde', die feindliche Waffen mit Lichtgeschwindigkeit neutralisieren.",
+                "price": 4000,
+                "destruction_degree": 0.9
+            },
+            "15": {
+                "name": "Cobalt Syndicate",
+                "description": "Spezialisiert auf taktische Roboter und fortschrittliche R\u00fcstungstechnik. Ihr 'Cobalt-Soldat' ist ein autonomer Krieger, der f\u00fcr Spionage und Kriegsf\u00fchrung eingesetzt wird.",
+                "price": 4000,
+                "destruction_degree": 0.8
+            },
+            "16": {
+                "name": "Blue Horizon Fund",
+                "description": "Ein geheimes milit\u00e4risches Projekt zur Entwicklung von Technologie f\u00fcr den milit\u00e4rischen Einsatz im Weltraum. Sie arbeiten an orbitalen Verteidigungssystemen und Satelliten-Spionagesystemen.",
+                "price": 4500,
+                "destruction_degree": 0.9
+            }
+        },
+        "state": {
+            "started": true
+        }
+    },
+    "research_field": [
+        "Dunkle Materie",
+        "Quantenverschr\u00e4nkung",
+        "Holografisches Prinzip",
+        "Quantengravitation",
+        "Suprafl\u00fcssigkeit ",
+        "Superfestigkeit"
+    ],
+    "research_field_description": [
+        "Unsichtbare Materieform, die nur durch Gravitation wirkt und die Bewegungen von Galaxien beeinflusst.",
+        "Zustand, bei dem Teilchen \u00fcber Distanz sofort miteinander verbunden bleiben.",
+        "Alle Rauminformationen k\u00f6nnen auf einer Fl\u00e4che beschrieben werden, \u00e4hnlich einem Hologramm.",
+        "Theorie, die Quantenmechanik und Gravitation zu einer einzigen Beschreibung vereint.",
+        "Materiezustand mit Null-Viskosit\u00e4t, der sich ohne Energieverlust bewegt.",
+        "Materiezustand, der gleichzeitig fl\u00fcssig und festartige Eigenschaften zeigt."
+    ],
+    "milestones": {
+        "Dunkle Materie": [
+            {
+                "name": "Erste Hypothese",
+                "description": "Die Theorie der Dunklen Materie wird erstmals von Wissenschaftlern formuliert, um fehlende Masse im Universum zu erkl\u00e4ren."
+            },
+            {
+                "name": "Erste experimentelle Hinweise",
+                "description": "Erste Hinweise auf Dunkle Materie durch Beobachtungen der Rotationskurven von Galaxien."
+            },
+            {
+                "name": "WZK-Experiment",
+                "description": "Wissenschaftler entwerfen ein Experiment zur direkten Detektion von Dunkler Materie."
+            },
+            {
+                "name": "Widerspruch zu bisherigen Modellen",
+                "description": "Beobachtungen legen nahe, dass die Dunkle Materie keine normalen Teilchen ist."
+            },
+            {
+                "name": "Bose-Einstein-Kondensate als Modell",
+                "description": "Forschung an Bose-Einstein-Kondensaten bietet neue Ans\u00e4tze zur Untersuchung von Dunkler Materie."
+            },
+            {
+                "name": "Gravitationswellenbeobachtungen",
+                "description": "Beobachtungen von Gravitationswellen liefern neue Hinweise auf die Natur der Dunklen Materie."
+            },
+            {
+                "name": "Indirekte Nachweise",
+                "description": "Indirekte Nachweise durch die Analyse von Gammastrahlen und kosmischen Strahlung."
+            },
+            {
+                "name": "Theorie der supersymmetrischen Teilchen",
+                "description": "Entwicklung der Theorie, dass Dunkle Materie aus supersymmetrischen Teilchen bestehen k\u00f6nnte."
+            },
+            {
+                "name": "Erste Kollisionsexperimente",
+                "description": "Experimentelle Kollisionen in Teilchenbeschleunigern liefern potenzielle Hinweise auf Dunkle Materie."
+            },
+            {
+                "name": "Kombination von Theorien",
+                "description": "Kombination der Theorien der Dunklen Materie mit anderen kosmologischen Modellen zur Entwicklung eines vereinheitlichten Modells."
+            }
+        ],
+        "Quantenverschr\u00e4nkung": [
+            {
+                "name": "Erste Entdeckung",
+                "description": "Albert Einstein, Boris Podolsky und Nathan Rosen formulieren das EPR-Paradoxon, das Quantenverschr\u00e4nkung postuliert."
+            },
+            {
+                "name": "Bell'sche Ungleichung",
+                "description": "John Bell formuliert eine Ungleichung, die die experimentelle Testbarkeit von Quantenverschr\u00e4nkung erm\u00f6glicht."
+            },
+            {
+                "name": "Erster Test von Bell\u2019s Ungleichung",
+                "description": "Erster experimenteller Test der Bell'schen Ungleichung, der Quantenverschr\u00e4nkung best\u00e4tigt."
+            },
+            {
+                "name": "Teleportation von Quanten",
+                "description": "Erfolgreiche Demonstration der Quanten-Teleportation in Laborversuchen."
+            },
+            {
+                "name": "Verkettung von Qubits",
+                "description": "Verkettung von mehreren Qubits zur Realisierung von Quantenverschr\u00e4nkung in komplexeren Systemen."
+            },
+            {
+                "name": "Quantenkommunikation",
+                "description": "Erste Implementierung der Quantenkommunikation \u00fcber lange Distanzen unter Verwendung von verschr\u00e4nkten Photonen."
+            },
+            {
+                "name": "Teleportation von Atomen",
+                "description": "Erfolgreiche Quanten-Teleportation von gr\u00f6\u00dferen Teilchen, wie Atomen, statt nur Photonen."
+            },
+            {
+                "name": "Verwendung in Quantencomputern",
+                "description": "Quantenverschr\u00e4nkung wird in funktionierenden Quantencomputern zur Berechnung komplexer Probleme genutzt."
+            },
+            {
+                "name": "Weltweite Quantenkommunikationsnetze",
+                "description": "Einf\u00fchrung erster globaler Quantenkommunikationsnetzwerke unter Verwendung von Quantenverschr\u00e4nkung zur sicheren Kommunikation."
+            },
+            {
+                "name": "Fehlerkorrektur in Quantencomputern",
+                "description": "Entwicklung von Methoden zur Fehlerkorrektur unter Verwendung von Quantenverschr\u00e4nkung f\u00fcr robustere Quantencomputer."
+            }
+        ],
+        "Holografisches Prinzip": [
+            {
+                "name": "Erste Theoretische Entw\u00fcrfe",
+                "description": "Das Holografische Prinzip wird von Gerard 't Hooft und Leonard Susskind formuliert."
+            },
+            {
+                "name": "Verbindung zur Stringtheorie",
+                "description": "Das Holografische Prinzip wird mit der Stringtheorie verbunden, um eine Verbindung zwischen Quantenmechanik und Gravitation zu schaffen."
+            },
+            {
+                "name": "AdS/CFT-Korrespondenz",
+                "description": "Entwicklung der AdS/CFT-Korrespondenz, die das Holografische Prinzip mathematisch unterst\u00fctzt."
+            },
+            {
+                "name": "Erste mathematische Beweise",
+                "description": "Erste Beweise und formale Verbindungen zwischen dem Holografischen Prinzip und bekannten physikalischen Modellen."
+            },
+            {
+                "name": "Kosmologische Anwendungen",
+                "description": "Das Holografische Prinzip wird verwendet, um das Verhalten von schwarzen L\u00f6chern und dem Universum zu erkl\u00e4ren."
+            },
+            {
+                "name": "Holografische Entropie",
+                "description": "Der Zusammenhang zwischen Entropie und der Fl\u00e4che eines Ereignishorizonts wird durch das Holografische Prinzip beschrieben."
+            },
+            {
+                "name": "Quantengravitation und Raumzeit",
+                "description": "Das Holografische Prinzip liefert Einblicke in die Natur der Quantengravitation und die Struktur der Raumzeit."
+            },
+            {
+                "name": "Verbindung zur Thermodynamik",
+                "description": "Das Holografische Prinzip wird zur Erkl\u00e4rung von Ph\u00e4nomenen der Thermodynamik in schwarzer Loch-Physik verwendet."
+            },
+            {
+                "name": "Erste Experimente zur Verifikation",
+                "description": "Erste Experimente zur Verifikation des Holografischen Prinzips durch Messungen von schwarzen L\u00f6chern und Quantenfluktuationen."
+            },
+            {
+                "name": "Vollst\u00e4ndige Theorie der Quantengravitation",
+                "description": "Das Holografische Prinzip f\u00fchrt zur vollst\u00e4ndigen Theorie der Quantengravitation, die die Quantenmechanik und Gravitation vereint."
+            }
+        ],
+        "Quantengravitation": [
+            {
+                "name": "Erste Theoretische Ann\u00e4herungen",
+                "description": "Erste Versuche, die allgemeine Relativit\u00e4tstheorie mit der Quantenmechanik zu verbinden."
+            },
+            {
+                "name": "Quantisierte Raumzeit",
+                "description": "Vorschl\u00e4ge zur Quantisierung der Raumzeit, um die Quantenmechanik auf gravitative Systeme anzuwenden."
+            },
+            {
+                "name": "Loop-Quantengravitation",
+                "description": "Entwicklung der Theorie der Loop-Quantengravitation als eine Alternative zur Stringtheorie."
+            },
+            {
+                "name": "Stringtheorie und Gravitation",
+                "description": "Verwendung der Stringtheorie, um die Quantenmechanik mit der Gravitation zu verbinden."
+            },
+            {
+                "name": "Holografisches Prinzip",
+                "description": "Das Holografische Prinzip bietet neue Wege zur Beschreibung von Quantengravitation in niedrigen Dimensionen."
+            },
+            {
+                "name": "Gravitationswellen und Quantenfluktuationen",
+                "description": "Erste Nachweise von Gravitationswellen, die durch Quantenfluktuationen beeinflusst werden."
+            },
+            {
+                "name": "Schwarze L\u00f6cher und Entropie",
+                "description": "Berechnungen zur Entropie von schwarzen L\u00f6chern f\u00fchren zu neuen Einsichten in die Quantengravitation."
+            },
+            {
+                "name": "Erste experimentelle Tests",
+                "description": "Erste Versuche, Quantengravitation experimentell zu testen, z. B. durch Messungen der Gravitationswellen."
+            },
+            {
+                "name": "Quantenfeldtheorie der Gravitation",
+                "description": "Entwicklung einer Quantenfeldtheorie zur Beschreibung der Gravitation in mikroskopischen Skalen."
+            },
+            {
+                "name": "Vereinheitlichung aller fundamentalen Kr\u00e4fte",
+                "description": "Vollst\u00e4ndige Theorie, die alle vier fundamentalen Kr\u00e4fte (Gravitation, Elektromagnetismus, starke und schwache Kernkraft) vereinigt."
+            }
+        ],
+        "Suprafl\u00fcssigkeit": [
+            {
+                "name": "Erste Entdeckung",
+                "description": "Die Entdeckung der Suprafl\u00fcssigkeit in Helium-4 durch Pyotr Kapitza, John F. Allen und Don Misener."
+            },
+            {
+                "name": "Supraleitung und Suprafl\u00fcssigkeit",
+                "description": "Forschung an der Verkn\u00fcpfung von Supraleitung und Suprafl\u00fcssigkeit in unterschiedlichen Materialien."
+            },
+            {
+                "name": "Bose-Einstein-Kondensat",
+                "description": "Die erste Erzeugung von Bose-Einstein-Kondensaten in ultra-kalten Gasen bringt neue Einsichten in Suprafl\u00fcssigkeit."
+            },
+            {
+                "name": "Vortexbewegungen",
+                "description": "Studien zur Bewegung von Vortexstrukturen in suprafl\u00fcssigen Systemen."
+            },
+            {
+                "name": "Suprafl\u00fcssigkeit bei h\u00f6heren Temperaturen",
+                "description": "Erste Versuche, Suprafl\u00fcssigkeit bei h\u00f6heren Temperaturen als zuvor zu erzeugen."
+            },
+            {
+                "name": "Verwendung in der Quantenmechanik",
+                "description": "Untersuchungen der Suprafl\u00fcssigkeit als Modell f\u00fcr Quanteneffekte in makroskopischen Systemen."
+            },
+            {
+                "name": "Erzeugung von Suprafl\u00fcssigkeit in anderen Materialien",
+                "description": "Suche nach anderen Materialien, die Suprafl\u00fcssigkeit unter bestimmten Bedingungen erzeugen k\u00f6nnen."
+            },
+            {
+                "name": "Nutzung in der Technologie",
+                "description": "Verwendung von Suprafl\u00fcssigkeit zur Verbesserung von K\u00fchlsystemen und anderen Technologien."
+            },
+            {
+                "name": "Erste Anwendungen in der Raumfahrttechnik",
+                "description": "Verwendung von Suprafl\u00fcssigkeit in der Raumfahrttechnologie f\u00fcr effizientere Systeme."
+            },
+            {
+                "name": "Erweiterung der Suprafl\u00fcssigkeitstheorie",
+                "description": "Die Suprafl\u00fcssigkeitstheorie wird erweitert, um auch exotische Materialien und Phasen zu umfassen."
+            }
+        ],
+        "Superfestigkeit": [
+            {
+                "name": "Erste Entdeckung",
+                "description": "Die Entdeckung von Superfestigkeit in bestimmten Materialien unter extremen Bedingungen."
+            },
+            {
+                "name": "Modellierung von Superfestigkeit",
+                "description": "Erste theoretische Modelle, die das Verhalten von Superfestigkeit beschreiben."
+            },
+            {
+                "name": "Experimentelle Beobachtungen",
+                "description": "Experimentelle Beobachtungen von Superfestigkeit in speziellen Festk\u00f6rpern."
+            },
+            {
+                "name": "Superfestigkeit in Nanomaterialien",
+                "description": "Die Entwicklung von Nanomaterialien mit Superfestigkeitseigenschaften."
+            },
+            {
+                "name": "Anwendung in der Materialwissenschaft",
+                "description": "Superfestigkeit wird in der Materialwissenschaft genutzt, um st\u00e4rkere und widerstandsf\u00e4higere Werkstoffe zu entwickeln."
+            },
+            {
+                "name": "Superfestigkeit bei extremen Temperaturen",
+                "description": "Untersuchung der Superfestigkeit bei extrem niedrigen oder hohen Temperaturen."
+            },
+            {
+                "name": "Verbindung zu Quantenmechanik",
+                "description": "Die Entdeckung, dass Superfestigkeit eng mit Quantenmechanik und den Wechselwirkungen auf atomarer Ebene verbunden ist."
+            },
+            {
+                "name": "Superfeste Materialien in der Technik",
+                "description": "Erste Anwendungen von superfeste Materialien in High-Tech-Ger\u00e4ten und Ingenieursprojekten."
+            },
+            {
+                "name": "Kommerzielle Nutzung von Superfestigkeit",
+                "description": "Kommerzielle Produkte, die superfeste Materialien verwenden, werden auf den Markt gebracht."
+            },
+            {
+                "name": "Optimierung von Superfestigkeitstechnologien",
+                "description": "Optimierung der Superfestigkeitstechnologien f\u00fcr verschiedene industrielle Anwendungen."
+            }
+        ]
+    },
+    "countries": {
+        "Frankreich": 1,
+        "China": 0.775,
+        "Russland": 0.575,
+        "Deutschland": 0.75,
+        "Botswana": 0.35,
+        "Schweiz": 0.65
+    },
+    "people": 9000000000
+}
+            editor.set(json);
+        </script>
+    </body>
+</html>
