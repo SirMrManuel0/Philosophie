@@ -1,67 +1,12 @@
 {
-    "user": {
-        "127.0.0.1": {
-            "team": 0,
-            "name": "Gabriel",
-            "is_at_game": true
-        }
-    },
-    "teams": {
-        "0": {
-            "name": "superTeam",
-            "color": [
-                94,
-                30,
-                123
-            ],
-            "research_field": 1,
-            "creator": "Gabriel",
-            "country": "Frankreich",
-            "user_count": 1,
-            "chosen_country": {
-                "127.0.0.1": "Frankreich"
-            },
-            "investoren": [
-                [
-                    "Vertex Innovations",
-                    7000
-                ],
-                [
-                    "Lighthouse Capital",
-                    1000
-                ],
-                [
-                    "Nimbus Growth Partners",
-                    4000
-                ],
-                [
-                    "Iron Forge Dynamics",
-                    8000
-                ],
-                [
-                    "Quantum Ventures",
-                    4000
-                ]
-            ],
-            "current_investors": [
-                0,
-                1,
-                14,
-                9,
-                4
-            ],
-            "current_milestone": 10,
-            "paid_milestone": 0,
-            "destruction_degree": 0.8400000000000001,
-            "done": true,
-            "killed": 7560000000
-        }
-    },
+    "user": {},
+    "teams": {},
     "game": {
         "id": 0,
         "teams": [],
         "progress": {
-            "0": 100.0
+            "0": {},
+            "1": {}
         },
         "technology_price_constant": 100000,
         "investoren": {
@@ -169,24 +114,16 @@
             }
         },
         "state": {
-            "started": true
+            "started": false
         }
     },
     "research_field": [
         "Dunkle Materie",
-        "Quantenverschr\u00e4nkung",
-        "Holografisches Prinzip",
-        "Quantengravitation",
-        "Suprafl\u00fcssigkeit ",
-        "Superfestigkeit"
+        "Quantenverschr\u00e4nkung"
     ],
     "research_field_description": [
         "Unsichtbare Materieform, die nur durch Gravitation wirkt und die Bewegungen von Galaxien beeinflusst.",
-        "Zustand, bei dem Teilchen \u00fcber Distanz sofort miteinander verbunden bleiben.",
-        "Alle Rauminformationen k\u00f6nnen auf einer Fl\u00e4che beschrieben werden, \u00e4hnlich einem Hologramm.",
-        "Theorie, die Quantenmechanik und Gravitation zu einer einzigen Beschreibung vereint.",
-        "Materiezustand mit Null-Viskosit\u00e4t, der sich ohne Energieverlust bewegt.",
-        "Materiezustand, der gleichzeitig fl\u00fcssig und festartige Eigenschaften zeigt."
+        "Zustand, bei dem Teilchen \u00fcber Distanz sofort miteinander verbunden bleiben."
     ],
     "milestones": {
         "Dunkle Materie": [

@@ -76,11 +76,14 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         file = self._file_to_bit(PathsManager().get_path(*path))
         if "css" in path:
             self.send_header("Content-type", "text/css")
-        elif path[-1][:-3] == "jpg":
+        elif path[-1].endswith(".jpg"):
             self.send_header("Content-type", "image/jpg")
             self.send_header("Content-Length", str(len(file)))
-        elif path[-1][:-3] == "png":
+        elif path[-1].endswith(".png"):
             self.send_header("Content-type", "image/png")
+            self.send_header("Content-Length", str(len(file)))
+        elif path[-1].endswith("svg"):
+            self.send_header("Content-type", "image/svg+xml")
             self.send_header("Content-Length", str(len(file)))
         elif "fonts" in path:
             self.send_header("Content-type", "font/ttf")
@@ -102,6 +105,16 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self._logger.info(f"Received GET Request from {self.client_address}.")
         Base: DB = DB(PathsManager().get_path("db"))
+        if self.path == "/js-libraries/node_modules/jsoneditor/dist/img/jsoneditor-icons.svg":
+            self._send_file("static", "admin", "json_editor", "svg")
+            return
+        if self.path == "/js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.css":
+            self._send_file("static", "admin", "json_editor", "css")
+            return
+        if self.path == "/js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.js":
+            self._send_file("static", "admin", "json_editor", "js")
+            return
+
         if self.path == "/endscreen":
             skill: str = Base.get_killed(self.client_address[0])
             with open(PathsManager().get_path("static","post_game","endscreen"), 'r', encoding="utf-8") as fs:
@@ -282,10 +295,10 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 data: dict ={"no": "no"}
             elif post_data["message"] == "check_all_here":
                 self._logger.info(f"Received POST Request from {self.client_address}. check_all_here.")
-                data: dict = {"check_all_here": [Base.are_all_game()]}
+                data: dict = {"check_all_here": [Base.has_game_started()]}
             elif post_data["message"] == "leaderboard":
                 self._logger.info(f"Received POST Request from {self.client_address}. leaderboard.")
-                data: dict = {"leaderboard": Base.get_leaderboard()}
+                data: dict = {"leaderboard": Base.get_top_three(self.client_address[0])}
             else:
                 self._logger.warning(f"Received POST Request from {self.client_address}. Unknown reason!")
                 self.send_response(400)
@@ -336,6 +349,26 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self._transfer_to("game")
                 return
             self._transfer_to("landingPage")
+        elif path[0] == "define":
+            self._logger.info(f"Received POST Request from {self.client_address} for define.")
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            post_data = json.loads(str(post_data)[2:-1])
+            Base: DB = DB(PathsManager().get_path("db"))
+            data: dict = {"done": True}
+            if post_data["message"] == "start_game":
+                Base.start_game()
+            elif post_data["message"] == "get_db":
+                data: dict = Base.get_db()
+            elif post_data["message"] == "set_db":
+                Base.set_db(post_data["db"])
+            elif post_data["message"] == "get_leaderboard":
+                data: dict = {"leaderboard": Base.get_leaderboards()}
+            elif post_data["message"] == "end_game":
+                Base.end_game()
+            elif post_data["message"] == "push_db":
+                Base.push_db(post_data["changes"])
+            self._send_json(data)
 
 
 def run_server():
