@@ -32,7 +32,12 @@
             "endscreen": "src/static/post_game/endscreen.html"
         },
         "admin": {
-            "lander": "src/static/admin/lander.html"
+            "lander": "src/static/admin/lander.html",
+            "json_editor": {
+                "css": "src/static/js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.css",
+                "js": "src/static/js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.js",
+                "svg": "src/static/js-libraries/node_modules/jsoneditor/dist/img/jsoneditor-icons.svg"
+            }
         }
     },
     "db": "databank.json",

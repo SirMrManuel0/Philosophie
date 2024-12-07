@@ -114,7 +114,7 @@
             }
         },
         "state": {
-            "started": true
+            "started": false
         }
     },
     "research_field": [

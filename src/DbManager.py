@@ -73,7 +73,9 @@ class DB:
             db["teams"][oldTeam]["user_count"] -= 1
             del db["teams"][oldTeam]["chosen_country"][user]
             if db["teams"][oldTeam]["user_count"] <= 0:
+                r_id: str = str(db["teams"][oldTeam]["research_field"])
                 del db["teams"][oldTeam]
+                del db["game"]["progress"][r_id][oldTeam]
         db["user"][user]["team"] = team
         db["teams"][str(team)]["user_count"] += 1
         db["teams"][str(team)]["chosen_country"][user] = ""
@@ -126,10 +128,11 @@ class DB:
         largest: int = -1
         for key in db["teams"].keys():
             largest = max(int(key), largest)
-        id: int = largest + 1
-        db["teams"][str(id)] = team
+        t_id: int = largest + 1
+        db["teams"][str(t_id)] = team
+        db["game"]["progress"][str(i)][t_id] = 0
         self._write_db(db)
-        return id
+        return t_id
 
     def set_team_country(self, team: int) -> None:
         db = self._load_db()
@@ -315,7 +318,7 @@ class DB:
             leaderboards[name] = []
 
         for r_id, k in enumerate(leaderboards.keys()):
-            teams: dict = db["game"]["progress"][r_id]
+            teams: dict = db["game"]["progress"][str(r_id)]
             teams: list = sorted(teams.items(), key=lambda x: x[1])
             for team in teams:
                 team_id: str = team[0]
@@ -325,11 +328,11 @@ class DB:
                 team_dict["color"] = db_team["color"]
                 team_dict["country"] = db_team["country"]
                 team_dict["progress"] = team[1]
-                team_dict["user"] = []
-                for user in db["users"].values():
+                team_dict["members"] = []
+                for user in db["user"].values():
                     if user["team"] != int(team_id):
                         continue
-                    team_dict["user"].append(user["name"])
+                    team_dict["members"].append(user["name"])
                 leaderboards[k].append(team_dict)
 
         return leaderboards
@@ -339,8 +342,9 @@ class DB:
         team: str = str(self.get_team(ip))
         top_three: list = list()
         db: dict = self._load_db()
-        r_ind: str = str(db["teams"][team]["research_field"])
-        leaderboard: list = leaderboards[r_ind]
+        r_ind: int = db["teams"][team]["research_field"]
+        field: str = db["research_field"][r_ind]
+        leaderboard: list = leaderboards[field]
         if len(leaderboard) >= 3:
             leaderboard: list = leaderboard[:3]
         for team in leaderboard:
@@ -364,11 +368,29 @@ class DB:
         db["game"]["state"]["started"] = True
         self._write_db(db)
 
+    def end_game(self):
+        db: dict = self._load_db()
+        db["game"]["state"]["started"] = False
+        self._write_db(db)
+
     def get_db(self) -> dict:
         return self._load_db()
 
     def set_db(self, new: dict) -> None:
         self._write_db(new)
+
+    def push_db(self, changes: dict) -> None:
+        def update_nested(original: dict, pushed: dict) -> None:
+            for key, value in pushed.items():
+                if isinstance(value, dict) and key in original:
+                    # Wenn es ein verschachteltes Objekt ist, rekursiv aktualisieren
+                    update_nested(original[key], value)
+                else:
+                    # Direkt aktualisieren
+                    original[key] = value
+        db: dict = self._load_db()
+        update_nested(db, changes)
+        self._write_db(db)
 
     def reset(self):
         db: dict = self._load_db()
