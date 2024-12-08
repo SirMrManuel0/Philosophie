@@ -5,7 +5,9 @@
         "id": 0,
         "teams": [],
         "progress": {
-            "0": {},
+            "0": {
+                "0": 0
+            },
             "1": {}
         },
         "technology_price_constant": 100000,
@@ -209,174 +211,6 @@
                 "name": "Fehlerkorrektur in Quantencomputern",
                 "description": "Entwicklung von Methoden zur Fehlerkorrektur unter Verwendung von Quantenverschr\u00e4nkung f\u00fcr robustere Quantencomputer."
             }
-        ],
-        "Holografisches Prinzip": [
-            {
-                "name": "Erste Theoretische Entw\u00fcrfe",
-                "description": "Das Holografische Prinzip wird von Gerard 't Hooft und Leonard Susskind formuliert."
-            },
-            {
-                "name": "Verbindung zur Stringtheorie",
-                "description": "Das Holografische Prinzip wird mit der Stringtheorie verbunden, um eine Verbindung zwischen Quantenmechanik und Gravitation zu schaffen."
-            },
-            {
-                "name": "AdS/CFT-Korrespondenz",
-                "description": "Entwicklung der AdS/CFT-Korrespondenz, die das Holografische Prinzip mathematisch unterst\u00fctzt."
-            },
-            {
-                "name": "Erste mathematische Beweise",
-                "description": "Erste Beweise und formale Verbindungen zwischen dem Holografischen Prinzip und bekannten physikalischen Modellen."
-            },
-            {
-                "name": "Kosmologische Anwendungen",
-                "description": "Das Holografische Prinzip wird verwendet, um das Verhalten von schwarzen L\u00f6chern und dem Universum zu erkl\u00e4ren."
-            },
-            {
-                "name": "Holografische Entropie",
-                "description": "Der Zusammenhang zwischen Entropie und der Fl\u00e4che eines Ereignishorizonts wird durch das Holografische Prinzip beschrieben."
-            },
-            {
-                "name": "Quantengravitation und Raumzeit",
-                "description": "Das Holografische Prinzip liefert Einblicke in die Natur der Quantengravitation und die Struktur der Raumzeit."
-            },
-            {
-                "name": "Verbindung zur Thermodynamik",
-                "description": "Das Holografische Prinzip wird zur Erkl\u00e4rung von Ph\u00e4nomenen der Thermodynamik in schwarzer Loch-Physik verwendet."
-            },
-            {
-                "name": "Erste Experimente zur Verifikation",
-                "description": "Erste Experimente zur Verifikation des Holografischen Prinzips durch Messungen von schwarzen L\u00f6chern und Quantenfluktuationen."
-            },
-            {
-                "name": "Vollst\u00e4ndige Theorie der Quantengravitation",
-                "description": "Das Holografische Prinzip f\u00fchrt zur vollst\u00e4ndigen Theorie der Quantengravitation, die die Quantenmechanik und Gravitation vereint."
-            }
-        ],
-        "Quantengravitation": [
-            {
-                "name": "Erste Theoretische Ann\u00e4herungen",
-                "description": "Erste Versuche, die allgemeine Relativit\u00e4tstheorie mit der Quantenmechanik zu verbinden."
-            },
-            {
-                "name": "Quantisierte Raumzeit",
-                "description": "Vorschl\u00e4ge zur Quantisierung der Raumzeit, um die Quantenmechanik auf gravitative Systeme anzuwenden."
-            },
-            {
-                "name": "Loop-Quantengravitation",
-                "description": "Entwicklung der Theorie der Loop-Quantengravitation als eine Alternative zur Stringtheorie."
-            },
-            {
-                "name": "Stringtheorie und Gravitation",
-                "description": "Verwendung der Stringtheorie, um die Quantenmechanik mit der Gravitation zu verbinden."
-            },
-            {
-                "name": "Holografisches Prinzip",
-                "description": "Das Holografische Prinzip bietet neue Wege zur Beschreibung von Quantengravitation in niedrigen Dimensionen."
-            },
-            {
-                "name": "Gravitationswellen und Quantenfluktuationen",
-                "description": "Erste Nachweise von Gravitationswellen, die durch Quantenfluktuationen beeinflusst werden."
-            },
-            {
-                "name": "Schwarze L\u00f6cher und Entropie",
-                "description": "Berechnungen zur Entropie von schwarzen L\u00f6chern f\u00fchren zu neuen Einsichten in die Quantengravitation."
-            },
-            {
-                "name": "Erste experimentelle Tests",
-                "description": "Erste Versuche, Quantengravitation experimentell zu testen, z. B. durch Messungen der Gravitationswellen."
-            },
-            {
-                "name": "Quantenfeldtheorie der Gravitation",
-                "description": "Entwicklung einer Quantenfeldtheorie zur Beschreibung der Gravitation in mikroskopischen Skalen."
-            },
-            {
-                "name": "Vereinheitlichung aller fundamentalen Kr\u00e4fte",
-                "description": "Vollst\u00e4ndige Theorie, die alle vier fundamentalen Kr\u00e4fte (Gravitation, Elektromagnetismus, starke und schwache Kernkraft) vereinigt."
-            }
-        ],
-        "Suprafl\u00fcssigkeit": [
-            {
-                "name": "Erste Entdeckung",
-                "description": "Die Entdeckung der Suprafl\u00fcssigkeit in Helium-4 durch Pyotr Kapitza, John F. Allen und Don Misener."
-            },
-            {
-                "name": "Supraleitung und Suprafl\u00fcssigkeit",
-                "description": "Forschung an der Verkn\u00fcpfung von Supraleitung und Suprafl\u00fcssigkeit in unterschiedlichen Materialien."
-            },
-            {
-                "name": "Bose-Einstein-Kondensat",
-                "description": "Die erste Erzeugung von Bose-Einstein-Kondensaten in ultra-kalten Gasen bringt neue Einsichten in Suprafl\u00fcssigkeit."
-            },
-            {
-                "name": "Vortexbewegungen",
-                "description": "Studien zur Bewegung von Vortexstrukturen in suprafl\u00fcssigen Systemen."
-            },
-            {
-                "name": "Suprafl\u00fcssigkeit bei h\u00f6heren Temperaturen",
-                "description": "Erste Versuche, Suprafl\u00fcssigkeit bei h\u00f6heren Temperaturen als zuvor zu erzeugen."
-            },
-            {
-                "name": "Verwendung in der Quantenmechanik",
-                "description": "Untersuchungen der Suprafl\u00fcssigkeit als Modell f\u00fcr Quanteneffekte in makroskopischen Systemen."
-            },
-            {
-                "name": "Erzeugung von Suprafl\u00fcssigkeit in anderen Materialien",
-                "description": "Suche nach anderen Materialien, die Suprafl\u00fcssigkeit unter bestimmten Bedingungen erzeugen k\u00f6nnen."
-            },
-            {
-                "name": "Nutzung in der Technologie",
-                "description": "Verwendung von Suprafl\u00fcssigkeit zur Verbesserung von K\u00fchlsystemen und anderen Technologien."
-            },
-            {
-                "name": "Erste Anwendungen in der Raumfahrttechnik",
-                "description": "Verwendung von Suprafl\u00fcssigkeit in der Raumfahrttechnologie f\u00fcr effizientere Systeme."
-            },
-            {
-                "name": "Erweiterung der Suprafl\u00fcssigkeitstheorie",
-                "description": "Die Suprafl\u00fcssigkeitstheorie wird erweitert, um auch exotische Materialien und Phasen zu umfassen."
-            }
-        ],
-        "Superfestigkeit": [
-            {
-                "name": "Erste Entdeckung",
-                "description": "Die Entdeckung von Superfestigkeit in bestimmten Materialien unter extremen Bedingungen."
-            },
-            {
-                "name": "Modellierung von Superfestigkeit",
-                "description": "Erste theoretische Modelle, die das Verhalten von Superfestigkeit beschreiben."
-            },
-            {
-                "name": "Experimentelle Beobachtungen",
-                "description": "Experimentelle Beobachtungen von Superfestigkeit in speziellen Festk\u00f6rpern."
-            },
-            {
-                "name": "Superfestigkeit in Nanomaterialien",
-                "description": "Die Entwicklung von Nanomaterialien mit Superfestigkeitseigenschaften."
-            },
-            {
-                "name": "Anwendung in der Materialwissenschaft",
-                "description": "Superfestigkeit wird in der Materialwissenschaft genutzt, um st\u00e4rkere und widerstandsf\u00e4higere Werkstoffe zu entwickeln."
-            },
-            {
-                "name": "Superfestigkeit bei extremen Temperaturen",
-                "description": "Untersuchung der Superfestigkeit bei extrem niedrigen oder hohen Temperaturen."
-            },
-            {
-                "name": "Verbindung zu Quantenmechanik",
-                "description": "Die Entdeckung, dass Superfestigkeit eng mit Quantenmechanik und den Wechselwirkungen auf atomarer Ebene verbunden ist."
-            },
-            {
-                "name": "Superfeste Materialien in der Technik",
-                "description": "Erste Anwendungen von superfeste Materialien in High-Tech-Ger\u00e4ten und Ingenieursprojekten."
-            },
-            {
-                "name": "Kommerzielle Nutzung von Superfestigkeit",
-                "description": "Kommerzielle Produkte, die superfeste Materialien verwenden, werden auf den Markt gebracht."
-            },
-            {
-                "name": "Optimierung von Superfestigkeitstechnologien",
-                "description": "Optimierung der Superfestigkeitstechnologien f\u00fcr verschiedene industrielle Anwendungen."
-            }
         ]
     },
     "countries": {
@@ -386,6 +220,32 @@
         "Deutschland": 0.75,
         "Botswana": 0.35,
         "Schweiz": 0.65
+    },
+    "country_to_flag": {
+        "Frankreich": [
+            "country_flag_url",
+            "Frankreich"
+        ],
+        "Botswana": [
+            "country_flag_url",
+            "Botswana"
+        ],
+        "China": [
+            "country_flag_url",
+            "China"
+        ],
+        "Deutschland": [
+            "country_flag_url",
+            "Deutschland"
+        ],
+        "Schweiz": [
+            "country_flag_url",
+            "Schweiz"
+        ],
+        "Russland": [
+            "country_flag_url",
+            "Russland"
+        ]
     },
     "people": 9000000000
 }

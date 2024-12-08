@@ -37,7 +37,8 @@
                 "css": "src/static/js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.css",
                 "js": "src/static/js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.js",
                 "svg": "src/static/js-libraries/node_modules/jsoneditor/dist/img/jsoneditor-icons.svg"
-            }
+            },
+            "leaderboard": "src/static/admin/leaderboard.html"
         }
     },
     "db": "databank.json",
