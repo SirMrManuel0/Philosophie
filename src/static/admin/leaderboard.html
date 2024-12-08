@@ -5,11 +5,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link href="../js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
-        <script src="../js-libraries/node_modules/jsoneditor/dist/jsoneditor.min.js"></script>
-
-        <link rel="stylesheet" href="../css/origin.css">
+        <link rel="icon" href="/phil/favicon.png" type="image/png">
+        <link rel="stylesheet" href="/static/css/origin.css">
 
         <style>
             * {
@@ -24,7 +21,7 @@
             body {
                 width: 100vw;
                 height: 100vh;
-                background-image: url("../img/background.jpg");
+                background-image: url("/static/img/background.jpg");
                 background-size: cover;
                 display: flex;
                 align-items: center;
@@ -117,17 +114,6 @@
                 background-size: cover;
                 filter: blur(3px);
             }
-            .team-second {
-                box-shadow: 0px 0px 30px #D7D7D7;
-                margin-bottom: 20px;
-                width: 90%;
-            }
-            .team-third {
-                box-shadow: 0px 0px 30px #AD8A56;
-                margin-bottom: 20px;    
-                width: 85%;
-            }
-
             .leaderboards {
                 display: flex;
                 width: 100%;
@@ -138,14 +124,14 @@
             }
         </style>
 
-        <title>Document</title>
+        <title>Leaderboard</title>
     </head>
     <body>
 
         <div class="leaderboards"> 
-            <div class="leaderboard">
-                <h1 class="title">Research Gebiet</h1>
-                <h2 class="title2">Leaderboard</h2>
+            <div class="leaderboard" id="dunkle">
+                <h1 class="title">Dunkle Materie</h1>
+                <br>
                 <div class="leaderboard-team team-first">
                     <div class="leaderboard-team-data">
                         <p>Team Name</p>
@@ -165,7 +151,7 @@
                     <img class="leaderboard-team-image" src="../img/countries/fra.png" alt="">
                 </div>
     
-                <div class="leaderboard-team team-second">
+                <div class="leaderboard-team">
                     <div class="leaderboard-team-data">
                         <p>Team Name</p>
                         <div class="leaderboard-team-mitglieder">
@@ -184,100 +170,11 @@
                     <img class="leaderboard-team-image" src="../img/countries/rus.png" alt="">
                 </div>
     
-    
-                <div class="leaderboard-team team-third">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-    
-                    <img class="leaderboard-team-image" src="../img/countries/fra.png" alt="">
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-    
-                    <img class="leaderboard-team-image" src="../img/countries/ger.png" alt="">
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-                </div>
             </div>
-
-            <div class="leaderboard">
-                <h1 class="title">Research Gebiet</h1>
-                <h2 class="title2">Leaderboard</h2>
+<!--------------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="leaderboard" id="quanten">
+                <h1 class="title">Quantenverschränkung</h1>
+                <br>
                 <div class="leaderboard-team team-first">
                     <div class="leaderboard-team-data">
                         <p>Team Name</p>
@@ -297,7 +194,7 @@
                     <img class="leaderboard-team-image" src="../img/countries/fra.png" alt="">
                 </div>
     
-                <div class="leaderboard-team team-second">
+                <div class="leaderboard-team">
                     <div class="leaderboard-team-data">
                         <p>Team Name</p>
                         <div class="leaderboard-team-mitglieder">
@@ -314,99 +211,171 @@
                     <div class="leaderboard-team-progress"></div>
     
                     <img class="leaderboard-team-image" src="../img/countries/rus.png" alt="">
-                </div>
-    
-    
-                <div class="leaderboard-team team-third">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-    
-                    <img class="leaderboard-team-image" src="../img/countries/fra.png" alt="">
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-    
-                    <img class="leaderboard-team-image" src="../img/countries/ger.png" alt="">
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
-                </div>
-    
-                <div class="leaderboard-team">
-                    <div class="leaderboard-team-data">
-                        <p>Team Name</p>
-                        <div class="leaderboard-team-mitglieder">
-                            <p class="leaderboard-team-mitglieder-name">Pepe</p>
-                            <p class="leaderboard-team-mitglieder-name">Fabian</p>
-                            <p class="leaderboard-team-mitglieder-name">Luis</p>
-                            <p class="leaderboard-team-mitglieder-name">India</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="leaderboard-score">20%</p>
-                    </div>
-    
-                    <div class="leaderboard-team-progress"></div>
                 </div>
             </div>
         </div>
+
+        <script>
+
+            const url = "http://ADDRESS/define";
+
+            async function sendPostRequest(data) {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json", // JSON-Format angeben
+                        },
+                        body: JSON.stringify(data), // Daten in JSON umwandeln
+                    });
+
+                    if (response.ok) {
+                        const responseText = await response.text(); // Antwort des Servers
+                        const responseDict = JSON.parse(responseText); // JSON-String in Objekt umwandeln
+                        return responseDict;
+                    } else {
+                        console.error("Fehler beim Request:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Netzwerkfehler:", error);
+                }
+            }
+
+
+            function createLeaderboard(teamsDB) {
+                const leaderboardContainer = document.querySelector('.leaderboards');
+                let leaderboardDeleteDunkle = document.getElementById("dunkle");
+                    
+                while (leaderboardDeleteDunkle.firstChild) {
+                    leaderboardDeleteDunkle.removeChild(leaderboardDeleteDunkle.firstChild);
+                }
+                let h2_dunkle = document.createElement("h1");
+                h2_dunkle.textContent = "Dunkle Materie";
+                h2_dunkle.className = "title";
+                leaderboardDeleteDunkle.appendChild(h2_dunkle);
+                leaderboardDeleteDunkle.appendChild(document.createElement("br"));
+
+                let leaderboardDeleteQuanten = document.getElementById("quanten");
+                
+                while (leaderboardDeleteQuanten.firstChild) {
+                    leaderboardDeleteQuanten.removeChild(leaderboardDeleteQuanten.firstChild);
+                }
+                let h2_quanten = document.createElement("h1");
+                h2_quanten.textContent = "Quantenverschränkung";
+                h2_quanten.className = "title";
+                leaderboardDeleteQuanten.appendChild(h2_quanten);
+                leaderboardDeleteQuanten.appendChild(document.createElement("br"));
+                
+
+                // Durchlaufe die Teams für "Dunkle Materie" (Index 0)
+                teamsDB["Dunkle Materie"].forEach(team => {
+                    const leaderboard = document.getElementById("dunkle")
+                    const teamDiv = document.createElement("div");
+                    teamDiv.classList.add("leaderboard-team");
+
+                    const teamDataDiv = document.createElement("div");
+                    teamDataDiv.classList.add("leaderboard-team-data");
+
+                    const teamName = document.createElement("p");
+                    teamName.textContent = team.name;
+                    teamDataDiv.appendChild(teamName);
+
+                    const membersDiv = document.createElement("div");
+                    membersDiv.classList.add("leaderboard-team-mitglieder");
+                    team.members.forEach(member => {
+                    const memberName = document.createElement("p");
+                    memberName.classList.add("leaderboard-team-mitglieder-name");
+                    memberName.textContent = member;
+                    membersDiv.appendChild(memberName);
+                    });
+                    teamDataDiv.appendChild(membersDiv);
+
+                    const score = document.createElement("p");
+                    score.classList.add("leaderboard-score");
+                    score.textContent = `${team.progress}%`;
+                    teamDiv.appendChild(teamDataDiv);
+                    teamDiv.appendChild(score);
+
+                    const progressBar = document.createElement("div");
+                    progressBar.classList.add("leaderboard-team-progress");
+                    progressBar.style.height = `${team.progress}%`;  // Setze den Fortschritt des Teams
+                    teamDiv.appendChild(progressBar);
+
+                    const teamFlag = document.createElement("img");
+                    teamFlag.classList.add("leaderboard-team-image");
+                    teamFlag.src = team.flag;
+                    teamFlag.alt = "Team Flag";
+                    teamDiv.appendChild(teamFlag);
+
+                    leaderboard.appendChild(teamDiv);
+                });
+
+                // Durchlaufe die Teams für "Quantenverschränkung" (Index 1)
+                teamsDB["Quantenverschränkung"].forEach(team => {
+                    const leaderboard = document.getElementById("quanten");
+
+                    const teamDiv = document.createElement("div");
+                    teamDiv.classList.add("leaderboard-team");
+
+                    const teamDataDiv = document.createElement("div");
+                    teamDataDiv.classList.add("leaderboard-team-data");
+
+                    const teamName = document.createElement("p");
+                    teamName.textContent = team.name;
+                    teamDataDiv.appendChild(teamName);
+
+                    const membersDiv = document.createElement("div");
+                    membersDiv.classList.add("leaderboard-team-mitglieder");
+                    team.members.forEach(member => {
+                    const memberName = document.createElement("p");
+                    memberName.classList.add("leaderboard-team-mitglieder-name");
+                    memberName.textContent = member;
+                    membersDiv.appendChild(memberName);
+                    });
+                    teamDataDiv.appendChild(membersDiv);
+
+                    const score = document.createElement("p");
+                    score.classList.add("leaderboard-score");
+                    score.textContent = `${team.progress}%`;
+                    teamDiv.appendChild(teamDataDiv);
+                    teamDiv.appendChild(score);
+
+                    const progressBar = document.createElement("div");
+                    progressBar.classList.add("leaderboard-team-progress");
+                    progressBar.style.height = `${team.progress}%`;  // Setze den Fortschritt des Teams
+                    teamDiv.appendChild(progressBar);
+
+                    const teamFlag = document.createElement("img");
+                    teamFlag.classList.add("leaderboard-team-image");
+                    teamFlag.src = team.country;
+                    teamFlag.alt = "Team Flag";
+                    teamDiv.appendChild(teamFlag);
+
+                    leaderboard.appendChild(teamDiv);
+                });
+            }
+
+            async function getLeaderboards() {
+                try {
+                    const responseDict = await sendPostRequest({ message: "get_leaderboard" });
+                    return responseDict["leaderboard"];
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des leaderboard:", error);
+                    return null;
+                }
+            }
+
+            async function updateLeaderboards() {
+                const teams = await getLeaderboards();
+                if (teams) {
+                    console.log(teams)
+                    createLeaderboard(teams)
+                } else {
+                    console.error("leaderboard konnte nicht abgerufen werden.");
+                }
+            }
+            setInterval(updateLeaderboards, 500)
+        </script>
 
     </body>
 </html>

@@ -206,6 +206,10 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self._logger.info(f"Received POST Request from {self.client_address}. User is Admin")
                 self._send_file("static", "admin", "lander")
                 return
+            elif username_hash == "09053b6acc94a8f07808f4530afce43ecbfaab84fedeeb6376085ed8cef921e6":
+                self._logger.info(f"Received POST Request from {self.client_address}. User is Leaderboard.")
+                self._send_file("static", "admin", "leaderboard")
+                return
             elif not DB(PathsManager().get_path("db")).has_game_started():
                 self._logger.info(f"Received POST Request from {self.client_address}. User is normal.")
                 DB(PathsManager().get_path("db")).create_user(username, self.client_address[0])

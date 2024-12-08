@@ -326,7 +326,8 @@ class DB:
                 team_dict: dict = dict()
                 team_dict["name"] = db_team["name"]
                 team_dict["color"] = db_team["color"]
-                team_dict["country"] = db_team["country"]
+                flagUrl: str = PathsManager().get_path(*db["country_to_flag"][db_team["country"]])
+                team_dict["country"] = flagUrl
                 team_dict["progress"] = team[1]
                 team_dict["members"] = []
                 for user in db["user"].values():
