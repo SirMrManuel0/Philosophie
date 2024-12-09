@@ -284,13 +284,15 @@ class DB:
         tp_constant: int = db["game"]["technology_price_constant"]
         progress: float = ((amount_milestone * (tp_constant // 10) + paid_milestone) / tp_constant) * 100.0
         progress = math.floor(progress * 100) / 100
-        db["game"]["progress"][team] = progress
+        research: str = str(db["teams"][team]["research_field"])
+        db["game"]["progress"][research][team] = progress
         self._write_db(db)
 
     def get_progress(self, team: int) -> float:
         db: dict = self._load_db()
         try:
-            return db["game"]["progress"][str(team)]
+            research: str = str(db["teams"][team]["research_field"])
+            return db["game"]["progress"][research][str(team)]
         except KeyError:
             return 0
 
