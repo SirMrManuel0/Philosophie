@@ -29,8 +29,18 @@ class DB:
         return db
 
     def _write_db(self, new: dict) -> None:
+        def update_nested(original: dict, pushed: dict) -> None:
+            for key, value in pushed.items():
+                if isinstance(value, dict) and key in original:
+                    # Wenn es ein verschachteltes Objekt ist, rekursiv aktualisieren
+                    update_nested(original[key], value)
+                else:
+                    # Direkt aktualisieren
+                    original[key] = value
+        db: dict = self._load_db()
+        update_nested(db, new)
         with open(self._db_path, "w", encoding="utf-8") as js:
-            json.dump(new, js, indent=4)
+            json.dump(db, js, indent=4)
 
     def create_user(self, username: str, ip: str) -> None:
         db: dict = self._load_db()
@@ -383,17 +393,7 @@ class DB:
         self._write_db(new)
 
     def push_db(self, changes: dict) -> None:
-        def update_nested(original: dict, pushed: dict) -> None:
-            for key, value in pushed.items():
-                if isinstance(value, dict) and key in original:
-                    # Wenn es ein verschachteltes Objekt ist, rekursiv aktualisieren
-                    update_nested(original[key], value)
-                else:
-                    # Direkt aktualisieren
-                    original[key] = value
-        db: dict = self._load_db()
-        update_nested(db, changes)
-        self._write_db(db)
+        self._write_db(changes)
 
     def reset(self):
         db: dict = self._load_db()
