@@ -329,11 +329,14 @@ class DB:
         for name in db["research_field"]:
             leaderboards[name] = []
 
+        if len(db["teams"]) == 0:
+            return leaderboards
+
         for r_id, k in enumerate(leaderboards.keys()):
             teams: dict = db["game"]["progress"][str(r_id)]
             teams: list = sorted(teams.items(), key=lambda x: x[1])
             for team in teams:
-                team_id: str = team[0]
+                team_id: str = str(team[0])
                 db_team: dict = db["teams"][team_id]
                 team_dict: dict = dict()
                 team_dict["name"] = db_team["name"]
