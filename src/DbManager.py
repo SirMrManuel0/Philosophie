@@ -29,8 +29,18 @@ class DB:
         return db
 
     def _write_db(self, new: dict) -> None:
+        def update_nested(original: dict, pushed: dict) -> None:
+            for key, value in pushed.items():
+                if isinstance(value, dict) and key in original:
+                    # Wenn es ein verschachteltes Objekt ist, rekursiv aktualisieren
+                    update_nested(original[key], value)
+                else:
+                    # Direkt aktualisieren
+                    original[key] = value
+        db: dict = self._load_db()
+        update_nested(db, new)
         with open(self._db_path, "w", encoding="utf-8") as js:
-            json.dump(new, js, indent=4)
+            json.dump(db, js, indent=4)
 
     def create_user(self, username: str, ip: str) -> None:
         db: dict = self._load_db()
@@ -284,13 +294,15 @@ class DB:
         tp_constant: int = db["game"]["technology_price_constant"]
         progress: float = ((amount_milestone * (tp_constant // 10) + paid_milestone) / tp_constant) * 100.0
         progress = math.floor(progress * 100) / 100
-        db["game"]["progress"][team] = progress
+        research: str = str(db["teams"][team]["research_field"])
+        db["game"]["progress"][research][team] = progress
         self._write_db(db)
 
     def get_progress(self, team: int) -> float:
         db: dict = self._load_db()
         try:
-            return db["game"]["progress"][str(team)]
+            research: str = str(db["teams"][team]["research_field"])
+            return db["game"]["progress"][research][str(team)]
         except KeyError:
             return 0
 
@@ -317,11 +329,14 @@ class DB:
         for name in db["research_field"]:
             leaderboards[name] = []
 
+        if len(db["teams"]) == 0:
+            return leaderboards
+
         for r_id, k in enumerate(leaderboards.keys()):
             teams: dict = db["game"]["progress"][str(r_id)]
             teams: list = sorted(teams.items(), key=lambda x: x[1])
             for team in teams:
-                team_id: str = team[0]
+                team_id: str = str(team[0])
                 db_team: dict = db["teams"][team_id]
                 team_dict: dict = dict()
                 team_dict["name"] = db_team["name"]
@@ -381,17 +396,7 @@ class DB:
         self._write_db(new)
 
     def push_db(self, changes: dict) -> None:
-        def update_nested(original: dict, pushed: dict) -> None:
-            for key, value in pushed.items():
-                if isinstance(value, dict) and key in original:
-                    # Wenn es ein verschachteltes Objekt ist, rekursiv aktualisieren
-                    update_nested(original[key], value)
-                else:
-                    # Direkt aktualisieren
-                    original[key] = value
-        db: dict = self._load_db()
-        update_nested(db, changes)
-        self._write_db(db)
+        self._write_db(changes)
 
     def reset(self):
         db: dict = self._load_db()
