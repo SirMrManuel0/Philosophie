@@ -234,6 +234,7 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             post_data = self.rfile.read(content_length)
             post_data = json.loads(str(post_data)[2:-1])
             Base: DB = DB(PathsManager().get_path("db"))
+            data: dict = {"maybe": "maybe"}
             if post_data["message"] == "username":
                 self._logger.info(f"Received POST Request from {self.client_address}. Username is requested.")
                 user: dict = Base.get_user(self.client_address[0])
@@ -303,6 +304,11 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "leaderboard":
                 self._logger.info(f"Received POST Request from {self.client_address}. leaderboard.")
                 data: dict = {"leaderboard": Base.get_top_three(self.client_address[0])}
+            elif post_data["message"] == "has_ended":
+                self._logger.info(f"Received POST Request from {self.client_address}. has_ended.")
+                if Base.has_game_ended():
+                    self._transfer_to("endgame")
+                    return
             else:
                 self._logger.warning(f"Received POST Request from {self.client_address}. Unknown reason!")
                 self.send_response(400)
@@ -311,7 +317,6 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 return
             self._send_json(data)
             return
-
         elif path[0] == "team_create":
             self._logger.info(f"Received POST Request from {self.client_address} for team_create.")
             content_length = int(self.headers['Content-Length'])
@@ -334,7 +339,6 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             values: tuple = form_data["Teamname"], form_data["Teamfarbe"], form_data["gebiet"]
             self._logger.info(f"Created team {values[0]} {values[1]}, {values[2]}"
                               f" due to {self.client_address[0]}")
-            Base.assign_team(self.client_address[0], teamId)
             self._transfer_to("teams")
             return
         elif path[0] == "select_country":
@@ -366,12 +370,14 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 data: dict = Base.get_db()
             elif post_data["message"] == "set_db":
                 Base.set_db(post_data["db"])
+                Base.update()
             elif post_data["message"] == "get_leaderboard":
                 data: dict = {"leaderboard": Base.get_leaderboards()}
             elif post_data["message"] == "end_game":
                 Base.end_game()
             elif post_data["message"] == "push_db":
                 Base.push_db(post_data["changes"])
+                Base.update()
             self._send_json(data)
 
 

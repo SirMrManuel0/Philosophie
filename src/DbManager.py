@@ -338,6 +338,10 @@ class DB:
             for team in teams:
                 team_id: str = str(team[0])
                 db_team: dict = db["teams"][team_id]
+                if db_team["user_count"] == 0:
+                    continue
+                if len(db_team["country"]) == 0:
+                    continue
                 team_dict: dict = dict()
                 team_dict["name"] = db_team["name"]
                 team_dict["color"] = db_team["color"]
@@ -368,6 +372,8 @@ class DB:
             progress: str = str(team["progress"])
             progress.replace(".",",")
             top_three.append(f"{name} | {progress}%")
+        while len(top_three) < 3:
+            top_three.append("")
         return top_three
 
     def get_killed(self, ip: str) -> str:
@@ -386,7 +392,7 @@ class DB:
 
     def end_game(self):
         db: dict = self._load_db()
-        db["game"]["state"]["started"] = False
+        db["game"]["state"]["ended"] = True
         self._write_db(db)
 
     def get_db(self) -> dict:
@@ -398,12 +404,18 @@ class DB:
     def push_db(self, changes: dict) -> None:
         self._write_db(changes)
 
-    def reset(self):
+    def update(self) -> None:
         db: dict = self._load_db()
-        db["user"] = {}
-        db["teams"] = {}
-        db["game"]["id"] = 0
-        db["game"]["teams"] = []
-        db["game"]["progress"] = {"0": {}, "1": {}}
-        db["game"]["state"]["started"] = False
-        self._write_db(db)
+        teams: list = list(db["teams"].keys())
+        for team in teams:
+            self.update_progress(team)
+
+    def has_game_ended(self) -> bool:
+        db: dict = self._load_db()
+        return db["game"]["state"]["ended"]
+
+    def reset(self):
+        with open(PathsManager().get_path("db_template"), "r", encoding="utf-8") as js:
+            db_template: dict = json.load(js)
+        with open(PathsManager().get_path("db"), "w", encoding="utf-8") as js:
+            json.dump(db_template, js, indent=4)
