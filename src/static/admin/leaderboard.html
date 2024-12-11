@@ -267,12 +267,17 @@
                 leaderboardDeleteQuanten.appendChild(h2_quanten);
                 leaderboardDeleteQuanten.appendChild(document.createElement("br"));
                 
-
+                let first_dunkle = true;
+                let first_quanten = true;
                 // Durchlaufe die Teams für "Dunkle Materie" (Index 0)
                 teamsDB["Dunkle Materie"].forEach(team => {
                     const leaderboard = document.getElementById("dunkle")
                     const teamDiv = document.createElement("div");
                     teamDiv.classList.add("leaderboard-team");
+                    if (first_dunkle) {
+                        first_dunkle = false;
+                        teamDiv.classList.add("team-first")
+                    }
 
                     const teamDataDiv = document.createElement("div");
                     teamDataDiv.classList.add("leaderboard-team-data");
@@ -323,6 +328,10 @@
 
                     const teamDiv = document.createElement("div");
                     teamDiv.classList.add("leaderboard-team");
+                    if (first_quanten) {
+                        first_quanten = false;
+                        teamDiv.classList.add("team-first")
+                    }
 
                     const teamDataDiv = document.createElement("div");
                     teamDataDiv.classList.add("leaderboard-team-data");

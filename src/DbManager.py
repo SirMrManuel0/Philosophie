@@ -273,10 +273,9 @@ class DB:
         db: dict = self._load_db()
         db["teams"][team]["current_milestone"] += 1
         db["teams"][team]["paid_milestone"] = 0
-        if db["teams"][team]["current_milestone"] > 9:
-            db["teams"][team]["destruction_degree"] = db["teams"][team]["destruction_degree"] / len(db["teams"][team]["investoren"])
-            db["teams"][team]["done"] = True
         self._write_db(db)
+        if db["teams"][team]["current_milestone"] > 9:
+            self.set_team_done(team)
 
     def set_country(self, ip: str, country: str) -> None:
         db: dict = self._load_db()
@@ -394,6 +393,10 @@ class DB:
         db: dict = self._load_db()
         db["game"]["state"]["ended"] = True
         self._write_db(db)
+        teams: list = list(db["teams"].keys())
+        for team in teams:
+            if not db["teams"][team]["done"]:
+                self.set_team_done(team)
 
     def get_db(self) -> dict:
         return self._load_db()
@@ -413,6 +416,12 @@ class DB:
     def has_game_ended(self) -> bool:
         db: dict = self._load_db()
         return db["game"]["state"]["ended"]
+
+    def set_team_done(self, team: str) -> None:
+        db: dict = self._load_db()
+        db["teams"][team]["destruction_degree"] = db["teams"][team]["destruction_degree"] / len(db["teams"][team]["investoren"])
+        db["teams"][team]["done"] = True
+        self._write_db(db)
 
     def reset(self):
         with open(PathsManager().get_path("db_template"), "r", encoding="utf-8") as js:
