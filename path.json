@@ -42,6 +42,7 @@
         }
     },
     "db": "databank.json",
+    "db_template": "datenbank_template.json",
     "country_flag_url": {
         "Frankreich": "/static/img/countries/fra.png",
         "China": "/static/img/countries/ch.png",

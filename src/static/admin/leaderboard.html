@@ -50,7 +50,7 @@
                 padding: 10px;
                 position: relative;
                 border-bottom: 1px solid #fff;
-                background-color: var(--background-color);
+                background-color: rgba(var(--background-colorT), 0.6);
                 border-radius: 10px;
                 flex-shrink: 0;
                 width: 80%;
@@ -96,6 +96,7 @@
                 bottom: 0;
                 left: 0;
                 background-color: rgba(10, 200, 200, 0.1);
+                z-index: -1;
             }
             .team-first {
                 box-shadow: 0px 0px 30px #C9B037;
@@ -299,11 +300,17 @@
                     const progressBar = document.createElement("div");
                     progressBar.classList.add("leaderboard-team-progress");
                     progressBar.style.height = `${team.progress}%`;  // Setze den Fortschritt des Teams
+
+                    if (team.color && Array.isArray(team.color) && team.color.length === 3) {
+                        const [r, g, b] = team.color;
+                        progressBar.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    }
+
                     teamDiv.appendChild(progressBar);
 
                     const teamFlag = document.createElement("img");
                     teamFlag.classList.add("leaderboard-team-image");
-                    teamFlag.src = team.flag;
+                    teamFlag.src = team.country;
                     teamFlag.alt = "Team Flag";
                     teamDiv.appendChild(teamFlag);
 
@@ -343,6 +350,10 @@
                     const progressBar = document.createElement("div");
                     progressBar.classList.add("leaderboard-team-progress");
                     progressBar.style.height = `${team.progress}%`;  // Setze den Fortschritt des Teams
+                    if (team.color && Array.isArray(team.color) && team.color.length === 3) {
+                        const [r, g, b] = team.color;
+                        progressBar.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    }
                     teamDiv.appendChild(progressBar);
 
                     const teamFlag = document.createElement("img");
@@ -368,7 +379,6 @@
             async function updateLeaderboards() {
                 const teams = await getLeaderboards();
                 if (teams) {
-                    console.log(teams)
                     createLeaderboard(teams)
                 } else {
                     console.error("leaderboard konnte nicht abgerufen werden.");

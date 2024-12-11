@@ -786,12 +786,17 @@
                 }
             }
             
+            async function checkEnded() {
+                sendPostRequest({message: "has_ended"})
+            }
+
             let intervalId = setInterval(async () => {
                 const all_here = await getCheckAllHere();
                 if (all_here) {
                     if (all_here[0]) {
                         document.getElementById("warten").classList.add("hide");
                         clearInterval(intervalId); // Stoppe das Intervall, wenn die Bedingung erfüllt ist
+                        setInterval(checkEnded, 1000);
                     }
                     
                 }
@@ -809,7 +814,7 @@
             setFortschritt(0);
             setMilestoneBalken(0);
 
-            setInterval(updateLeaderboard, 200);
+            setInterval(updateLeaderboard, 500);
             setInterval(updateMilestone, 500);
             setInterval(updateFortschritt, 500);
             setInterval(updateMilestoneBalken, 500);
