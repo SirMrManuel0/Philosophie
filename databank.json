@@ -1,11 +1,69 @@
 {
-    "user": {},
-    "teams": {},
+    "user": {
+        "127.0.0.1": {
+            "team": 0,
+            "name": "Gabriel",
+            "is_at_game": true
+        }
+    },
+    "teams": {
+        "0": {
+            "name": "Lord",
+            "color": [
+                95,
+                26,
+                96
+            ],
+            "research_field": 0,
+            "creator": "Gabriel",
+            "country": "Frankreich",
+            "user_count": 1,
+            "chosen_country": {
+                "127.0.0.1": "Frankreich"
+            },
+            "investoren": [
+                [
+                    "Aurora Capital",
+                    1500
+                ],
+                [
+                    "Eclipse Holdings",
+                    2000
+                ],
+                [
+                    "Vertex Innovations",
+                    7000
+                ],
+                [
+                    "Quantum Ventures",
+                    4000
+                ],
+                [
+                    "Iron Forge Dynamics",
+                    8000
+                ]
+            ],
+            "current_investors": [
+                5,
+                3,
+                9,
+                2,
+                6
+            ],
+            "current_milestone": 2,
+            "paid_milestone": 0,
+            "destruction_degree": 1.25,
+            "done": true,
+            "killed": 10750000000
+        }
+    },
     "game": {
         "id": 0,
         "teams": [],
         "progress": {
-            "0": {},
+            "0": {
+                "0": 20.0
+            },
             "1": {}
         },
         "technology_price_constant": 100000,
@@ -114,8 +172,8 @@
             }
         },
         "state": {
-            "started": false,
-            "ended": false
+            "started": true,
+            "ended": true
         }
     },
     "research_field": [

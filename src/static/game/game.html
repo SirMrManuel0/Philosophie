@@ -787,7 +787,30 @@
             }
             
             async function checkEnded() {
-                sendPostRequest({message: "has_ended"})
+                const body = { message: "has_ended" };
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(body),
+                        redirect: 'follow', // Ensures redirection is followed automatically
+                    });
+
+                    if (response.redirected) {
+                        const redirectUrl = response.headers.get('Location'); // Extract the redirect URL
+                        if (redirectUrl) {
+                            console.log(`Redirecting user to: ${redirectUrl}`);
+                            window.location.href = redirectUrl; // Redirect the user to the new URL
+                        } else {
+                            console.error('No Location header found for the redirect.');
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
 
             let intervalId = setInterval(async () => {
