@@ -804,6 +804,10 @@
                             console.log(`Redirecting user to: ${redirectUrl}`);
                             window.location.href = redirectUrl; // Redirect the user to the new URL
                         } else {
+                            if (response.url && response.url.endsWith("endscreen")) {
+                                console.log(`Redirecting user to: ${response.url}`);
+                                window.location.href = response.url; // Redirect the user to the new URL  
+                            }
                             console.error('No Location header found for the redirect.');
                         }
                     }
@@ -831,6 +835,10 @@
                             console.log(`Redirecting user to: ${redirectUrl}`);
                             window.location.href = redirectUrl; // Redirect the user to the new URL
                         } else {
+                            if (response.url && response.url.endsWith("endscreen")) {
+                                console.log(`Redirecting user to: ${response.url}`);
+                                window.location.href = response.url; // Redirect the user to the new URL  
+                            }
                             console.error('No Location header found for the redirect.');
                         }
                     }
