@@ -280,7 +280,9 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "investoren":
                 self._logger.info(f"Received POST Request from {self.client_address}. investoren.")
                 data: dict = {"investoren": Base.get_user_investoren(self.client_address[0])}
-            elif post_data["message"].startswith("investor_bought_") and not Base.has_game_ended():
+            elif (post_data["message"].startswith("investor_bought_")
+                  and not Base.has_game_ended()
+                  and not Base.is_team_done(Base.get_team(self.client_address[0]))):
                 message: str = post_data["message"]
                 self._logger.info(f"Received POST Request from {self.client_address}. {message}.")
                 index: int = int(post_data["message"][-1:])
@@ -307,6 +309,11 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "has_ended":
                 self._logger.info(f"Received POST Request from {self.client_address}. has_ended.")
                 if Base.has_game_ended():
+                    self._transfer_to("endscreen")
+                    return
+            elif post_data["message"] == "is_team_done":
+                self._logger.info(f"Received POST Request from {self.client_address}. is_team_done.")
+                if Base.is_team_done(Base.get_team(self.client_address[0])):
                     self._transfer_to("endscreen")
                     return
             else:

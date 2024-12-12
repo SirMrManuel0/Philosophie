@@ -313,10 +313,6 @@ class DB:
         milestone_progress = math.floor(milestone_progress * 100) / 100
         return milestone_progress
 
-    def is_team_done(self, team: int) -> bool:
-        db: dict = self._load_db()
-        return db["teams"][str(team)]["done"]
-
     def user_at_game(self, ip: str) -> None:
         db: dict = self._load_db()
         db["user"][ip]["is_at_game"] = True
@@ -395,8 +391,14 @@ class DB:
         self._write_db(db)
         teams: list = list(db["teams"].keys())
         for team in teams:
-            if not db["teams"][team]["done"]:
+            if not self.is_team_done(team):
                 self.set_team_done(team)
+
+    def is_team_done(self, team: str | int) -> bool:
+        if isinstance(team, int):
+            team: str = str(team)
+        db: dict = self._load_db()
+        return db["teams"][team]["done"]
 
     def get_db(self) -> dict:
         return self._load_db()
