@@ -743,7 +743,6 @@
             async function updateFortschritt() {
                 const fortschritt = await getFortschritt();
                 if (fortschritt || fortschritt == 0) {
-                    console.log(fortschritt)
                     setFortschritt(+fortschritt)
                 } else {
                     console.error("fortschritt konnte nicht abgerufen werden.");

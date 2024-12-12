@@ -255,10 +255,9 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 data: dict = {"team_votes": Base.get_team_votes()}
             elif post_data["message"] == "check_country_team":
                 self._logger.info(f"Received POST Request from {self.client_address}. check_country_team.")
-                if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
+                if Base.has_team_country(Base.get_team(self.client_address[0])):
                     self._transfer_to("game")
                     return
-                return
             elif post_data["message"] == "country_flag_url":
                 self._logger.info(f"Received POST Request from {self.client_address}. country_flag_url.")
                 data: dict = {"country_flag_url": Base.get_user_flag(self.client_address[0])}

@@ -425,6 +425,12 @@ class DB:
         db["teams"][team]["done"] = True
         self._write_db(db)
 
+    def has_team_country(self, team: str | int) -> bool:
+        if isinstance(team, int):
+            team: str = str(team)
+        db: dict = self._load_db()
+        return db["teams"][team]["country"] != ""
+
     def reset(self):
         with open(PathsManager().get_path("db_template"), "r", encoding="utf-8") as js:
             db_template: dict = json.load(js)
