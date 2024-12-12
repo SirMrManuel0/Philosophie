@@ -742,10 +742,10 @@
 
             async function updateFortschritt() {
                 const fortschritt = await getFortschritt();
-                if (fortschritt) {
+                if (fortschritt || fortschritt == 0) {
                     setFortschritt(+fortschritt)
                 } else {
-                    console.error("milestone konnte nicht abgerufen werden.");
+                    console.error("fortschritt konnte nicht abgerufen werden.");
                 }
             }
 
@@ -804,6 +804,41 @@
                             console.log(`Redirecting user to: ${redirectUrl}`);
                             window.location.href = redirectUrl; // Redirect the user to the new URL
                         } else {
+                            if (response.url && response.url.endsWith("endscreen")) {
+                                console.log(`Redirecting user to: ${response.url}`);
+                                window.location.href = response.url; // Redirect the user to the new URL  
+                            }
+                            console.error('No Location header found for the redirect.');
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+            
+            async function checkTeamDone() {
+                const body = { message: "is_team_done" };
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(body),
+                        redirect: 'follow', // Ensures redirection is followed automatically
+                    });
+
+                    if (response.redirected) {
+                        const redirectUrl = response.headers.get('Location'); // Extract the redirect URL
+                        if (redirectUrl) {
+                            console.log(`Redirecting user to: ${redirectUrl}`);
+                            window.location.href = redirectUrl; // Redirect the user to the new URL
+                        } else {
+                            if (response.url && response.url.endsWith("endscreen")) {
+                                console.log(`Redirecting user to: ${response.url}`);
+                                window.location.href = response.url; // Redirect the user to the new URL  
+                            }
                             console.error('No Location header found for the redirect.');
                         }
                     }
@@ -819,7 +854,6 @@
                     if (all_here[0]) {
                         document.getElementById("warten").classList.add("hide");
                         clearInterval(intervalId); // Stoppe das Intervall, wenn die Bedingung erfüllt ist
-                        setInterval(checkEnded, 1000);
                     }
                     
                 }
@@ -842,6 +876,8 @@
             setInterval(updateFortschritt, 500);
             setInterval(updateMilestoneBalken, 500);
             setInterval(updateInvestorenHistory, 500);
+            setInterval(checkEnded, 1000);
+            setInterval(checkTeamDone, 1000);
 
         </script>
     </body>

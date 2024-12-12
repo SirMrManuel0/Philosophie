@@ -300,7 +300,7 @@ class DB:
     def get_progress(self, team: int) -> float:
         db: dict = self._load_db()
         try:
-            research: str = str(db["teams"][team]["research_field"])
+            research: str = str(db["teams"][str(team)]["research_field"])
             return db["game"]["progress"][research][str(team)]
         except KeyError:
             return 0
@@ -312,10 +312,6 @@ class DB:
         milestone_progress: float = (paid_milestone / (tp_constant / 10)) * 100
         milestone_progress = math.floor(milestone_progress * 100) / 100
         return milestone_progress
-
-    def is_team_done(self, team: int) -> bool:
-        db: dict = self._load_db()
-        return db["teams"][str(team)]["done"]
 
     def user_at_game(self, ip: str) -> None:
         db: dict = self._load_db()
@@ -382,7 +378,7 @@ class DB:
         killed: int = math.floor(people * destruction)
         db["teams"][str(self.get_team(ip))]["killed"] = killed
         self._write_db(db)
-        return f"{killed:,}".replace(",", " ")
+        return f"{killed:,}".replace(",", ".")
 
     def start_game(self):
         db: dict = self._load_db()
@@ -395,8 +391,14 @@ class DB:
         self._write_db(db)
         teams: list = list(db["teams"].keys())
         for team in teams:
-            if not db["teams"][team]["done"]:
+            if not self.is_team_done(team):
                 self.set_team_done(team)
+
+    def is_team_done(self, team: str | int) -> bool:
+        if isinstance(team, int):
+            team: str = str(team)
+        db: dict = self._load_db()
+        return db["teams"][team]["done"]
 
     def get_db(self) -> dict:
         return self._load_db()
@@ -422,6 +424,12 @@ class DB:
         db["teams"][team]["destruction_degree"] = db["teams"][team]["destruction_degree"] / len(db["teams"][team]["investoren"])
         db["teams"][team]["done"] = True
         self._write_db(db)
+
+    def has_team_country(self, team: str | int) -> bool:
+        if isinstance(team, int):
+            team: str = str(team)
+        db: dict = self._load_db()
+        return db["teams"][team]["country"] != ""
 
     def reset(self):
         with open(PathsManager().get_path("db_template"), "r", encoding="utf-8") as js:

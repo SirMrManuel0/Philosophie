@@ -255,10 +255,9 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 data: dict = {"team_votes": Base.get_team_votes()}
             elif post_data["message"] == "check_country_team":
                 self._logger.info(f"Received POST Request from {self.client_address}. check_country_team.")
-                if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
+                if Base.has_team_country(Base.get_team(self.client_address[0])):
                     self._transfer_to("game")
                     return
-                return
             elif post_data["message"] == "country_flag_url":
                 self._logger.info(f"Received POST Request from {self.client_address}. country_flag_url.")
                 data: dict = {"country_flag_url": Base.get_user_flag(self.client_address[0])}
@@ -280,7 +279,9 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "investoren":
                 self._logger.info(f"Received POST Request from {self.client_address}. investoren.")
                 data: dict = {"investoren": Base.get_user_investoren(self.client_address[0])}
-            elif post_data["message"].startswith("investor_bought_") and not Base.has_game_ended():
+            elif (post_data["message"].startswith("investor_bought_")
+                  and not Base.has_game_ended()
+                  and not Base.is_team_done(Base.get_team(self.client_address[0]))):
                 message: str = post_data["message"]
                 self._logger.info(f"Received POST Request from {self.client_address}. {message}.")
                 index: int = int(post_data["message"][-1:])
@@ -307,6 +308,11 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             elif post_data["message"] == "has_ended":
                 self._logger.info(f"Received POST Request from {self.client_address}. has_ended.")
                 if Base.has_game_ended():
+                    self._transfer_to("endscreen")
+                    return
+            elif post_data["message"] == "is_team_done":
+                self._logger.info(f"Received POST Request from {self.client_address}. is_team_done.")
+                if Base.is_team_done(Base.get_team(self.client_address[0])):
                     self._transfer_to("endscreen")
                     return
             else:
@@ -345,10 +351,11 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self._logger.info(f"Received POST Request from {self.client_address} for select_country.")
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
-
             parsed_data = parse_qs(post_data.decode('utf-8'))
             form_data = {key: values[0] for key, values in parsed_data.items()}
             Base: DB = DB(PathsManager().get_path("db"))
+            if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
+                return
             Base.set_country(self.client_address[0], form_data["country"])
             if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
                 self._logger.info(f"Team {Base.get_team_name(Base.get_team(self.client_address[0]))} has decided on a country The "
