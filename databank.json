@@ -5,9 +5,7 @@
         "id": 0,
         "teams": [],
         "progress": {
-            "0": {
-                "0": 20.0
-            },
+            "0": {},
             "1": {}
         },
         "technology_price_constant": 100000,
@@ -116,8 +114,8 @@
             }
         },
         "state": {
-            "started": true,
-            "ended": true
+            "started": false,
+            "ended": false
         }
     },
     "research_field": [

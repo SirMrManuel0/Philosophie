@@ -352,10 +352,11 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self._logger.info(f"Received POST Request from {self.client_address} for select_country.")
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
-
             parsed_data = parse_qs(post_data.decode('utf-8'))
             form_data = {key: values[0] for key, values in parsed_data.items()}
             Base: DB = DB(PathsManager().get_path("db"))
+            if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
+                return
             Base.set_country(self.client_address[0], form_data["country"])
             if Base.have_all_chosen_country(Base.get_team(self.client_address[0])):
                 self._logger.info(f"Team {Base.get_team_name(Base.get_team(self.client_address[0]))} has decided on a country The "

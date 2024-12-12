@@ -742,10 +742,11 @@
 
             async function updateFortschritt() {
                 const fortschritt = await getFortschritt();
-                if (fortschritt) {
+                if (fortschritt || fortschritt == 0) {
+                    console.log(fortschritt)
                     setFortschritt(+fortschritt)
                 } else {
-                    console.error("milestone konnte nicht abgerufen werden.");
+                    console.error("fortschritt konnte nicht abgerufen werden.");
                 }
             }
 

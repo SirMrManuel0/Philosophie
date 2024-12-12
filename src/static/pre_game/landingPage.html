@@ -470,8 +470,31 @@
                 }
             }
 
-            function checkGame() {
-                sendPostRequest({ message: "check_country_team" })
+            async function checkGame() {
+                const body = { message: "check_country_team" };
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(body),
+                        redirect: 'follow', // Ensures redirection is followed automatically
+                    });
+
+                    if (response.redirected) {
+                        const redirectUrl = response.headers.get('Location'); // Extract the redirect URL
+                        if (redirectUrl) {
+                            console.log(`Redirecting user to: ${redirectUrl}`);
+                            window.location.href = redirectUrl; // Redirect the user to the new URL
+                        } else {
+                            console.error('No Location header found for the redirect.');
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
 
 
@@ -480,8 +503,8 @@
             updateTeamname();
             updateTeamnamevotes();
 
-            setInterval(updateTeamnamevotes, 2000);
-            setInterval(checkGame, 2000);
+            setInterval(updateTeamnamevotes, 1000);
+            setInterval(checkGame, 500);
 
         </script>
     </body>

@@ -300,7 +300,7 @@ class DB:
     def get_progress(self, team: int) -> float:
         db: dict = self._load_db()
         try:
-            research: str = str(db["teams"][team]["research_field"])
+            research: str = str(db["teams"][str(team)]["research_field"])
             return db["game"]["progress"][research][str(team)]
         except KeyError:
             return 0
@@ -378,7 +378,7 @@ class DB:
         killed: int = math.floor(people * destruction)
         db["teams"][str(self.get_team(ip))]["killed"] = killed
         self._write_db(db)
-        return f"{killed:,}".replace(",", " ")
+        return f"{killed:,}".replace(",", ".")
 
     def start_game(self):
         db: dict = self._load_db()
