@@ -1,41 +1,6 @@
 {
-    "user": {
-        "127.0.0.1": {
-            "team": 0,
-            "name": "Gabriel",
-            "is_at_game": true
-        }
-    },
-    "teams": {
-        "0": {
-            "name": "test",
-            "color": [
-                0,
-                0,
-                0
-            ],
-            "research_field": 0,
-            "creator": "Gabriel",
-            "country": "Frankreich",
-            "user_count": 1,
-            "chosen_country": {
-                "127.0.0.1": ""
-            },
-            "investoren": [],
-            "current_investors": [
-                0,
-                1,
-                2,
-                3,
-                4
-            ],
-            "current_milestone": 0,
-            "paid_milestone": 0,
-            "destruction_degree": 0,
-            "done": false,
-            "killed": 0
-        }
-    },
+    "user": {},
+    "teams": {},
     "game": {
         "id": 0,
         "teams": [],

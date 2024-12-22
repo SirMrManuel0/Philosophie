@@ -22,13 +22,14 @@ class DB:
     def __init__(self, path: str):
         self._db_path: str = path
 
-    def _load_db(self) -> dict:
+    def _load_db(self) -> tuple:
         db: dict = dict()
         with open(self._db_path, "r", encoding="utf-8") as js:
             db: dict = json.load(js)
-        return db
+            db2: dict = {key: val for key, val in db.items()}
+        return db, db2
 
-    def _write_db(self, new: dict) -> None:
+    def _write_db(self, new: dict, prev: dict = None) -> None:
         def update_nested(original: dict, pushed: dict) -> None:
             for key, value in pushed.items():
                 if isinstance(value, dict) and key in original:
@@ -37,13 +38,49 @@ class DB:
                 else:
                     # Direkt aktualisieren
                     original[key] = value
-        db: dict = self._load_db()
-        update_nested(db, new)
+
+        if prev is None:
+            db, db_prev = self._load_db()
+            update_nested(db, new)
+            with open(self._db_path, "w", encoding="utf-8") as js:
+                json.dump(db, js, indent=4)
+            return
+
+        def get_diff(org: dict, changed: dict) -> dict:
+            diff = {}
+            for key, val in changed.items():
+                if key not in org:
+                    diff[key] = val
+                elif isinstance(val, dict) and isinstance(org[key], dict):
+                    nested_diff = get_diff(org[key], val)
+                    if nested_diff:
+                        diff[key] = nested_diff
+                elif org[key] != val:
+                    diff[key] = val
+            return diff
+
+        difference: dict = get_diff(prev, new)
+        if not difference:
+            return
+        current, _ = self._load_db()
+
+        def nested_update(base: dict, changes: dict) -> dict:
+            for key, val in changes.items():
+                if key not in base:
+                    base[key] = val
+                elif isinstance(val, dict) and isinstance(base[key], dict):
+                    base[key] = nested_update(base[key], val)
+                else:
+                    base[key] = val
+            return base
+
+        to_write: dict = nested_update(current, difference)
+
         with open(self._db_path, "w", encoding="utf-8") as js:
-            json.dump(db, js, indent=4)
+            json.dump(to_write, js, indent=4)
 
     def create_user(self, username: str, ip: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["user"][ip] = {}
         db["user"][ip]["team"] = -1
         db["user"][ip]["name"] = username
@@ -51,15 +88,15 @@ class DB:
         self._write_db(db)
 
     def get_user(self, ip: str) -> dict:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["user"][ip]
 
     def get_users(self) -> dict:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["user"]
 
     def is_user(self, ip: str) -> bool:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         try:
             _ = db["user"][ip]
             return True
@@ -67,15 +104,15 @@ class DB:
             return False
 
     def get_chosen_country(self, ip: str) -> str:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["teams"][str(self.get_team(ip))]["chosen_country"][ip]
 
     def get_team(self, ip: str) -> int:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return int(db["user"][ip]["team"])
 
     def assign_team(self, user: str, team: int) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         oldTeam: str = str(db["user"][user]["team"])
         if int(oldTeam) >= 0:
             if oldTeam == str(team):
@@ -93,27 +130,27 @@ class DB:
         self._write_db(db)
 
     def get_teams(self) -> list:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         teams: list = list(db["teams"].values())
         for team in teams:
             team["research_field"] = db["research_field"][team["research_field"]]
         return teams
 
     def is_team(self, name: str) -> bool:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         for k, team in db["teams"].items():
             if team["name"] == name: return True
         return False
 
     def get_team_by_name(self, name: str) -> int:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         for k, team in db["teams"].items():
             if team["name"] == name: return int(k)
         return -1
 
     def create_team(self, name: str, color: str,
                     research_field: str, creator: str) -> int:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         fields: list = db["research_field"]
         for i in range(len(fields)):
             if fields[i] == research_field:
@@ -181,7 +218,7 @@ class DB:
         return db["teams"][str(team)]["country"]
 
     def have_all_chosen_country(self, team: int) -> bool:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         selectedCountries: dict = db["teams"][str(team)]["chosen_country"]
         for k, v in selectedCountries.items():
             if v == "":
@@ -189,7 +226,7 @@ class DB:
         return True
 
     def get_team_votes(self) -> dict:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         countries: dict = {k: {} for k, _ in db["countries"].items()}
         teams: list = self.get_teams()
         for country, dic in countries.items():
@@ -203,38 +240,38 @@ class DB:
         return countries
 
     def get_user_flag(self, ip: str) -> str:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         path_manager: PathsManager = PathsManager()
         team: int = self.get_team(ip)
         country: str = db["teams"][str(team)]["country"]
         return path_manager.get_path("country_flag_url", country)
 
     def get_user_color(self, ip: str) -> list:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["teams"][str(self.get_team(ip))]["color"]
 
     def get_user_technology(self, ip: str) -> str:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["research_field"][db["teams"][str(self.get_team(ip))]["research_field"]]
 
     def get_user_technology_description(self, ip: str) -> str:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["research_field_description"][db["teams"][str(self.get_team(ip))]["research_field"]]
 
     def get_user_investor_history(self, ip: str) -> dict:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         team: str = str(self.get_team(ip))
         return db["teams"][team]["investoren"]
 
     def get_user_milestone(self, ip: str) -> dict:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         team: str = str(self.get_team(ip))
         research_field: str = db["research_field"][db["teams"][team]["research_field"]]
         milestone: int = db["teams"][team]["current_milestone"]
         return db["milestones"][research_field][milestone]
 
     def get_user_investoren(self, ip: str) -> list:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         team: str = str(self.get_team(ip))
         investoren: list = db["teams"][team]["current_investors"]
         sending_investoren: list = list()
@@ -244,7 +281,7 @@ class DB:
         return sending_investoren
 
     def bought_investor(self, index: int, ip: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         team: str = str(self.get_team(ip))
         investor: str = str(db["teams"][team]["current_investors"][index])
         name: str = db["game"]["investoren"][investor]["name"]
@@ -270,7 +307,7 @@ class DB:
         self.update_progress(team)
 
     def next_milestone(self, team: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["teams"][team]["current_milestone"] += 1
         db["teams"][team]["paid_milestone"] = 0
         self._write_db(db)
@@ -278,16 +315,16 @@ class DB:
             self.set_team_done(team)
 
     def set_country(self, ip: str, country: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["teams"][str(self.get_team(ip))]["chosen_country"][ip] = country
         self._write_db(db)
 
     def has_game_started(self) -> bool:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["game"]["state"]["started"]
 
     def update_progress(self, team: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         amount_milestone: int = db["teams"][team]["current_milestone"]
         paid_milestone: int = db["teams"][team]["paid_milestone"]
         tp_constant: int = db["game"]["technology_price_constant"]
@@ -298,7 +335,7 @@ class DB:
         self._write_db(db)
 
     def get_progress(self, team: int) -> float:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         try:
             research: str = str(db["teams"][str(team)]["research_field"])
             return db["game"]["progress"][research][str(team)]
@@ -306,7 +343,7 @@ class DB:
             return 0
 
     def get_milestone_progress(self, team: int) -> float:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         paid_milestone: int = db["teams"][str(team)]["paid_milestone"]
         tp_constant: int = db["game"]["technology_price_constant"]
         milestone_progress: float = (paid_milestone / (tp_constant / 10)) * 100
@@ -314,12 +351,12 @@ class DB:
         return milestone_progress
 
     def user_at_game(self, ip: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["user"][ip]["is_at_game"] = True
         self._write_db(db)
 
     def get_leaderboards(self) -> dict:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         leaderboards: dict = dict()
         for name in db["research_field"]:
             leaderboards[name] = []
@@ -356,7 +393,7 @@ class DB:
         leaderboards: dict = self.get_leaderboards()
         team: str = str(self.get_team(ip))
         top_three: list = list()
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         r_ind: int = db["teams"][team]["research_field"]
         field: str = db["research_field"][r_ind]
         leaderboard: list = leaderboards[field]
@@ -372,7 +409,7 @@ class DB:
         return top_three
 
     def get_killed(self, ip: str) -> str:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         people: int = db["people"]
         destruction: float = db["teams"][str(self.get_team(ip))]["destruction_degree"]
         killed: int = math.floor(people * destruction)
@@ -381,12 +418,12 @@ class DB:
         return f"{killed:,}".replace(",", ".")
 
     def start_game(self):
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["game"]["state"]["started"] = True
         self._write_db(db)
 
     def end_game(self):
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["game"]["state"]["ended"] = True
         self._write_db(db)
         teams: list = list(db["teams"].keys())
@@ -397,7 +434,7 @@ class DB:
     def is_team_done(self, team: str | int) -> bool:
         if isinstance(team, int):
             team: str = str(team)
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["teams"][team]["done"]
 
     def get_db(self) -> dict:
@@ -410,17 +447,17 @@ class DB:
         self._write_db(changes)
 
     def update(self) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         teams: list = list(db["teams"].keys())
         for team in teams:
             self.update_progress(team)
 
     def has_game_ended(self) -> bool:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["game"]["state"]["ended"]
 
     def set_team_done(self, team: str) -> None:
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         db["teams"][team]["destruction_degree"] = db["teams"][team]["destruction_degree"] / len(db["teams"][team]["investoren"])
         db["teams"][team]["done"] = True
         self._write_db(db)
@@ -428,7 +465,7 @@ class DB:
     def has_team_country(self, team: str | int) -> bool:
         if isinstance(team, int):
             team: str = str(team)
-        db: dict = self._load_db()
+        db, db_prev = self._load_db()
         return db["teams"][team]["country"] != ""
 
     def reset(self):
